@@ -191,6 +191,10 @@ body {
     font-size: 1.2rem;
   }
 
+  .search input:placeholder-shown {
+    font-size: 0.8rem;
+  }
+
   .list-cards {
     grid-template-columns: 1fr;
   }
@@ -199,6 +203,15 @@ body {
 @media screen and (max-width: 600px) {
   .hero {
     align-items: center;
+  }
+
+  .search input:placeholder-shown {
+    font-size: 0.6rem;
+  }
+
+  .search-btn {
+    width: 6rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -222,5 +235,10 @@ body {
 
   .search input {
     font-size: 1.6rem;
+  }
+
+  .search-btn {
+    width: 4rem;
+    font-size: 0.6rem;
   }
 }
