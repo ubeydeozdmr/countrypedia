@@ -7,7 +7,7 @@ export const setNightMode = function () {
   );
   document.querySelector('body').style.backgroundColor = '#111111';
   document.querySelector('.toolbar-icons').style.color = '#cccccc';
-  document.querySelector('.github a').style.fill = '#cccccc';
+  document.querySelector('.github svg').style.fill = '#cccccc';
   document.querySelector('.hero').style.backgroundColor = '#333333';
   document.querySelector('.hero-title').style.color = '#eeeeee';
   document.querySelector('.hero-description').style.color = '#cccccc';
@@ -22,7 +22,7 @@ export const setDayMode = function () {
   );
   document.querySelector('body').style.backgroundColor = '#ffffff';
   document.querySelector('.toolbar-icons').style.color = '#555555';
-  document.querySelector('.github a').style.fill = '#555555';
+  document.querySelector('.github svg').style.fill = '#555555';
   document.querySelector('.hero').style.backgroundColor = '#eeeeee';
   document.querySelector('.hero-title').style.color = '#333333';
   document.querySelector('.hero-description').style.color = '#555555';

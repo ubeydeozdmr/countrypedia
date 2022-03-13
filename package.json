@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ubeydeozdmr/countrypedia#readme",
   "dependencies": {
+    "bootstrap-icons": "^1.8.1",
     "parcel": "^2.3.2"
   }
 }
