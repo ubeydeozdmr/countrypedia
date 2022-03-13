@@ -1,6 +1,6 @@
 'use strict';
 
-import { setDayMode, setNightMode } from './js/themes';
+import { setDayMode, setNightMode } from './themes';
 
 const listCards = document.querySelector('.list-cards');
 const input = document.querySelector('#search');
