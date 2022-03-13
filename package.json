@@ -1,0 +1,26 @@
+{
+  "name": "countrypedia",
+  "version": "1.0.0",
+  "description": "An application where you can see all countries",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubeydeozdmr/countrypedia.git"
+  },
+  "keywords": [
+    "country"
+  ],
+  "author": "Ubeyde Emir Özdemir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ubeydeozdmr/countrypedia/issues"
+  },
+  "homepage": "https://github.com/ubeydeozdmr/countrypedia#readme",
+  "dependencies": {
+    "parcel": "^2.3.2"
+  }
+}
