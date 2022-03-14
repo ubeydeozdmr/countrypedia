@@ -3,8 +3,8 @@
 import { setDayMode, setNightMode } from './themes';
 
 const listCards = document.querySelector('.list-cards');
-const input = document.querySelector('#search');
-const search = document.querySelector('#submit-search');
+const input = document.querySelector('.search-input');
+const search = document.querySelector('.search-btn');
 const toggler = document.querySelector('.night-mode');
 const goBack = document.querySelector('.show-all-text span');
 

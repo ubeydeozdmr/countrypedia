@@ -77,7 +77,7 @@ body {
   display: flex;
 }
 
-.search input {
+.search-input {
   width: 100%;
   height: 100%;
   border: none;
@@ -86,11 +86,11 @@ body {
   background-color: #ffffff;
 }
 
-.search input:placeholder-shown {
+.search-input:placeholder-shown {
   font-size: 1.2rem;
 }
 
-.search input:focus {
+.search-input:focus {
   outline: none;
 }
 
@@ -103,12 +103,6 @@ body {
   background-color: #eeeeee;
   color: #333333;
   transition: all 0.3s;
-}
-
-.search-btn:hover,
-.search-btn:active {
-  /* BUG: The hover feature no longer works after switching between night mode and day mode. */
-  background-color: #dddddd;
 }
 
 .show-all {
@@ -131,6 +125,11 @@ body {
 .show-all-text span {
   color: blue;
   cursor: pointer;
+  font-weight: 600;
+}
+
+.show-all-text span:hover {
+  text-decoration: underline;
 }
 
 .list-card {
