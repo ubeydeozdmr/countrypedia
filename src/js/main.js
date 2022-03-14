@@ -4,6 +4,10 @@ import { setDayMode, setNightMode } from './themes';
 
 const listCards = document.querySelector('.list-cards');
 const details = document.querySelector('.details');
+const detailsExit = document.querySelector('.details-exit');
+const detailsFlag = document.querySelector('.details-flag');
+const detailsAltSpellings = document.querySelector('.details-alt-spellings');
+const detailsIndependent = document.querySelector('.details-independent');
 const input = document.querySelector('.search-input');
 const search = document.querySelector('.search-btn');
 const toggler = document.querySelector('.night-mode');
@@ -45,12 +49,28 @@ const renderCountries = function (data) {
   const listCard = document.querySelectorAll('.list-card');
   listCard.forEach(item =>
     item.addEventListener('click', async function (e) {
-      // details.style.display = 'flex';
       const id = e.target.closest('hover').getAttribute('cca2');
       console.log(id);
       const data = await getData(`alpha/${id}`);
-      console.log(...data);
+      renderDetails(data);
     })
+  );
+};
+
+const renderDetails = function (data) {
+  details.style.display = 'flex';
+  // details.style.display = 'grid';
+  scroll(0, 0);
+  data = data[0];
+  const flag = `<img src="${data.flags.svg}" alt="${data.demonyms.eng.m} flag" style="width: 4rem; margin-top: 0.4rem" />`;
+  detailsFlag.insertAdjacentHTML('beforeend', flag);
+  detailsAltSpellings.insertAdjacentHTML(
+    'beforeend',
+    data.altSpellings.toString().replaceAll(',', ', ')
+  );
+  detailsIndependent.insertAdjacentHTML(
+    'beforeend',
+    data.independent ? 'Yes' : 'No'
   );
 };
 
@@ -85,9 +105,25 @@ toggler.addEventListener('click', function () {
   }
 });
 
+detailsExit.addEventListener('click', () => {
+  detailsFlag.removeChild(detailsFlag.lastChild);
+  [detailsAltSpellings, detailsIndependent].forEach(domItem => {
+    while (domItem.hasChildNodes()) {
+      domItem.removeChild(domItem.firstChild);
+    }
+  });
+
+  details.style.display = 'none';
+});
+
 const init = async function () {
   const data = await getData('all');
   renderCountries(data);
+  let _docHeight =
+    document.height !== undefined
+      ? document.height
+      : document.body.offsetHeight;
+  details.style.height = _docHeight + 'px';
 };
 
 init();
