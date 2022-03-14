@@ -3,6 +3,7 @@
 import { setDayMode, setNightMode } from './themes';
 
 const listCards = document.querySelector('.list-cards');
+const details = document.querySelector('.details');
 const input = document.querySelector('.search-input');
 const search = document.querySelector('.search-btn');
 const toggler = document.querySelector('.night-mode');
@@ -25,19 +26,32 @@ const renderCountries = function (data) {
 
   data.forEach(item => {
     const cardContent = `
-      <div class="list-card">
-        <div class="list-card-img">
-          <img src="${item.flags.svg}" alt="${item.name.common} flag">
+      <hover cca2="${item.cca2}">
+        <div class="list-card">
+          <div class="list-card-img">
+            <img src="${item.flags.svg}" alt="${item.name.common} flag">
+          </div>
+          <div class="list-card-text">
+            <p>${item.name.common}</p>
+          </div>
+          <div class="list-card-save-icon"></div>
         </div>
-        <div class="list-card-text">
-          <p>${item.name.common}</p>
-        </div>
-        <div class="list-card-save-icon"></div>
-      </div>
-      `;
+      </hover>
+    `;
 
     listCards.insertAdjacentHTML('afterbegin', cardContent);
   });
+
+  const listCard = document.querySelectorAll('.list-card');
+  listCard.forEach(item =>
+    item.addEventListener('click', async function (e) {
+      // details.style.display = 'flex';
+      const id = e.target.closest('hover').getAttribute('cca2');
+      console.log(id);
+      const data = await getData(`alpha/${id}`);
+      console.log(...data);
+    })
+  );
 };
 
 search.addEventListener('click', async function () {

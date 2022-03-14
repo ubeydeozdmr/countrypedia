@@ -4,6 +4,22 @@
   box-sizing: border-box;
 }
 
+.details {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 10;
+}
+
+.details-exit {
+  position: absolute;
+  padding: 1rem;
+  top: 0;
+  right: 0;
+}
+
 body {
   /* font-family: 'Roboto Condensed', sans-serif; */
   font-family: 'Open Sans', sans-serif;
