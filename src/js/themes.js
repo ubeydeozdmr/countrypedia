@@ -11,8 +11,15 @@ export const setNightMode = function () {
   document.querySelector('.hero').style.backgroundColor = '#333333';
   document.querySelector('.hero-title').style.color = '#eeeeee';
   document.querySelector('.hero-description').style.color = '#cccccc';
-  document.querySelector('.search button').style.backgroundColor = '#333333';
-  document.querySelector('.search button').style.color = '#eeeeee';
+  document.querySelector('.search').style.backgroundColor = '#333333';
+  document.querySelector('.search input').style.backgroundColor = '#333333';
+  document.querySelector('.search input').style.color = '#eeeeee';
+  document.querySelector('.search-btn').style.backgroundColor = '#222222';
+  document.querySelector('.search-btn').style.color = '#eeeeee';
+  document.querySelectorAll('.list-card').forEach(item => {
+    item.style.backgroundColor = '#333333';
+    item.style.color = '#eeeeee';
+  });
 };
 
 export const setDayMode = function () {
@@ -26,6 +33,13 @@ export const setDayMode = function () {
   document.querySelector('.hero').style.backgroundColor = '#eeeeee';
   document.querySelector('.hero-title').style.color = '#333333';
   document.querySelector('.hero-description').style.color = '#555555';
-  document.querySelector('.search button').style.backgroundColor = '#eeeeee';
-  document.querySelector('.search button').style.color = '#333333';
+  document.querySelector('.search').style.backgroundColor = '#ffffff';
+  document.querySelector('.search input').style.backgroundColor = '#ffffff';
+  document.querySelector('.search input').style.color = '#000000';
+  document.querySelector('.search-btn').style.backgroundColor = '#eeeeee';
+  document.querySelector('.search-btn').style.color = '#333333';
+  document.querySelectorAll('.list-card').forEach(item => {
+    item.style.backgroundColor = '#ffffff';
+    item.style.color = '#000000';
+  });
 };
