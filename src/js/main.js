@@ -17,6 +17,15 @@ const detailsIdd = document.querySelector('.details-idd');
 const detailsIndependent = document.querySelector('.details-independent');
 const detailsLandlocked = document.querySelector('.details-landlocked');
 const detailsLanguages = document.querySelector('.details-languages');
+const detailsLocation = document.querySelector('.details-location');
+const detailsMapsGoogle = document.querySelector('.details-map-link--google');
+const detailsMapsOpenSt = document.querySelector('.details-map-link--openst');
+const detailsPopulation = document.querySelector('.details-population');
+const detailsRegion = document.querySelector('.details-region');
+const detailsStartOfWeek = document.querySelector('.details-start-of-week');
+const detailsTimezones = document.querySelector('.details-timezones');
+const detailsTld = document.querySelector('.details-top-level-domain');
+const detailsUnMember = document.querySelector('.details-un-member');
 const input = document.querySelector('.search-input');
 const search = document.querySelector('.search-btn');
 const showAllTextKeyword = document.querySelector('.show-all-text-keyword');
@@ -29,7 +38,7 @@ const getData = async function (keyword) {
   const res = await fetch(`https://restcountries.com/v3.1/${keyword}`);
   const data = await res.json();
   // console.log(data);
-  // console.log(data[95]);
+  // console.log(data[0]);
   return data;
 };
 
@@ -73,72 +82,72 @@ const renderDetails = function (data) {
   const arms = `<img src="${data.coatOfArms.svg}" alt="${data.demonyms.eng.m} arms" style="width: 12rem; margin-top: 0.4rem"; border-radius: 1rem>`;
 
   insertData(detailsFlag, flag);
+
   insertData(
     detailsAltSpellings,
     data.altSpellings.toString().replaceAll(',', ', ')
   );
+
   insertData(
     detailsBorders,
     data.borders ? data.borders.toString().replaceAll(',', ', ') : 'No borders'
   );
+
   insertData(detailsCapital, data.capital.toString().replaceAll(',', ', '));
+
   insertData(
     detailsCarDirection,
     data.car.side.toString()[0].toUpperCase() + data.car.side.slice(1)
   );
+
   insertData(detailsCoatOfArms, arms);
+
   insertData(
     detailsContinents,
     data.continents.toString().replaceAll(',', ', ')
   );
+
   for (const [_, value] of Object.entries(data.currencies)) {
     let currencies = '';
     currencies += `${value.name} (${value.symbol}), `;
     insertData(detailsCurrencies, currencies);
   }
+
   insertData(detailsIdd, data.idd.root);
+
   insertData(detailsIndependent, data.independent ? 'Yes' : 'No');
+
   insertData(detailsLandlocked, data.landlocked ? 'Yes' : 'No');
+
   for (const [_, value] of Object.entries(data.languages)) {
     let languages = '';
     languages += `${value}, `;
     insertData(detailsLanguages, languages);
   }
-  // detailsFlag.insertAdjacentHTML('beforeend', flag);
-  // detailsAltSpellings.insertAdjacentHTML(
-  //   'beforeend',
-  //   data.altSpellings.toString().replaceAll(',', ', ')
-  // );
-  // detailsBorders.insertAdjacentHTML(
-  //   'beforeend',
-  //   data.borders ? data.borders.toString().replaceAll(',', ', ') : 'No borders'
-  // );
-  // detailsCapital.insertAdjacentHTML(
-  //   'beforeend',
-  //   data.capital.toString().replaceAll(',', ', ')
-  // );
-  // detailsCarDirection.insertAdjacentHTML(
-  //   'beforeend',
-  //   data.car.side.toString()[0].toUpperCase() + data.car.side.slice(1)
-  // );
-  // detailsCoatOfArms.insertAdjacentHTML('beforeend', arms);
-  // detailsContinents.insertAdjacentHTML(
-  //   'beforeend',
-  //   data.continents.toString().replaceAll(',', ', ')
-  // );
-  // detailsCurrencies.insertAdjacentHTML(
-  //   'beforeend',
-  //   `${cur[Object.keys(cur)[0]].name} (${cur[Object.keys(cur)[0]].symbol})`
-  // );
-  // detailsIdd.insertAdjacentHTML('beforeend', data.idd.root);
-  // detailsIndependent.insertAdjacentHTML(
-  //   'beforeend',
-  //   data.independent ? 'Yes' : 'No'
-  // );
-  // detailsLandlocked.insertAdjacentHTML(
-  //   'beforeend',
-  //   data.landlocked ? 'Yes' : 'No'
-  // );
+
+  insertData(detailsLocation, data.latlng.toString().replace(',', ', '));
+
+  detailsMapsGoogle.setAttribute('href', data.maps.googleMaps);
+  detailsMapsOpenSt.setAttribute('href', data.maps.openStreetMaps);
+
+  insertData(
+    detailsPopulation,
+    data.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  );
+
+  insertData(detailsRegion, `${data.region} / ${data.subregion}`);
+
+  insertData(
+    detailsStartOfWeek,
+    data.startOfWeek.toString()[0].toUpperCase() +
+      data.startOfWeek.toString().slice(1)
+  );
+
+  insertData(detailsTimezones, data.timezones.toString().replaceAll(',', ', '));
+
+  insertData(detailsTld, data.tld);
+
+  insertData(detailsUnMember, data.unMember ? 'Yes' : 'No');
 };
 
 search.addEventListener('click', async function () {
@@ -189,6 +198,13 @@ detailsExit.addEventListener('click', () => {
     detailsIndependent,
     detailsLandlocked,
     detailsLanguages,
+    detailsLocation,
+    detailsPopulation,
+    detailsRegion,
+    detailsStartOfWeek,
+    detailsTimezones,
+    detailsTld,
+    detailsUnMember,
   ].forEach(domItem => itemCleaner(domItem));
 
   details.style.display = 'none';
