@@ -16,6 +16,23 @@ export const setNightMode = function () {
   document.querySelector('.search input').style.color = '#eeeeee';
   document.querySelector('.search-btn').style.backgroundColor = '#222222';
   document.querySelector('.search-btn').style.color = '#eeeeee';
+  document.querySelector('.details').style.backgroundColor =
+    'rgba(18, 18, 18, 0.98)';
+  document.querySelector('.details-exit-icon').style.color = '#cccccc';
+  document.querySelector('.details-title-primary').style.color = '#cccccc';
+  document
+    .querySelectorAll('.details-title-secondary')
+    .forEach(item => (item.style.color = '#dddddd'));
+  document
+    .querySelectorAll('.details-text')
+    .forEach(item => (item.style.color = '#eeeeee'));
+  document
+    .querySelectorAll('.details-group')
+    .forEach(item => (item.style.border = '1px solid #cccccc'));
+  document.querySelectorAll('.details-map-link').forEach(item => {
+    item.style.backgroundColor = '#333333';
+    item.style.color = '#eeeeee';
+  });
   document.querySelectorAll('.list-card').forEach(item => {
     item.style.backgroundColor = '#333333';
     item.style.color = '#eeeeee';
@@ -38,6 +55,23 @@ export const setDayMode = function () {
   document.querySelector('.search input').style.color = '#000000';
   document.querySelector('.search-btn').style.backgroundColor = '#eeeeee';
   document.querySelector('.search-btn').style.color = '#333333';
+  document.querySelector('.details').style.backgroundColor =
+    'rgba(255, 255, 255, 0.98)';
+  document.querySelector('.details-exit-icon').style.color = '#333333';
+  document.querySelector('.details-title-primary').style.color = '#333333';
+  document
+    .querySelectorAll('.details-title-secondary')
+    .forEach(item => (item.style.color = '#444444'));
+  document
+    .querySelectorAll('.details-text')
+    .forEach(item => (item.style.color = '#555555'));
+  document
+    .querySelectorAll('.details-group')
+    .forEach(item => (item.style.border = '1px solid #333333'));
+  document.querySelectorAll('.details-map-link').forEach(item => {
+    item.style.backgroundColor = '#ffffff';
+    item.style.color = '#000000';
+  });
   document.querySelectorAll('.list-card').forEach(item => {
     item.style.backgroundColor = '#ffffff';
     item.style.color = '#000000';
