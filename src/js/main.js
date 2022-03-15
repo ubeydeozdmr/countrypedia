@@ -7,7 +7,15 @@ const details = document.querySelector('.details');
 const detailsExit = document.querySelector('.details-exit');
 const detailsFlag = document.querySelector('.details-flag');
 const detailsAltSpellings = document.querySelector('.details-alt-spellings');
+const detailsBorders = document.querySelector('.details-borders');
+const detailsCapital = document.querySelector('.details-capital');
+const detailsCarDirection = document.querySelector('.details-car-direction');
+const detailsCoatOfArms = document.querySelector('.details-coat-of-arms');
+const detailsContinents = document.querySelector('.details-continents');
+const detailsCurrencies = document.querySelector('.details-currencies');
+const detailsIdd = document.querySelector('.details-idd');
 const detailsIndependent = document.querySelector('.details-independent');
+const detailsLandlocked = document.querySelector('.details-landlocked');
 const input = document.querySelector('.search-input');
 const search = document.querySelector('.search-btn');
 const toggler = document.querySelector('.night-mode');
@@ -50,7 +58,6 @@ const renderCountries = function (data) {
   listCard.forEach(item =>
     item.addEventListener('click', async function (e) {
       const id = e.target.closest('hover').getAttribute('cca2');
-      console.log(id);
       const data = await getData(`alpha/${id}`);
       renderDetails(data);
     })
@@ -62,15 +69,43 @@ const renderDetails = function (data) {
   // details.style.display = 'grid';
   scroll(0, 0);
   data = data[0];
-  const flag = `<img src="${data.flags.svg}" alt="${data.demonyms.eng.m} flag" style="width: 4rem; margin-top: 0.4rem" />`;
+  const flag = `<img src="${data.flags.svg}" alt="${data.demonyms.eng.m} flag" style="width: 12rem; margin-top: 0.4rem; border-radius: 1rem" />`;
   detailsFlag.insertAdjacentHTML('beforeend', flag);
   detailsAltSpellings.insertAdjacentHTML(
     'beforeend',
     data.altSpellings.toString().replaceAll(',', ', ')
   );
+  detailsBorders.insertAdjacentHTML(
+    'beforeend',
+    data.borders ? data.borders.toString().replaceAll(',', ', ') : 'No borders'
+  );
+  detailsCapital.insertAdjacentHTML(
+    'beforeend',
+    data.capital.toString().replaceAll(',', ', ')
+  );
+  detailsCarDirection.insertAdjacentHTML(
+    'beforeend',
+    data.car.side.toString()[0].toUpperCase() + data.car.side.slice(1)
+  );
+  const arms = `<img src="${data.coatOfArms.svg}" alt="${data.demonyms.eng.m} arms" style="width: 12rem; margin-top: 0.4rem"; border-radius: 1rem>`;
+  detailsCoatOfArms.insertAdjacentHTML('beforeend', arms);
+  detailsContinents.insertAdjacentHTML(
+    'beforeend',
+    data.continents.toString().replaceAll(',', ', ')
+  );
+  const cur = data.currencies;
+  detailsCurrencies.insertAdjacentHTML(
+    'beforeend',
+    `${cur[Object.keys(cur)[0]].name} (${cur[Object.keys(cur)[0]].symbol})`
+  );
+  detailsIdd.insertAdjacentHTML('beforeend', data.idd.root);
   detailsIndependent.insertAdjacentHTML(
     'beforeend',
     data.independent ? 'Yes' : 'No'
+  );
+  detailsLandlocked.insertAdjacentHTML(
+    'beforeend',
+    data.landlocked ? 'Yes' : 'No'
   );
 };
 
@@ -79,12 +114,12 @@ search.addEventListener('click', async function () {
     const data = await getData(`name/${input.value}`);
     renderCountries(data);
     document.querySelector('.show-all').style.display = 'block';
-    console.log(goBack);
   }
 });
 
 goBack.addEventListener('click', function () {
   document.querySelector('.show-all').style.display = 'none';
+  input.value = '';
   init();
 });
 
@@ -107,7 +142,18 @@ toggler.addEventListener('click', function () {
 
 detailsExit.addEventListener('click', () => {
   detailsFlag.removeChild(detailsFlag.lastChild);
-  [detailsAltSpellings, detailsIndependent].forEach(domItem => {
+  detailsCoatOfArms.removeChild(detailsCoatOfArms.lastChild);
+  [
+    detailsAltSpellings,
+    detailsBorders,
+    detailsCapital,
+    detailsCarDirection,
+    detailsContinents,
+    detailsCurrencies,
+    detailsIdd,
+    detailsIndependent,
+    detailsLandlocked,
+  ].forEach(domItem => {
     while (domItem.hasChildNodes()) {
       domItem.removeChild(domItem.firstChild);
     }
