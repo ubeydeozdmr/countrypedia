@@ -11,8 +11,6 @@ const showAllTextKeyword = document.querySelector('.show-all-text-keyword');
 const toggler = document.querySelector('.night-mode');
 const goBack = document.querySelector('.show-all-text-click');
 
-let isDarkModeActive = false;
-
 const getData = async function (keyword) {
   const res = await fetch(`https://restcountries.com/v3.1/${keyword}`);
   const data = await res.json();
@@ -68,7 +66,8 @@ search.addEventListener('click', async function () {
     itemCleaner(showAllTextKeyword);
     showAllTextKeyword.insertAdjacentHTML('beforeend', input.value);
     input.value = '';
-    isDarkModeActive ? setNightMode() : setDayMode();
+    let theme = localStorage.getItem('theme');
+    theme === 'day' ? setDayMode() : setNightMode();
   }
 });
 
@@ -86,11 +85,14 @@ input.addEventListener('keyup', function (e) {
 });
 
 toggler.addEventListener('click', function () {
-  if (!isDarkModeActive) {
-    isDarkModeActive = true;
+  let theme = localStorage.getItem('theme');
+  if (theme === 'day') {
+    theme = 'night';
+    localStorage.setItem('theme', 'night');
     setNightMode();
   } else {
-    isDarkModeActive = false;
+    theme = 'day';
+    localStorage.setItem('theme', 'day');
     setDayMode();
   }
 });
@@ -98,7 +100,12 @@ toggler.addEventListener('click', function () {
 const init = async function () {
   const data = await getData('all');
   renderCountries(data);
-  isDarkModeActive ? setNightMode() : setDayMode();
+  if (!localStorage.getItem('theme')) {
+    localStorage.setItem('theme', 'day');
+  } else {
+    let theme = localStorage.getItem('theme');
+    theme === 'day' ? setDayMode() : setNightMode();
+  }
   let _docHeight =
     document.height !== undefined
       ? document.height
