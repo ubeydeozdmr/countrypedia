@@ -11,6 +11,8 @@ const showAllTextKeyword = document.querySelector('.show-all-text-keyword');
 const toggler = document.querySelector('.night-mode');
 const goBack = document.querySelector('.show-all-text-click');
 
+let theme;
+
 const getData = async function (keyword) {
   const res = await fetch(`https://restcountries.com/v3.1/${keyword}`);
   const data = await res.json();
@@ -25,7 +27,7 @@ const renderCountries = function (data) {
   data.forEach(item => {
     const cardContent = `
       <hover cca2="${item.cca2}">
-        <div class="list-card">
+        <div class="list-card list-card--${theme}">
           <div class="list-card-img">
             <img src="${item.flags.svg}" alt="${item.name.common} flag">
           </div>
@@ -66,7 +68,6 @@ search.addEventListener('click', async function () {
     itemCleaner(showAllTextKeyword);
     showAllTextKeyword.insertAdjacentHTML('beforeend', input.value);
     input.value = '';
-    let theme = localStorage.getItem('theme');
     theme === 'day' ? setDayMode() : setNightMode();
   }
 });
@@ -85,7 +86,6 @@ input.addEventListener('keyup', function (e) {
 });
 
 toggler.addEventListener('click', function () {
-  let theme = localStorage.getItem('theme');
   if (theme === 'day') {
     theme = 'night';
     localStorage.setItem('theme', 'night');
@@ -98,14 +98,15 @@ toggler.addEventListener('click', function () {
 });
 
 const init = async function () {
-  const data = await getData('all');
-  renderCountries(data);
   if (!localStorage.getItem('theme')) {
     localStorage.setItem('theme', 'day');
+    theme = localStorage.getItem('theme');
   } else {
-    let theme = localStorage.getItem('theme');
+    theme = localStorage.getItem('theme');
     theme === 'day' ? setDayMode() : setNightMode();
   }
+  const data = await getData('all');
+  renderCountries(data);
   let _docHeight =
     document.height !== undefined
       ? document.height

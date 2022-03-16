@@ -38,6 +38,10 @@ export const setNightMode = function () {
     item.style.color = '#eeeeee';
   });
   document.querySelectorAll('.list-card').forEach(item => {
+    item.classList.remove('.list-card--day');
+    item.classList.add('.list-card--night');
+  });
+  document.querySelectorAll('.list-card').forEach(item => {
     item.style.backgroundColor = '#333333';
     item.style.color = '#eeeeee';
   });

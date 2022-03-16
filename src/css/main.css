@@ -144,6 +144,16 @@ body {
   box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
 }
 
+.list-card--day {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.list-card--night {
+  background-color: #333333;
+  color: #eeeeee;
+}
+
 .list-card:hover {
   transform: translateY(-0.2rem);
 }
