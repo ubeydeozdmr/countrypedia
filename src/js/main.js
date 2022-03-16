@@ -68,6 +68,7 @@ search.addEventListener('click', async function () {
     itemCleaner(showAllTextKeyword);
     showAllTextKeyword.insertAdjacentHTML('beforeend', input.value);
     input.value = '';
+    isDarkModeActive ? setNightMode() : setDayMode();
   }
 });
 
@@ -97,6 +98,7 @@ toggler.addEventListener('click', function () {
 const init = async function () {
   const data = await getData('all');
   renderCountries(data);
+  isDarkModeActive ? setNightMode() : setDayMode();
   let _docHeight =
     document.height !== undefined
       ? document.height
