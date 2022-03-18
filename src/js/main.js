@@ -3,13 +3,14 @@
 import { setDayMode, setNightMode } from './themes';
 import { renderDetailsContent } from './details';
 
+const body = document.querySelector('body');
 const listCards = document.querySelector('.list-cards');
 const details = document.querySelector('.details');
 const input = document.querySelector('.search-input');
 const search = document.querySelector('.search-btn');
 const showAllTextKeyword = document.querySelector('.show-all-text-keyword');
 const toggler = document.querySelector('.night-mode');
-const goBack = document.querySelector('.show-all-text-click');
+const showAllTextClick = document.querySelector('.show-all-text-click');
 
 let theme;
 
@@ -53,9 +54,9 @@ const renderCountries = function (data) {
 };
 
 const renderDetails = function (data) {
-  details.style.display = 'flex';
-  // details.style.display = 'grid';
-  scroll(0, 0);
+  body.style.overflowY = 'hidden';
+  // details.style.display = 'flex';
+  details.style.display = 'grid';
   data = data[0];
   renderDetailsContent(data);
 };
@@ -72,7 +73,7 @@ search.addEventListener('click', async function () {
   }
 });
 
-goBack.addEventListener('click', function () {
+showAllTextClick.addEventListener('click', function () {
   document.querySelector('.show-all').style.display = 'none';
   input.value = '';
   init();
@@ -107,11 +108,11 @@ const init = async function () {
   }
   const data = await getData('all');
   renderCountries(data);
-  let _docHeight =
-    document.height !== undefined
-      ? document.height
-      : document.body.offsetHeight;
-  details.style.height = _docHeight + 'px';
+  // let _docHeight =
+  //   document.height !== undefined
+  //     ? document.height
+  //     : document.body.offsetHeight;
+  // details.style.height = _docHeight + 'px';
 };
 
 init();

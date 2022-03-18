@@ -46,6 +46,7 @@ detailsExit.addEventListener('click', () => {
   ].forEach(domItem => itemCleaner(domItem));
 
   details.style.display = 'none';
+  document.querySelector('body').style.overflowY = 'auto';
 });
 
 const insertData = (element, action) =>
@@ -57,8 +58,8 @@ const itemCleaner = parentItem => {
 };
 
 export const renderDetailsContent = function (data) {
-  const flag = `<img src="${data.flags.svg}" alt="${data.demonyms.eng.m} flag" style="width: 12rem; margin-top: 0.4rem; border-radius: 1rem" />`;
-  const arms = `<img src="${data.coatOfArms.svg}" alt="${data.demonyms.eng.m} arms" style="width: 12rem; margin-top: 0.4rem"; border-radius: 1rem>`;
+  const flag = `<img src="${data.flags.svg}" alt="${data.demonyms.eng.m} flag" class="details-img" />`;
+  const arms = `<img src="${data.coatOfArms.svg}" alt="${data.demonyms.eng.m} arms" class="details-img" />`;
 
   insertData(detailsFlag, flag);
 

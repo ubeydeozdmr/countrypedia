@@ -21,7 +21,7 @@ export const setNightMode = function () {
   document.querySelector('.show-all-text-click').style.color = 'lightblue';
 
   document.querySelector('.details').style.backgroundColor =
-    'rgba(18, 18, 18, 0.98)';
+    'rgba(18, 18, 18, 0.9)';
   document.querySelector('.details-exit-icon').style.color = '#cccccc';
   document.querySelector('.details-title-primary').style.color = '#cccccc';
   document
@@ -67,7 +67,7 @@ export const setDayMode = function () {
   document.querySelector('.show-all-text').style.color = '#000000';
   document.querySelector('.show-all-text-click').style.color = 'blue';
   document.querySelector('.details').style.backgroundColor =
-    'rgba(255, 255, 255, 0.98)';
+    'rgba(255, 255, 255, 0.9)';
   document.querySelector('.details-exit-icon').style.color = '#333333';
   document.querySelector('.details-title-primary').style.color = '#333333';
   document
