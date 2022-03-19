@@ -45,9 +45,9 @@ This app is still under development so it may have bugs. For suggestions and cor
 
 <table>
   <tr>
-    <td><img src="./src/assets/cp-overview-light-lg.png" alt="cp-overview-light-lg" width = 341.5px height = 192px /></td>
-    <td><img src="./src/assets/cp-search-light-lg.png" alt="cp-search-light-lg" width = 341.5px height = 192px /></td>
-    <td><img src="./src/assets/cp-details-light-lg.png" alt="cp-details-light-lg" width = 341.5px height = 192px /></td>
+    <td><img src="./src/assets/cp-overview-light-lg.png" alt="cp-overview-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/cp-search-light-lg.png" alt="cp-search-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/cp-details-light-lg.png" alt="cp-details-light-lg" width = 341.5px /></td>
   </tr> 
   <tr>
     <td><img src="./src/assets/cp-overview-dark-lg.png" alt="cp-overview-light-lg" width = 341.5px height = 192px /></td>
