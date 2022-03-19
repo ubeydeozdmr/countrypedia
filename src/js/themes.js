@@ -30,9 +30,6 @@ export const setNightMode = function () {
   document
     .querySelectorAll('.details-text')
     .forEach(item => (item.style.color = '#eeeeee'));
-  // document
-  //   .querySelectorAll('.details-group')
-  //   .forEach(item => (item.style.border = '1px solid #cccccc'));
   document.querySelectorAll('.details-map-link').forEach(item => {
     item.style.backgroundColor = '#333333';
     item.style.color = '#eeeeee';
@@ -76,9 +73,6 @@ export const setDayMode = function () {
   document
     .querySelectorAll('.details-text')
     .forEach(item => (item.style.color = '#555555'));
-  // document
-  //   .querySelectorAll('.details-group')
-  //   .forEach(item => (item.style.border = '1px solid #333333'));
   document.querySelectorAll('.details-map-link').forEach(item => {
     item.style.backgroundColor = '#ffffff';
     item.style.color = '#000000';
