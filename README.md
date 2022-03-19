@@ -43,7 +43,25 @@ This app is still under development so it may have bugs. For suggestions and cor
 
 # Screenshots
 
-![countrypedia-overview-light](./src/assets/countrypedia-overview-light.png)
-![countrypedia-overview-dark](./src/assets/countrypedia-overview-dark.png)
-![countrypedia-search-light](./src/assets/countrypedia-search-light.png)
-![countrypedia-search-dark](./src/assets/countrypedia-search-dark.png)
+<table>
+  <tr>
+    <td><img src="./src/assets/cp-overview-light-lg.png" alt="cp-overview-light-lg" width = 341.5px height = 192px /></td>
+    <td><img src="./src/assets/cp-search-light-lg.png" alt="cp-search-light-lg" width = 341.5px height = 192px /></td>
+    <td><img src="./src/assets/cp-details-light-lg.png" alt="cp-details-light-lg" width = 341.5px height = 192px /></td>
+  </tr> 
+  <tr>
+    <td><img src="./src/assets/cp-overview-dark-lg.png" alt="cp-overview-light-lg" width = 341.5px height = 192px /></td>
+    <td><img src="./src/assets/cp-search-dark-lg.png" alt="cp-search-light-lg" width = 341.5px height = 192px /></td>
+    <td><img src="./src/assets/cp-details-dark-lg.png" alt="cp-details-light-lg" width = 341.5px height = 192px /></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td><img src="./src/assets/cp-overview-light-sm.png" alt="cp-overview-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/cp-search-light-sm.png" alt="cp-search-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/cp-details-light-sm.png" alt="cp-details-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/cp-overview-dark-sm.png" alt="cp-overview-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/cp-search-dark-sm.png" alt="cp-search-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/cp-details-dark-sm.png" alt="cp-details-light-lg" width = 170.75px /></td>
+  </tr>
+</table>
