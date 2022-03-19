@@ -4,6 +4,7 @@ import { setDayMode, setNightMode } from './themes';
 import { renderDetailsContent } from './details';
 
 const body = document.querySelector('body');
+const spinner = document.querySelector('.loader-container');
 const listCards = document.querySelector('.list-cards');
 const details = document.querySelector('.details');
 const input = document.querySelector('.search-input');
@@ -42,6 +43,7 @@ const renderCountries = function (data) {
 
     listCards.insertAdjacentHTML('afterbegin', cardContent);
   });
+  spinner.style.display = 'none';
 
   const listCard = document.querySelectorAll('.list-card');
   listCard.forEach(item =>
@@ -63,8 +65,10 @@ const renderDetails = function (data) {
 
 search.addEventListener('click', async function () {
   if (input.value !== '') {
+    spinner.style.display = 'flex';
     const data = await getData(`name/${input.value}`);
     renderCountries(data);
+    spinner.style.display = 'none';
     document.querySelector('.show-all').style.display = 'block';
     itemCleaner(showAllTextKeyword);
     showAllTextKeyword.insertAdjacentHTML('beforeend', input.value);
@@ -76,6 +80,7 @@ search.addEventListener('click', async function () {
 showAllTextClick.addEventListener('click', function () {
   document.querySelector('.show-all').style.display = 'none';
   input.value = '';
+  spinner.style.display = 'flex';
   init();
 });
 
@@ -98,7 +103,12 @@ toggler.addEventListener('click', function () {
   }
 });
 
+// window.addEventListener('load', function () {
+//   spinner.style.display = 'none';
+// });
+
 const init = async function () {
+  // spinner.style.display = 'flex';
   if (!localStorage.getItem('theme')) {
     localStorage.setItem('theme', 'day');
     theme = localStorage.getItem('theme');

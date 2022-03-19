@@ -9,7 +9,6 @@
   flex-direction: column;
   padding: 2rem;
   gap: 1rem;
-  transition: all 0.5s;
   backdrop-filter: blur(4px);
 }
 

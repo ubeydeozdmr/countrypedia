@@ -68,6 +68,44 @@ body {
   column-gap: 1.4rem;
 }
 
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 10rem;
+}
+
+.loader {
+  border: 0.8rem solid #dddddd;
+  border-radius: 50%;
+  border-top: 16px solid #666666;
+  width: 4rem;
+  height: 4rem;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .search {
   height: 4rem;
   background-color: #ffffff;
