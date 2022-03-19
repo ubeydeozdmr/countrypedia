@@ -21,7 +21,7 @@ export const setNightMode = function () {
   document.querySelector('.show-all-text-click').style.color = 'lightblue';
 
   document.querySelector('.details').style.backgroundColor =
-    'rgba(18, 18, 18, 0.9)';
+    'rgba(18, 18, 18, 0.96)';
   document.querySelector('.details-exit-icon').style.color = '#cccccc';
   document.querySelector('.details-title-primary').style.color = '#cccccc';
   document
@@ -30,9 +30,6 @@ export const setNightMode = function () {
   document
     .querySelectorAll('.details-text')
     .forEach(item => (item.style.color = '#eeeeee'));
-  document
-    .querySelectorAll('.details-group')
-    .forEach(item => (item.style.border = '1px solid #cccccc'));
   document.querySelectorAll('.details-map-link').forEach(item => {
     item.style.backgroundColor = '#333333';
     item.style.color = '#eeeeee';
@@ -67,7 +64,7 @@ export const setDayMode = function () {
   document.querySelector('.show-all-text').style.color = '#000000';
   document.querySelector('.show-all-text-click').style.color = 'blue';
   document.querySelector('.details').style.backgroundColor =
-    'rgba(255, 255, 255, 0.9)';
+    'rgba(255, 255, 255, 0.96)';
   document.querySelector('.details-exit-icon').style.color = '#333333';
   document.querySelector('.details-title-primary').style.color = '#333333';
   document
@@ -76,9 +73,6 @@ export const setDayMode = function () {
   document
     .querySelectorAll('.details-text')
     .forEach(item => (item.style.color = '#555555'));
-  document
-    .querySelectorAll('.details-group')
-    .forEach(item => (item.style.border = '1px solid #333333'));
   document.querySelectorAll('.details-map-link').forEach(item => {
     item.style.backgroundColor = '#ffffff';
     item.style.color = '#000000';

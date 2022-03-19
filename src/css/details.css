@@ -1,11 +1,10 @@
 .details {
   display: none;
-  grid-template-columns: 1fr 1fr;
   position: fixed;
   width: 100%;
   overflow-x: hidden;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.96);
   z-index: 10;
   flex-direction: column;
   padding: 2rem;
@@ -14,9 +13,30 @@
   backdrop-filter: blur(4px);
 }
 
+.details-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  row-gap: 3rem;
+}
+
+.details-container--left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  align-items: center;
+  text-align: center;
+}
+
+.details-container--right {
+  border: 1px solid #aaaaaa;
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .details-exit {
   position: absolute;
-  padding: 1rem;
+  margin: 3.2rem;
   top: 0;
   right: 0;
   cursor: pointer;
@@ -54,21 +74,19 @@
 }
 
 .details-group {
-  border: 1px solid #333333;
-  border-radius: 1rem;
   padding: 0.8rem 2.4rem;
 }
 
 .details-map-link {
   display: inline-block;
-  margin: 0.4rem 0.2rem 0 0.2rem;
+  margin: 0.4rem 0.2rem 0 0;
   padding: 0.4rem 0.8rem;
   background-color: #ffffff;
   color: #000000;
   box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
   border-radius: 100rem;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
   transition: all 0.3s;
 }
 
@@ -77,12 +95,46 @@
 }
 
 @media screen and (max-width: 1250px) {
-  .details {
+  .details-container {
+    grid-template-columns: 1fr;
+  }
+
+  .details-container--left {
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .details-container {
+    grid-template-columns: 1fr 2fr;
+    row-gap: 3rem;
+    column-gap: 2rem;
+  }
+
+  .details-container--left {
+    flex-direction: column;
+  }
+
+  .details-container--right {
     grid-template-columns: 1fr;
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
+  .details-exit {
+    padding: 2.4rem;
+  }
+
+  .details-container {
+    grid-template-columns: 1fr;
+  }
+
+  .details-title-primary {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
   .details-img {
     height: auto;
     width: 100%;

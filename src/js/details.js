@@ -125,7 +125,7 @@ export const renderDetailsContent = function (data) {
 
   insertData(detailsTimezones, data.timezones.toString().replaceAll(',', ', '));
 
-  insertData(detailsTld, data.tld);
+  insertData(detailsTld, data.tld.toString().replaceAll(',', ', '));
 
   insertData(detailsUnMember, data.unMember ? 'Yes' : 'No');
 };
