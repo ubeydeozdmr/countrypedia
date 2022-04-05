@@ -1,7 +1,7 @@
 'use strict';
 
 import { setDayMode, setNightMode } from './themes';
-import { renderDetailsContent } from './details';
+import { renderDetailsContent, renderDetailsError } from './details';
 
 const body = document.querySelector('body');
 const spinner = document.querySelector('.loader-container');
@@ -16,11 +16,22 @@ const showAllTextClick = document.querySelector('.show-all-text-click');
 let theme;
 
 const getData = async function (keyword) {
-  const res = await fetch(`https://restcountries.com/v3.1/${keyword}`);
-  const data = await res.json();
-  // console.log(data);
-  // console.log(data[0]);
-  return data;
+  try {
+    const res = await fetch(`https://restcountries.com/v3.1/${keyword}`);
+    if (!res || !res.ok) throw new Error();
+    const data = await res.json();
+    // console.log(data);
+    // console.log(data[0]);
+    return data;
+  } catch (err) {
+    const markup = `
+      <h2 class="error-message">
+        We had a problem trying to pull the required data. Please try again.
+      </h2>
+    `;
+    spinner.insertAdjacentHTML('beforebegin', markup);
+    spinner.style.display = 'none';
+  }
 };
 
 const renderCountries = function (data) {
@@ -41,7 +52,7 @@ const renderCountries = function (data) {
       </hover>
     `;
 
-    listCards.insertAdjacentHTML('afterbegin', cardContent);
+    listCards.insertAdjacentHTML('beforeend', cardContent);
   });
   spinner.style.display = 'none';
 
@@ -57,8 +68,8 @@ const renderCountries = function (data) {
 
 const renderDetails = function (data) {
   body.style.overflowY = 'hidden';
-  // details.style.display = 'flex';
   details.style.display = 'grid';
+  if (!data) return renderDetailsError();
   data = data[0];
   renderDetailsContent(data);
 };
@@ -103,12 +114,7 @@ toggler.addEventListener('click', function () {
   }
 });
 
-// window.addEventListener('load', function () {
-//   spinner.style.display = 'none';
-// });
-
 const init = async function () {
-  // spinner.style.display = 'flex';
   if (!localStorage.getItem('theme')) {
     localStorage.setItem('theme', 'day');
     theme = localStorage.getItem('theme');
@@ -117,12 +123,7 @@ const init = async function () {
     theme === 'day' ? setDayMode() : setNightMode();
   }
   const data = await getData('all');
-  renderCountries(data);
-  // let _docHeight =
-  //   document.height !== undefined
-  //     ? document.height
-  //     : document.body.offsetHeight;
-  // details.style.height = _docHeight + 'px';
+  if (data) renderCountries(data);
 };
 
 init();

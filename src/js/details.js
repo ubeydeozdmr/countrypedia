@@ -1,4 +1,5 @@
 const details = document.querySelector('.details');
+const detailsContainer = document.querySelector('.details-container');
 const detailsExit = document.querySelector('.details-exit');
 const detailsFlag = document.querySelector('.details-flag');
 const detailsAltSpellings = document.querySelector('.details-alt-spellings');
@@ -55,6 +56,16 @@ const insertData = (element, action) =>
 const itemCleaner = parentItem => {
   while (parentItem.hasChildNodes())
     parentItem.removeChild(parentItem.firstChild);
+};
+
+export const renderDetailsError = function () {
+  itemCleaner(detailsContainer);
+  const markup = `
+  <h2 class="error-message">
+    We had a problem trying to pull the required data. Please try again.
+  </h2>
+`;
+  return detailsContainer.insertAdjacentHTML('afterbegin', markup);
 };
 
 export const renderDetailsContent = function (data) {

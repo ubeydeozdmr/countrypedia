@@ -106,6 +106,12 @@ body {
   }
 }
 
+.error-message {
+  color: red;
+  text-align: center;
+  margin: 4rem 0;
+}
+
 .search {
   height: 4rem;
   background-color: #ffffff;
