@@ -45,23 +45,23 @@ This app is still under development so it may have bugs. For suggestions and cor
 
 <table>
   <tr>
-    <td><img src="./src/assets/cp-overview-light-lg.png" alt="cp-overview-light-lg" width = 341.5px /></td>
-    <td><img src="./src/assets/cp-search-light-lg.png" alt="cp-search-light-lg" width = 341.5px /></td>
-    <td><img src="./src/assets/cp-details-light-lg.png" alt="cp-details-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/cp-overview-light-lg.png" alt="cp-overview-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/cp-search-light-lg.png" alt="cp-search-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/cp-details-light-lg.png" alt="cp-details-light-lg" width = 341.5px /></td>
   </tr> 
   <tr>
-    <td><img src="./src/assets/cp-overview-dark-lg.png" alt="cp-overview-light-lg" width = 341.5px /></td>
-    <td><img src="./src/assets/cp-search-dark-lg.png" alt="cp-search-light-lg" width = 341.5px /></td>
-    <td><img src="./src/assets/cp-details-dark-lg.png" alt="cp-details-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/cp-overview-dark-lg.png" alt="cp-overview-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/cp-search-dark-lg.png" alt="cp-search-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/cp-details-dark-lg.png" alt="cp-details-light-lg" width = 341.5px /></td>
   </tr>
 </table>
 <table>
   <tr>
-    <td><img src="./src/assets/cp-overview-light-sm.png" alt="cp-overview-light-lg" width = 170.75px /></td>
-    <td><img src="./src/assets/cp-search-light-sm.png" alt="cp-search-light-lg" width = 170.75px /></td>
-    <td><img src="./src/assets/cp-details-light-sm.png" alt="cp-details-light-lg" width = 170.75px /></td>
-    <td><img src="./src/assets/cp-overview-dark-sm.png" alt="cp-overview-light-lg" width = 170.75px /></td>
-    <td><img src="./src/assets/cp-search-dark-sm.png" alt="cp-search-light-lg" width = 170.75px /></td>
-    <td><img src="./src/assets/cp-details-dark-sm.png" alt="cp-details-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/cp-overview-light-sm.png" alt="cp-overview-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/cp-search-light-sm.png" alt="cp-search-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/cp-details-light-sm.png" alt="cp-details-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/cp-overview-dark-sm.png" alt="cp-overview-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/cp-search-dark-sm.png" alt="cp-search-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/cp-details-dark-sm.png" alt="cp-details-light-lg" width = 170.75px /></td>
   </tr>
 </table>
