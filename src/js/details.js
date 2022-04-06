@@ -58,16 +58,6 @@ const itemCleaner = parentItem => {
     parentItem.removeChild(parentItem.firstChild);
 };
 
-export const renderDetailsError = function () {
-  itemCleaner(detailsContainer);
-  const markup = `
-  <h2 class="error-message">
-    We had a problem trying to pull the required data. Please try again.
-  </h2>
-`;
-  return detailsContainer.insertAdjacentHTML('afterbegin', markup);
-};
-
 export const renderDetailsContent = function (data) {
   const flag = `<img src="${data.flags.svg}" alt="${data.demonyms.eng.m} flag" class="details-img" />`;
   const arms = `<img src="${data.coatOfArms.svg}" alt="${data.demonyms.eng.m} arms" class="details-img" />`;

@@ -69,7 +69,6 @@ const renderCountries = function (data) {
 const renderDetails = function (data) {
   body.style.overflowY = 'hidden';
   details.style.display = 'grid';
-  if (!data) return renderDetailsError();
   data = data[0];
   renderDetailsContent(data);
 };
