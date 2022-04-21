@@ -37,8 +37,8 @@ class View {
    */
   renderCountries(data) {
     this.#clear(this.#listCards);
-    if (document.querySelector('.error-message') != null)
-      this.#clear(document.querySelector('.error-message'));
+    // if (document.querySelector('.error-message') != null)
+    //   this.#clear(document.querySelector('.error-message'));
 
     data.forEach(item => {
       const cardContent = `
@@ -83,16 +83,21 @@ class View {
     this.renderSpinner();
   }
 
-  renderError() {
-    // TODO: Unfortunately, for now, the error handling of the application is quite inadequate and hardcoded.
-    // TODO: I will try to improve it in the future.
-    const markup = `
-      <h2 class="error-message">
-        We couldn't find what you're looking for. Try another query.
-      </h2>
-    `;
-    this.#spinner.insertAdjacentHTML('beforebegin', markup);
+  #popup = document.querySelector('.popup');
+  #overlay = document.querySelector('.overlay');
+  #errorMessage = document.querySelector('.error-message');
+
+  renderError(errorMessage) {
+    this.#clear(this.#errorMessage);
+    this.#errorMessage.insertAdjacentHTML('beforeend', errorMessage);
+    this.#popup.style.display = 'block';
+    this.#overlay.style.display = 'block';
     this.#spinner.style.display = 'none';
+  }
+
+  dismissError() {
+    this.#popup.style.display = 'none';
+    this.#overlay.style.display = 'none';
   }
 
   #details = document.querySelector('.details');
@@ -210,6 +215,7 @@ class View {
   #detailsText = document.querySelectorAll('.details-text');
   #detailsMapLink = document.querySelectorAll('.details-map-link');
   #listCard = document.querySelectorAll('.list-card');
+  #popupCloseBtn = document.querySelector('.btn--close-popup');
 
   setNightMode() {
     // Redefining #listCard item
@@ -234,6 +240,8 @@ class View {
     this.#details.style.backgroundColor = 'rgba(18, 18, 18, 0.96)';
     this.#detailsExitIcon.style.color = '#cccccc';
     this.#detailsTitlePrimary.style.color = '#cccccc';
+    this.#popup.style.backgroundColor = '#111111';
+    this.#popupCloseBtn.style.color = '#eeeeee';
     this.#detailsTitleSecond.forEach(item => (item.style.color = '#dddddd'));
     this.#detailsText.forEach(item => (item.style.color = '#eeeeee'));
     this.#detailsMapLink.forEach(item => {
@@ -273,6 +281,8 @@ class View {
     this.#details.style.backgroundColor = 'rgba(255, 255, 255, 0.96)';
     this.#detailsExitIcon.style.color = '#333333';
     this.#detailsTitlePrimary.style.color = '#333333';
+    this.#popup.style.backgroundColor = '#eeeeee';
+    this.#popupCloseBtn.style.color = '#111111';
     this.#detailsTitleSecond.forEach(item => (item.style.color = '#444444'));
     this.#detailsText.forEach(item => (item.style.color = '#555555'));
     this.#detailsMapLink.forEach(item => {
