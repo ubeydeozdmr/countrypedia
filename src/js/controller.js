@@ -1,6 +1,11 @@
 import { ERROR_BAD_REQUEST, ERROR_NOT_FOUND } from './config';
 import { getData } from './model';
-import view from './view';
+import countriesView from './views/countriesView';
+import detailsView from './views/detailsView';
+import themesView from './views/themesView';
+import View from './views/View';
+
+const statusView = new View();
 
 const toggler = document.querySelector('.night-mode');
 const search = document.querySelector('.search-btn');
@@ -10,26 +15,27 @@ const detailsExit = document.querySelector('.details-exit');
 const btnClosePopup = document.querySelector('.btn--close-popup');
 
 toggler.addEventListener('click', function () {
-  if (view.theme === 'day') {
-    view.theme = 'night';
+  if (View.theme === 'day') {
+    View.theme = 'night';
     localStorage.setItem('theme', 'night');
-    view.setNightMode();
+    themesView.setNightMode();
   } else {
-    view.theme = 'day';
+    View.theme = 'day';
     localStorage.setItem('theme', 'day');
-    view.setDayMode();
+    themesView.setDayMode();
   }
 });
 
 search.addEventListener('click', async function () {
   if (input.value === '') return;
-  view.renderSpinner();
+  // !
+  statusView.renderSpinner();
   const data = await getData(`name/${input.value}`);
-  if (data) view.renderCountries(data);
-  else view.renderError(ERROR_NOT_FOUND);
-  view.renderShowAll(input);
+  if (data) countriesView.render(data);
+  else statusView.renderError(ERROR_NOT_FOUND);
+  countriesView.renderShowAll(input);
   listCardHandler();
-  view.theme === 'day' ? view.setDayMode() : view.setNightMode();
+  View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
 });
 
 input.addEventListener('keyup', function (e) {
@@ -37,22 +43,23 @@ input.addEventListener('keyup', function (e) {
 });
 
 showAllTextClick.addEventListener('click', function () {
-  view.hideShowAll(input);
+  countriesView.hideShowAll(input);
   init();
 });
 
-detailsExit.addEventListener('click', () => view.hideDetails());
+detailsExit.addEventListener('click', () => detailsView.hide());
 
-btnClosePopup.addEventListener('click', () => view.dismissError());
+btnClosePopup.addEventListener('click', () => statusView.dismissError());
 
 const listCardHandler = function () {
   try {
+    View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
     document.querySelectorAll('.list-card').forEach(item =>
       item.addEventListener('click', async function (e) {
         const id = e.target.closest('hover').getAttribute('cca3');
         const data = await getData(`alpha/${id}`);
-        if (data) view.renderDetails(data);
-        else view.renderError(ERROR_BAD_REQUEST);
+        if (data) detailsView.render(data);
+        else statusView.renderError(ERROR_BAD_REQUEST);
       })
     );
   } catch (err) {
@@ -63,14 +70,14 @@ const listCardHandler = function () {
 const init = async function () {
   if (!localStorage.getItem('theme')) {
     localStorage.setItem('theme', 'day');
-    view.theme = localStorage.getItem('theme');
+    View.theme = localStorage.getItem('theme');
   } else {
-    view.theme = localStorage.getItem('theme');
-    view.theme === 'day' ? view.setDayMode() : view.setNightMode();
+    View.theme = localStorage.getItem('theme');
+    View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
   }
   const data = await getData('all');
-  if (data) view.renderCountries(data);
-  else view.renderError(ERROR_BAD_REQUEST);
+  if (data) countriesView.render(data);
+  else statusView.renderError(ERROR_BAD_REQUEST);
   listCardHandler();
 };
 init();
