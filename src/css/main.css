@@ -61,8 +61,12 @@ body {
 }
 
 .hero-title span {
+  background-color: #555555;
+  color: #ffffff;
   font-size: 1.2rem;
   letter-spacing: 0.12rem;
+  padding: 0 0.2rem;
+  border-radius: 4px;
 }
 
 .hero-description {
@@ -134,7 +138,7 @@ body {
 .search {
   height: 4rem;
   background-color: #ffffff;
-  border-radius: 1.2rem;
+  border-radius: 1000px;
   box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
   overflow: hidden;
   display: flex;
@@ -240,6 +244,7 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
+  user-select: none;
 }
 
 .list-card-save-icon {
@@ -258,6 +263,10 @@ footer {
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
+}
+
+.footer-link:hover {
+  text-decoration: none;
 }
 
 @media screen and (max-width: 1250px) {

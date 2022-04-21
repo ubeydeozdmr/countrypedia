@@ -37,8 +37,6 @@ class View {
    */
   renderCountries(data) {
     this.#clear(this.#listCards);
-    // if (document.querySelector('.error-message') != null)
-    //   this.#clear(document.querySelector('.error-message'));
 
     data.forEach(item => {
       const cardContent = `
@@ -216,6 +214,10 @@ class View {
   #detailsMapLink = document.querySelectorAll('.details-map-link');
   #listCard = document.querySelectorAll('.list-card');
   #popupCloseBtn = document.querySelector('.btn--close-popup');
+  #footer = document.querySelector('footer');
+  #footerGitHubLink = document.querySelector('.footer-link--github');
+  #footerApiRefLink = document.querySelector('.footer-link--apiref');
+  #betaTag = document.querySelector('.hero-title span');
 
   setNightMode() {
     // Redefining #listCard item
@@ -237,11 +239,15 @@ class View {
     this.#showAll.style.backgroundColor = '#333333';
     this.#showAllText.style.color = '#eeeeee';
     this.#showAllTextClick.style.color = 'lightblue';
+    this.#footerGitHubLink.style.color = 'lightblue';
+    this.#footerApiRefLink.style.color = 'lightblue';
     this.#details.style.backgroundColor = 'rgba(18, 18, 18, 0.96)';
     this.#detailsExitIcon.style.color = '#cccccc';
     this.#detailsTitlePrimary.style.color = '#cccccc';
     this.#popup.style.backgroundColor = '#111111';
     this.#popupCloseBtn.style.color = '#eeeeee';
+    this.#betaTag.style.color = '#333333';
+    this.#betaTag.style.backgroundColor = '#cccccc';
     this.#detailsTitleSecond.forEach(item => (item.style.color = '#dddddd'));
     this.#detailsText.forEach(item => (item.style.color = '#eeeeee'));
     this.#detailsMapLink.forEach(item => {
@@ -256,6 +262,8 @@ class View {
       item.style.backgroundColor = '#333333';
       item.style.color = '#eeeeee';
     });
+    this.#footer.style.color = '#cccccc';
+    this.#footer.style.backgroundColor = '#333333';
   }
 
   setDayMode() {
@@ -278,11 +286,15 @@ class View {
     this.#showAll.style.backgroundColor = '#ffffff';
     this.#showAllText.style.color = '#000000';
     this.#showAllTextClick.style.color = 'blue';
+    this.#footerGitHubLink.style.color = 'blue';
+    this.#footerApiRefLink.style.color = 'blue';
     this.#details.style.backgroundColor = 'rgba(255, 255, 255, 0.96)';
     this.#detailsExitIcon.style.color = '#333333';
     this.#detailsTitlePrimary.style.color = '#333333';
     this.#popup.style.backgroundColor = '#eeeeee';
-    this.#popupCloseBtn.style.color = '#111111';
+    this.#popupCloseBtn.style.color = '#333333';
+    this.#betaTag.style.color = '#ffffff';
+    this.#betaTag.style.backgroundColor = '#555555';
     this.#detailsTitleSecond.forEach(item => (item.style.color = '#444444'));
     this.#detailsText.forEach(item => (item.style.color = '#555555'));
     this.#detailsMapLink.forEach(item => {
@@ -293,6 +305,8 @@ class View {
       item.style.backgroundColor = '#ffffff';
       item.style.color = '#000000';
     });
+    this.#footer.style.color = '#333333';
+    this.#footer.style.backgroundColor = '#eeeeee';
   }
 }
 
