@@ -15,15 +15,15 @@
     <link rel="icon" type="image/x-icon" href="src/assets/favicon.ico" />
     <title>Countrypedia</title>
   </head>
-  <body>
+  <body class="body">
     <div class="details">
       <div class="details-exit">
         <svg
+          class="bi bi-x-lg details-exit-icon"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
           fill="currentColor"
-          class="bi bi-x-lg details-exit-icon"
           viewBox="0 0 16 16"
         >
           <path
@@ -141,8 +141,8 @@
       <div class="toolbar">
         <div class="night-mode">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
             class="toolbar-icons"
+            xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -155,8 +155,8 @@
             />
           </svg>
           <!-- <svg
-            xmlns="http://www.w3.org/2000/svg"
             class="toolbar-icons"
+            xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -170,13 +170,14 @@
           </svg> -->
         </div>
         <div class="github">
-          <a target="_blank" href="https://github.com/ubeydeozdmr/countrypedia">
+          <!-- prettier-ignore -->
+          <a class="github-link" target="_blank" href="https://github.com/ubeydeozdmr/countrypedia">
             <svg
+              class="bi bi-github toolbar-icons"
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-github toolbar-icons"
               viewBox="0 0 16 16"
             >
               <path
@@ -188,8 +189,8 @@
         <!-- !!! Under development !!! -->
         <!-- <div class="bookmarks">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
             class="toolbar-icons"
+            xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -203,7 +204,9 @@
           </svg>
         </div> -->
       </div>
-      <h1 class="hero-title">Countrypedia <span>BETA</span></h1>
+      <h1 class="hero-title">
+        Countrypedia <span class="beta-tag">BETA</span>
+      </h1>
       <p class="hero-description">
         An application where you can see all countries
       </p>
@@ -241,7 +244,7 @@
         <!-- Content will be added here when JavaScript is finished running -->
       </section>
     </div>
-    <footer>
+    <footer class="footer">
       Created by Ubeyde Emir Özdemir with ❤️ // &nbsp;
       <a
         class="footer-link footer-link--github"
