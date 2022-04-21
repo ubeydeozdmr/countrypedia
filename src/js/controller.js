@@ -1,3 +1,4 @@
+import { ERROR_BAD_REQUEST, ERROR_NOT_FOUND } from './config';
 import { getData } from './model';
 import view from './view';
 
@@ -6,6 +7,7 @@ const search = document.querySelector('.search-btn');
 const input = document.querySelector('.search-input');
 const showAllTextClick = document.querySelector('.show-all-text-click');
 const detailsExit = document.querySelector('.details-exit');
+const btnClosePopup = document.querySelector('.btn--close-popup');
 
 toggler.addEventListener('click', function () {
   if (view.theme === 'day') {
@@ -24,7 +26,7 @@ search.addEventListener('click', async function () {
   view.renderSpinner();
   const data = await getData(`name/${input.value}`);
   if (data) view.renderCountries(data);
-  else view.renderError();
+  else view.renderError(ERROR_NOT_FOUND);
   view.renderShowAll(input);
   listCardHandler();
   view.theme === 'day' ? view.setDayMode() : view.setNightMode();
@@ -41,13 +43,16 @@ showAllTextClick.addEventListener('click', function () {
 
 detailsExit.addEventListener('click', () => view.hideDetails());
 
+btnClosePopup.addEventListener('click', () => view.dismissError());
+
 const listCardHandler = function () {
   try {
     document.querySelectorAll('.list-card').forEach(item =>
       item.addEventListener('click', async function (e) {
         const id = e.target.closest('hover').getAttribute('cca3');
         const data = await getData(`alpha/${id}`);
-        view.renderDetails(data);
+        if (data) view.renderDetails(data);
+        else view.renderError(ERROR_BAD_REQUEST);
       })
     );
   } catch (err) {
@@ -65,7 +70,7 @@ const init = async function () {
   }
   const data = await getData('all');
   if (data) view.renderCountries(data);
-  else view.renderError();
+  else view.renderError(ERROR_BAD_REQUEST);
   listCardHandler();
 };
 init();
