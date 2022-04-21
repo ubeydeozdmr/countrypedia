@@ -1,5 +1,5 @@
 import { ERROR_BAD_REQUEST, ERROR_NOT_FOUND } from './config';
-import { getData } from './model';
+import { getData, state } from './model';
 import countriesView from './views/countriesView';
 import detailsView from './views/detailsView';
 import themesView from './views/themesView';
@@ -32,7 +32,7 @@ search.addEventListener('click', async function () {
   statusView.renderSpinner();
   const data = await getData(`name/${input.value}`);
   if (data) countriesView.render(data);
-  else statusView.renderError(ERROR_NOT_FOUND);
+  else statusView.renderError(errorHandler());
   countriesView.renderShowAll(input);
   listCardHandler();
   View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
@@ -51,6 +51,15 @@ detailsExit.addEventListener('click', () => detailsView.hide());
 
 btnClosePopup.addEventListener('click', () => statusView.dismissError());
 
+const errorHandler = function () {
+  switch (state.status) {
+    case 404:
+      return ERROR_NOT_FOUND;
+    default:
+      return ERROR_BAD_REQUEST;
+  }
+};
+
 const listCardHandler = function () {
   try {
     View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
@@ -59,7 +68,7 @@ const listCardHandler = function () {
         const id = e.target.closest('hover').getAttribute('cca3');
         const data = await getData(`alpha/${id}`);
         if (data) detailsView.render(data);
-        else statusView.renderError(ERROR_BAD_REQUEST);
+        else statusView.renderError(errorHandler());
       })
     );
   } catch (err) {
@@ -68,6 +77,8 @@ const listCardHandler = function () {
 };
 
 const init = async function () {
+  let data;
+
   if (!localStorage.getItem('theme')) {
     localStorage.setItem('theme', 'day');
     View.theme = localStorage.getItem('theme');
@@ -75,9 +86,12 @@ const init = async function () {
     View.theme = localStorage.getItem('theme');
     View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
   }
-  const data = await getData('all');
+
+  state.countries ? (data = state.countries) : (data = await getData('all'));
+
   if (data) countriesView.render(data);
-  else statusView.renderError(ERROR_BAD_REQUEST);
+  else statusView.renderError(errorHandler());
+
   listCardHandler();
 };
 init();
