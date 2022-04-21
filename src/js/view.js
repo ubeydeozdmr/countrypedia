@@ -42,8 +42,8 @@ class View {
       const cardContent = `
         <hover cca3="${item.cca3}">
           <div class="list-card list-card--${this.theme}">
-            <div class="list-card-img">
-              <img src="${item.flags.svg}" alt="${item.name.common} flag">
+            <div class="list-card-img-frame">
+              <img class="list-card-img" src="${item.flags.svg}" alt="${item.name.common} flag">
             </div>
             <div class="list-card-text">
               <p>${item.name.common}</p>
