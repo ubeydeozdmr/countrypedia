@@ -31,8 +31,8 @@ class DetailsView extends View {
     this.#details.style.display = 'grid';
     data = data[0];
 
-    const flag = `<img src="${data.flags.svg}" alt="${data.demonyms.eng.m} flag" class="details-img" />`;
-    const arms = `<img src="${data.coatOfArms.svg}" alt="${data.demonyms.eng.m} arms" class="details-img" />`;
+    const flag = `<img src="${data.flags.svg}" alt="${data.demonyms?.eng?.m} flag" class="details-img" />`;
+    const arms = `<img src="${data.coatOfArms.svg}" alt="${data.demonyms?.eng?.m} arms" class="details-img" />`;
 
     insert(this.#detailsFlag, flag);
     insert(this.#detailsAltSpellings, data.altSpellings.join(', '));
