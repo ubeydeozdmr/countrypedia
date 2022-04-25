@@ -38,18 +38,18 @@ class DetailsView extends View {
     insert(this.#detailsAltSpellings, data.altSpellings.join(', '));
     // prettier-ignore
     insert(this.#detailsBorders, data.borders ? data.borders.join(', ') : 'No borders');
-    insert(this.#detailsCapital, data.capital.join(', '));
+    insert(this.#detailsCapital, data.capital?.join(', ') || 'No data');
     // prettier-ignore
     insert(this.#detailsCarDirection, data.car.side.toString()[0].toUpperCase() + data.car.side.slice(1));
     insert(this.#detailsCoatOfArms, arms);
     insert(this.#detailsContinents, data.continents.join(', '));
-    insert(this.#detailsIdd, data.idd.root);
+    insert(this.#detailsIdd, data.idd.root || 'No data');
     insert(this.#detailsIndependent, data.independent ? 'Yes' : 'No');
     insert(this.#detailsLandlocked, data.landlocked ? 'Yes' : 'No');
     insert(this.#detailsLocation, data.latlng.join(', '));
     // prettier-ignore
     insert(this.#detailsPopulation, data.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '));
-    insert(this.#detailsRegion, `${data.region} / ${data.subregion}`);
+    insert(this.#detailsRegion, `${data.region} / ${data.subregion || '?'}`);
     // prettier-ignore
     insert(this.#detailsStartOfWeek, data.startOfWeek[0].toUpperCase() + data.startOfWeek.toString().slice(1));
     insert(this.#detailsTimezones, data.timezones.join(', '));
@@ -58,17 +58,23 @@ class DetailsView extends View {
     this.#detailsMapsGoogle.setAttribute('href', data.maps.googleMaps);
     this.#detailsMapsOpenSt.setAttribute('href', data.maps.openStreetMaps);
 
-    Object.values(data.currencies).forEach(cur => {
-      let currencies = '';
-      currencies += `${cur.name} (${cur.symbol}), `;
-      insert(this.#detailsCurrencies, currencies);
-    });
+    let currencies = '';
+    let languages = '';
 
-    Object.values(data.languages).forEach(lang => {
-      let languages = '';
-      languages += `${lang}, `;
-      insert(this.#detailsLanguages, languages);
-    });
+    if (data.currencies)
+      Object.values(data.currencies).forEach(cur => {
+        currencies += `${cur.name} (${cur.symbol || '?'}), `;
+      });
+    else currencies = 'No data  ';
+
+    if (data.languages)
+      Object.values(data.languages).forEach(lang => {
+        languages += `${lang}, `;
+      });
+    else languages = 'No data  ';
+
+    insert(this.#detailsCurrencies, currencies.slice(0, currencies.length - 2));
+    insert(this.#detailsLanguages, languages.slice(0, languages.length - 2));
   }
 
   hide() {
