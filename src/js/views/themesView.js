@@ -73,6 +73,14 @@ class ThemesView extends View {
     });
     this.#footer.style.color = '#cccccc';
     this.#footer.style.backgroundColor = '#333333';
+
+    this.#searchBtn.addEventListener('mouseover', function () {
+      this.style.backgroundColor = '#444444';
+    });
+
+    this.#searchBtn.addEventListener('mouseleave', function () {
+      this.style.backgroundColor = '#222222';
+    });
   }
 
   setDayMode() {
@@ -116,6 +124,14 @@ class ThemesView extends View {
     });
     this.#footer.style.color = '#333333';
     this.#footer.style.backgroundColor = '#eeeeee';
+
+    this.#searchBtn.addEventListener('mouseover', function () {
+      this.style.backgroundColor = '#dddddd';
+    });
+
+    this.#searchBtn.addEventListener('mouseleave', function () {
+      this.style.backgroundColor = '#eeeeee';
+    });
   }
 }
 
