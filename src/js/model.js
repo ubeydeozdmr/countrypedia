@@ -9,7 +9,6 @@ export const getData = async function (keyword) {
   try {
     const res = await fetch(API_ROUTE + keyword);
     state.status = res.status;
-    console.log(state.status);
     if (!res.ok) return;
     const data = await res.json();
     if (!state.countries) state.countries = data;
