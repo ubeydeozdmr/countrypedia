@@ -4,176 +4,176 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/css/main.css" />
-    <link rel="stylesheet" href="src/css/details.css" />
+    <link rel="stylesheet" href="src/scss/main.scss" />
+    <link rel="stylesheet" href="src/font/stylesheet.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/x-icon" href="src/assets/favicon.ico" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto+Condensed:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&amp;family=Roboto+Condensed:wght@400;700&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/x-icon" href="src/assets/favicon.ico" />
     <title>Countrypedia</title>
   </head>
   <body class="body">
-    <div class="details">
-      <div class="details-exit">
-        <svg
-          class="bi bi-x-lg details-exit-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="currentColor"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
-          />
-          <path
-            fill-rule="evenodd"
-            d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
-          />
-        </svg>
-      </div>
-
-      <div class="details-container">
-        <div class="details-container--left">
-          <div class="details-title-primary">
-            <h2>Details</h2>
-          </div>
-          <div class="details-flag">
-            <h3 class="details-title-secondary">Flag</h3>
-            <!-- The image will be shown here -->
-          </div>
-          <div class="details-coat-of-arms">
-            <h3 class="details-title-secondary">Coat of Arms</h3>
-            <!-- The image will be shown here -->
-          </div>
+    <div class="focus hidden"></div>
+    <div class="popup hidden">
+      <a
+        class="details__map-button details__map-button--googlemaps"
+        target="_blank"
+        href=""
+      >
+        Google Maps &rarr;
+      </a>
+      <div class="details">
+        <!-- <div class="details__map-button details__map-button--openstreetmap">
+          OpenStreetMap
+        </div> -->
+        <div class="details__header">
+          <div class="details__title">Details</div>
+          <div class="details__exit" tabindex="-10">&#9587;</div>
         </div>
-        <div class="details-container--right">
-          <div class="details-group">
-            <h3 class="details-title-secondary">Alt Spellings</h3>
-            <div class="details-alt-spellings details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Borders</h3>
-            <div class="details-borders details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Capital</h3>
-            <div class="details-capital details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Car Driving Direction</h3>
-            <div class="details-car-direction details-text"></div>
-          </div>
-
-          <div class="details-group">
-            <h3 class="details-title-secondary">Continents</h3>
-            <div class="details-continents details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Currencies</h3>
-            <div class="details-currencies details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Direct Dialing Code</h3>
-            <div class="details-idd details-text"></div>
-          </div>
-
-          <div class="details-group">
-            <h3 class="details-title-secondary">Independent</h3>
-            <div class="details-independent details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Landlocked</h3>
-            <div class="details-landlocked details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Languages</h3>
-            <div class="details-languages details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Location</h3>
-            <div class="details-location details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Maps</h3>
-            <!-- prettier-ignore -->
-            <a target="_blank" class="details-map-link details-map-link--google">Google Maps</a>
-            <!-- prettier-ignore -->
-            <a target="_blank" class="details-map-link details-map-link--openst">OpenStreetMaps</a>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Population</h3>
-            <div class="details-population details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Region</h3>
-            <div class="details-region details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Start of Week</h3>
-            <div class="details-start-of-week details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Timezones</h3>
-            <div class="details-timezones details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">Top-level Domain</h3>
-            <div class="details-top-level-domain details-text"></div>
-          </div>
-          <div class="details-group">
-            <h3 class="details-title-secondary">United Nations Member</h3>
-            <div class="details-un-member details-text"></div>
+        <div class="details__content">
+          <div class="details__flag"></div>
+          <div class="details__arms"></div>
+          <div class="details__list">
+            <div class="details__list-item details__list--alt-spelling">
+              <p>Alt Spellings:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--borders">
+              <p>Borders:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--capital">
+              <p>Capital:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--cdd">
+              <p>Car Driving Direction:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--continents">
+              <p>Continents:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--currencies">
+              <p>Currencies:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--dialing-code">
+              <p>Direct Dialing Code:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--independent">
+              <p>Independent:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--landlocked">
+              <p>Landlocked:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--languages">
+              <p>Languages:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--location">
+              <p>Location:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--population">
+              <p>Population:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--region">
+              <p>Region:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--start-of-week">
+              <p>Start of Week:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--timezones">
+              <p>Timezones:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--tld">
+              <p>Top Level Domain:</p>
+              <span></span>
+            </div>
+            <div class="details__list-item details__list--un-member">
+              <p>United Nations Member:</p>
+              <span></span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="popup">
-      <button class="btn--close-popup">&times;</button>
-      <h2 class="error-message"></h2>
-    </div>
-    <div class="overlay"></div>
-    <header class="hero">
+    <header class="hero hero">
       <div class="toolbar">
-        <div class="night-mode">
+        <a class="toolbar__theme" href="#theme">
           <svg
-            class="toolbar-icons"
+            class="bi bi-moon toolbar__icon toolbar__theme--day-icon"
             xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"
             />
           </svg>
-          <!-- <svg
-            class="toolbar-icons"
+          <svg
+            class="bi bi-brightness-high toolbar__icon toolbar__theme--night-icon disabled"
             xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
             />
-          </svg> -->
+          </svg>
+        </a>
+        <a
+          target="_blank"
+          href="https://github.com/ubeydeozdmr/countrypedia"
+          class="toolbar__github"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-github toolbar__icon toolbar__github--icon"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+            />
+          </svg>
+        </a>
+      </div>
+      <section class="container">
+        <div class="hero__text-box">
+          <h1 class="hero__title">Simple Countrypedia</h1>
+          <h2 class="hero__description">
+            An application where you can see all countries
+          </h2>
         </div>
-        <div class="github">
-          <!-- prettier-ignore -->
-          <a class="github-link" target="_blank" href="https://github.com/ubeydeozdmr/countrypedia">
+        <nav class="search">
+          <input
+            class="search__input"
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search by country name"
+          />
+          <a class="search__button">
             <svg
-              class="bi bi-github toolbar-icons"
+              class="search__icon bi bi-search"
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -181,83 +181,52 @@
               viewBox="0 0 16 16"
             >
               <path
-                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
               />
             </svg>
           </a>
-        </div>
-        <!-- !!! Under development !!! -->
-        <!-- <div class="bookmarks">
-          <svg
-            class="toolbar-icons"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-            />
-          </svg>
-        </div> -->
-      </div>
-      <h1 class="hero-title">
-        Countrypedia <span class="beta-tag">BETA</span>
-      </h1>
-      <p class="hero-description">
-        An application where you can see all countries
-      </p>
-    </header>
-    <div class="container">
-      <nav class="search">
-        <input
-          class="search-input"
-          type="text"
-          name="search"
-          id="search"
-          placeholder="Search by country name. It can be the native name or partial name"
-        />
-        <button
-          class="search-btn"
-          type="submit"
-          name="submit-search"
-          id="submit-search"
-        >
-          Search
-        </button>
-      </nav>
-      <div class="show-all">
-        <p class="show-all-text">
-          You are currently viewing a specific search result: "<span
-            class="show-all-text-keyword"
-          ></span
-          >" <span class="show-all-text-click">Click</span> to turn back
-        </p>
-      </div>
-      <div class="loader-container">
-        <div class="loader"></div>
-      </div>
-      <section class="list-cards">
-        <!-- Content will be added here when JavaScript is finished running -->
+        </nav>
       </section>
-    </div>
+    </header>
+    <section class="container">
+      <div class="cflex">
+        <span class="cflex__row">
+          <h2 class="cflex__title">List of All Countries</h2>
+          <div class="cflex__show-all hidden">Show All</div>
+        </span>
+        <div class="loader-container">
+          <div class="loader"></div>
+        </div>
+        <div class="cflex__no-result disabled">
+          <p class="error-message">
+            We couldn't find what you're looking for. Try another query.
+          </p>
+        </div>
+        <article class="countries"></article>
+      </div>
+    </section>
     <footer class="footer">
-      Created by Ubeyde Emir Özdemir with ❤️ // &nbsp;
+      <p class="footer__text">Created by Ubeyde Emir Özdemir with ❤️</p>
       <a
-        class="footer-link footer-link--github"
-        target="_blank"
-        href="https://github.com/ubeydeozdmr/countrypedia"
-        >GitHub</a
-      >
-      &nbsp; - &nbsp;
-      <a
-        class="footer-link footer-link--apiref"
+        class="footer__text footer__link"
         target="_blank"
         href="https://restcountries.com"
+        tabindex="981"
         >API Reference</a
+      >
+      <a
+        class="footer__text footer__link"
+        target="_blank"
+        href="https://github.com/ubeydeozdmr/countrypedia"
+        tabindex="982"
+        >GitHub</a
+      >
+      <a
+        class="footer__text footer__link"
+        target="_blank"
+        href="/old/v1.html"
+        tabindex="983"
+        >Return to old design</a
       >
     </footer>
     <script type="module" src="src/js/controller.js"></script>

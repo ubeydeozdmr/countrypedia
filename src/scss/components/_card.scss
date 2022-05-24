@@ -1,0 +1,35 @@
+.country {
+  background-color: white;
+  color: $color-gray-7;
+  text-decoration: none;
+  height: 3.6rem;
+  box-shadow: $shadow-light;
+  border-radius: 3px;
+  display: flex;
+  overflow: hidden;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &--dark {
+    color: $color-gray-2;
+    background-color: $color-gray-7;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  &__flag {
+    margin: 0.4rem;
+    width: 4.4rem;
+    background-size: cover;
+    background-position: center;
+    border-radius: 3px;
+  }
+
+  &__name {
+    font-size: 1.6rem;
+    align-self: center;
+  }
+}

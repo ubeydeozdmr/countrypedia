@@ -1,0 +1,43 @@
+.footer {
+  text-align: center;
+  background-color: $color-gray-2;
+  color: $color-gray-8;
+
+  &--dark {
+    background-color: $color-gray-7;
+  }
+
+  &__text {
+    display: inline-block;
+    font-size: $font-small;
+    margin: 0 1rem;
+    color: $color-gray-8;
+
+    &--dark {
+      color: $color-gray-1;
+    }
+  }
+
+  &__link {
+    color: blue;
+
+    &--dark {
+      color: lightblue;
+    }
+  }
+}
+
+a.footer__text {
+  transition: all 0.3s;
+
+  &:link,
+  &:visited {
+    font-weight: inherit;
+  }
+
+  &:hover,
+  &:active {
+    text-decoration: none;
+    font-weight: 700;
+  }
+}

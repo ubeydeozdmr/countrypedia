@@ -4,6 +4,8 @@
 
 This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, coat of arms, population, region of the country you selected. [Click here](https://simplecountrypedia.netlify.app) for visit website.
 
+- UPDATE: V2 has arrived!
+
 # Development
 
 This web application was created with [Rest Countries API](https://restcountries.com/).
