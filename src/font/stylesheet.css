@@ -1,33 +1,13 @@
-/*!
- * Web Fonts from Fontspring.com
- *
- * All OpenType features and all extended glyphs have been removed.
- * Fully installable fonts can be purchased at https://www.fontspring.com
- *
- * The fonts included in this stylesheet are subject to the End User License you purchased
- * from Fontspring. The fonts are protected under domestic and international trademark and 
- * copyright law. You are prohibited from modifying, reverse engineering, duplicating, or
- * distributing this font software.
- *
- * (c) 2010-2022 Fontspring
- *
- *
- *
- *
- * The fonts included are copyrighted by the vendor listed below.
- *
- * Vendor:      Radomir Tinkov
- * License URL: https://www.fontspring.com/licenses/radomir-tinkov/webfont
- *
- *
- */
-
 @font-face {
-    font-family: 'gilroy-extrabold';
-    src: url('gilroy-extrabold-webfont.woff2') format('woff2'),
-         url('gilroy-extrabold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: '.';
+  src: url('6cb6937e73090b564d3d63d291a45852.eot');
+  src: url('6cb6937e73090b564d3d63d291a45852.eot?#iefix')
+      format('embedded-opentype'),
+    url('6cb6937e73090b564d3d63d291a45852.woff2') format('woff2'),
+    url('6cb6937e73090b564d3d63d291a45852.woff') format('woff'),
+    url('6cb6937e73090b564d3d63d291a45852.ttf') format('truetype'),
+    url('6cb6937e73090b564d3d63d291a45852.svg#.') format('svg');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
-
