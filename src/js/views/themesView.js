@@ -13,6 +13,7 @@ class ThemesView extends View {
   #heroDescription = document.querySelector('.hero__description');
   #search = document.querySelector('.search');
   #searchInput = document.querySelector('.search__input');
+  #searchIcon = document.querySelector('.search__icon');
   #toolbarIcon = document.querySelectorAll('.toolbar__icon');
   #details = document.querySelector('.details');
   #detailsListItem = document.querySelectorAll('.details__list-item');
@@ -32,6 +33,7 @@ class ThemesView extends View {
     this.#heroDescription.classList.add('hero__description--dark');
     this.#search.classList.add('search--dark');
     this.#searchInput.classList.add('search__input--dark');
+    this.#searchIcon.classList.add('search__icon--dark');
     this.#toolbarIcon.forEach(item => item.classList.add('toolbar__icon--dark'));
     this.#details.classList.add('details--dark');
     this.#detailsListItem.forEach(item =>
@@ -54,6 +56,7 @@ class ThemesView extends View {
     this.#heroDescription.classList.remove('hero__description--dark');
     this.#search.classList.remove('search--dark');
     this.#searchInput.classList.remove('search__input--dark');
+    this.#searchIcon.classList.remove('search__icon--dark');
     this.#toolbarIcon.forEach(item => item.classList.remove('toolbar__icon--dark'));
     this.#details.classList.remove('details--dark');
     this.#detailsListItem.classList.remove('details__list-item--dark');

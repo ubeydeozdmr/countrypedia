@@ -4,7 +4,11 @@
 
 This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, coat of arms, population, region of the country you selected. [Click here](https://simplecountrypedia.netlify.app) for visit website.
 
-- UPDATE: V2 has arrived!
+# UPDATE: V2 has arrived!
+
+In the update made after a break for a while, the design was changed, as well as some improvements related to accessibility.
+
+Note: The previous design has not been removed yet. You can find the link of the old site in the site footer.
 
 # Development
 
