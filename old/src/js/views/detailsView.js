@@ -2,37 +2,33 @@ import { clear, insert } from '../helpers';
 import View from './View';
 
 class DetailsView extends View {
-  body = document.querySelector('body');
-  details = document.querySelector('.popup');
-  #detailsFlag = document.querySelector('.details__flag');
-  #detailsAltSpellings = document.querySelector('.details__list--alt-spelling span');
-  #detailsBorders = document.querySelector('.details__list--borders span');
-  #detailsCapital = document.querySelector('.details__list--capital span');
-  #detailsCarDirection = document.querySelector('.details__list--cdd span');
-  #detailsCoatOfArms = document.querySelector('.details__arms');
-  #detailsContinents = document.querySelector('.details__list--continents span');
-  #detailsCurrencies = document.querySelector('.details__list--currencies span');
-  #detailsDialingCode = document.querySelector('.details__list--dialing-code span');
-  #detailsIndependent = document.querySelector('.details__list--independent span');
-  #detailsLandlocked = document.querySelector('.details__list--landlocked span');
-  #detailsLanguages = document.querySelector('.details__list--languages span');
-  #detailsLocation = document.querySelector('.details__list--location span');
-  #detailsMapsGoogle = document.querySelector('.details__map-button--googlemaps');
-  // #detailsMapsOpenSt = document.querySelector('.details-map-link--openst');
-  #detailsPopulation = document.querySelector('.details__list--population span');
-  #detailsRegion = document.querySelector('.details__list--region span');
-  #detailsStartOfWeek = document.querySelector('.details__list--start-of-week span');
-  #detailsTimezones = document.querySelector('.details__list--timezones span');
-  #detailsTld = document.querySelector('.details__list--tld span');
-  #detailsUnMember = document.querySelector('.details__list--un-member span');
+  #body = document.querySelector('body');
+  #details = document.querySelector('.details');
+  #detailsFlag = document.querySelector('.details-flag');
+  #detailsAltSpellings = document.querySelector('.details-alt-spellings');
+  #detailsBorders = document.querySelector('.details-borders');
+  #detailsCapital = document.querySelector('.details-capital');
+  #detailsCarDirection = document.querySelector('.details-car-direction');
+  #detailsCoatOfArms = document.querySelector('.details-coat-of-arms');
+  #detailsContinents = document.querySelector('.details-continents');
+  #detailsCurrencies = document.querySelector('.details-currencies');
+  #detailsIdd = document.querySelector('.details-idd');
+  #detailsIndependent = document.querySelector('.details-independent');
+  #detailsLandlocked = document.querySelector('.details-landlocked');
+  #detailsLanguages = document.querySelector('.details-languages');
+  #detailsLocation = document.querySelector('.details-location');
+  #detailsMapsGoogle = document.querySelector('.details-map-link--google');
+  #detailsMapsOpenSt = document.querySelector('.details-map-link--openst');
+  #detailsPopulation = document.querySelector('.details-population');
+  #detailsRegion = document.querySelector('.details-region');
+  #detailsStartOfWeek = document.querySelector('.details-start-of-week');
+  #detailsTimezones = document.querySelector('.details-timezones');
+  #detailsTld = document.querySelector('.details-top-level-domain');
+  #detailsUnMember = document.querySelector('.details-un-member');
 
   render(data) {
-    this.isDetailsOpened = true;
-    document.querySelector('nav.search').style.zIndex = '8';
-
-    this.body.style.overflowY = 'hidden';
-    this.details.classList.remove('hidden');
-    // this.details.style.visibility = 'visible';
+    this.#body.style.overflowY = 'hidden';
+    this.#details.style.display = 'grid';
     data = data[0];
 
     const flag = `<img src="${data.flags.svg}" alt="${data.demonyms?.eng?.m} flag" class="details-img" />`;
@@ -47,7 +43,7 @@ class DetailsView extends View {
     insert(this.#detailsCarDirection, data.car.side.toString()[0].toUpperCase() + data.car.side.slice(1));
     insert(this.#detailsCoatOfArms, arms);
     insert(this.#detailsContinents, data.continents.join(', '));
-    insert(this.#detailsDialingCode, data.idd.root || 'No data');
+    insert(this.#detailsIdd, data.idd.root || 'No data');
     insert(this.#detailsIndependent, data.independent ? 'Yes' : 'No');
     insert(this.#detailsLandlocked, data.landlocked ? 'Yes' : 'No');
     insert(this.#detailsLocation, data.latlng.join(', '));
@@ -60,7 +56,7 @@ class DetailsView extends View {
     insert(this.#detailsTld, data.tld.join(', '));
     insert(this.#detailsUnMember, data.unMember ? 'Yes' : 'No');
     this.#detailsMapsGoogle.setAttribute('href', data.maps.googleMaps);
-    // this.#detailsMapsOpenSt.setAttribute('href', data.maps.openStreetMaps);
+    this.#detailsMapsOpenSt.setAttribute('href', data.maps.openStreetMaps);
 
     let currencies = '';
     let languages = '';
@@ -91,7 +87,7 @@ class DetailsView extends View {
       this.#detailsCarDirection,
       this.#detailsContinents,
       this.#detailsCurrencies,
-      this.#detailsDialingCode,
+      this.#detailsIdd,
       this.#detailsIndependent,
       this.#detailsLandlocked,
       this.#detailsLanguages,
@@ -104,10 +100,8 @@ class DetailsView extends View {
       this.#detailsUnMember,
     ].forEach(domItem => clear(domItem));
 
-    // this.#details.style.visibility = 'hidden';
-    this.details.classList.add('hidden');
-    this.body.style.overflowY = 'auto';
-    this.isDetailsOpened = false;
+    this.#details.style.display = 'none';
+    this.#body.style.overflowY = 'auto';
   }
 }
 

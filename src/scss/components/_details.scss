@@ -1,0 +1,155 @@
+.details {
+  position: fixed;
+  border-radius: 3px;
+  background-color: white;
+  width: 75vw;
+  height: 90vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  // overflow: hidden;
+  padding: 1.6rem 2.4rem;
+  transition: all 0.5s;
+
+  @media only screen and (max-width: 900px) {
+    width: 82.5vw;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 90vw;
+  }
+
+  &--dark {
+    background-color: $color-gray-7;
+    color: white;
+  }
+
+  &__map-button {
+    background-color: green;
+    padding: 1rem 2rem;
+    font-size: $font-medium;
+    color: #ddffdd;
+    border-radius: 1000px;
+    box-shadow: $shadow-dark;
+    position: absolute;
+    right: 1.6rem;
+    bottom: 1.6rem;
+    cursor: pointer;
+    z-index: 100;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover {
+      transition: all 0.3s;
+      transform: translateY(-0.8rem);
+    }
+
+    &:active {
+      transition: all 0.3s;
+      transform: translateY(-0.4rem);
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    flex: 1;
+    font-weight: 700;
+    font-size: 3rem;
+    font-family: $font-gilroy;
+    letter-spacing: -0.2rem;
+  }
+
+  &__exit {
+    font-weight: 900;
+    font-size: 1.6rem;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1.2fr 1.8fr;
+    flex: 1;
+
+    @media only screen and (max-width: 600px) {
+      grid-template-columns: 1.8fr 1.2fr;
+      grid-template-rows: 1fr 3fr;
+    }
+
+    & img {
+      width: 85%;
+      border-radius: 3px;
+      transition: transform 0.3s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  &__flag {
+    align-self: center;
+    width: 80%;
+
+    & img {
+      border: 1px solid $color-gray-1;
+    }
+  }
+
+  &__arms {
+    order: 3;
+    align-self: center;
+    width: 80%;
+
+    @media only screen and (max-width: 600px) {
+      order: 2;
+    }
+  }
+
+  &__list {
+    order: 2;
+    grid-row: span 2;
+    display: grid;
+    padding: 1.8rem 0;
+
+    @media only screen and (max-width: 600px) {
+      order: 3;
+      grid-column: span 2;
+    }
+
+    &-item {
+      display: flex;
+      font-size: $font-medium;
+      align-items: center;
+      justify-content: space-between;
+
+      &:nth-child(even) {
+        background-color: $color-gray-1;
+      }
+
+      &--dark {
+        &:nth-child(even) {
+          background-color: $color-gray-8;
+        }
+      }
+
+      & p {
+        font-weight: 700;
+      }
+
+      & span {
+        font-weight: 400;
+      }
+    }
+  }
+}

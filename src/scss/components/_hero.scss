@@ -1,0 +1,32 @@
+.hero {
+  background-color: $color-gray-2;
+
+  &--dark {
+    background-color: $color-gray-7;
+  }
+
+  &__text-box {
+    font-family: $font-gilroy;
+    font-size: $font-huge;
+    letter-spacing: -0.7;
+    position: absolute;
+    top: 25vh;
+    transform: translateY(-50%);
+  }
+
+  &__title {
+    color: $color-gray-8;
+
+    &--dark {
+      color: $color-gray-1;
+    }
+  }
+
+  &__description {
+    color: $color-gray-6;
+
+    &--dark {
+      color: $color-gray-3;
+    }
+  }
+}
