@@ -59,7 +59,6 @@ class ThemesView extends View {
     this.#searchIcon.classList.remove('search__icon--dark');
     this.#toolbarIcon.forEach(item => item.classList.remove('toolbar__icon--dark'));
     this.#details.classList.remove('details--dark');
-    this.#detailsListItem.classList.remove('details__list-item--dark');
     this.#detailsListItem.forEach(item =>
       item.classList.remove('details__list-item--dark')
     );
