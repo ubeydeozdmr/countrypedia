@@ -17,8 +17,13 @@ class ThemesView extends View {
   #toolbarIcon = document.querySelectorAll('.toolbar__icon');
   #details = document.querySelector('.details');
   #detailsListItem = document.querySelectorAll('.details__list-item');
+  #dayIcon = document.querySelector('.toolbar__theme--day-icon');
+  #nightIcon = document.querySelector('.toolbar__theme--night-icon');
 
   setNightMode() {
+    this.#dayIcon.classList.add('disabled');
+    this.#nightIcon.classList.remove('disabled');
+
     this.#country = document.querySelectorAll('.country');
 
     this.#body.classList.add('body--dark');
@@ -42,6 +47,9 @@ class ThemesView extends View {
   }
 
   setDayMode() {
+    this.#dayIcon.classList.remove('disabled');
+    this.#nightIcon.classList.add('disabled');
+
     this.#country = document.querySelectorAll('.country');
 
     this.#body.classList.remove('body--dark');
