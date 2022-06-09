@@ -27,7 +27,7 @@ class CountriesView extends View {
         `article hover:nth-child(${i}) .country .country__flag`
       ).style.backgroundImage = `url(${item.flags.svg})`;
     });
-    this.spinner.style.display = 'none';
+    this.spinnerMain.style.display = 'none';
     // this.theme === 'light' ? themesView.setDayMode() : themesView.setNightMode();
   }
 

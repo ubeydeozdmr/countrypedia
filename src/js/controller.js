@@ -32,7 +32,7 @@ search.addEventListener('click', async function () {
   if (input.value === '') return;
 
   // 2) If not empty, render spinner before fetch operation
-  viewObj.renderSpinner();
+  viewObj.renderSpinner('main');
 
   // 3) Fetch data from API
   const data = await getData(`name/${input.value}`);
@@ -101,6 +101,8 @@ const listCardHandler = function () {
     // View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
     document.querySelectorAll('.country').forEach(item =>
       item.addEventListener('click', async function (e) {
+        detailsView.renderPre();
+        viewObj.renderSpinner('details');
         const id = e.target.closest('hover').getAttribute('cca3');
         const data = await getData(`alpha/${id}`);
         if (data) detailsView.render(data);

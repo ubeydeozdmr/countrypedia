@@ -4,7 +4,8 @@ export default class View {
   theme;
   isDetailsOpened = false;
 
-  spinner = document.querySelector('.loader-container');
+  spinnerMain = document.querySelector('.loader-container--main');
+  spinnerDetails = document.querySelector('.loader-container--details');
   popup = document.querySelector('.popup');
   overlay = document.querySelector('.overlay');
   noResult = document.querySelector('.cflex__no-result');
@@ -12,8 +13,13 @@ export default class View {
 
   // STATUS METHODS
 
-  renderSpinner() {
-    this.spinner.style.display = 'flex';
+  renderSpinner(place) {
+    switch (place) {
+      case 'main':
+        this.spinnerMain.style.display = 'flex';
+      case 'details':
+        this.spinnerDetails.style.display = 'flex';
+    }
   }
 
   /**
@@ -26,7 +32,7 @@ export default class View {
     // this.errorMessage.insertAdjacentHTML('beforeend', errorMessage);
     // this.popup.style.display = 'block';
     // this.overlay.style.display = 'block';
-    this.spinner.style.display = 'none';
+    this.spinnerMain.style.display = 'none';
   }
 
   dismissError() {
