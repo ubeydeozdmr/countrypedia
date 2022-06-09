@@ -64,77 +64,77 @@ class DetailsView extends View {
     } arms" class="details-img" />
     </div>
     <div class="details__list">
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Alt Spellings:</p>
         <span>${data.altSpellings.join(', ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Borders:</p>
         <span>${data.borders ? data.borders.join(', ') : 'No borders'}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Capital:</p>
         <span>${data.capital?.join(', ') || 'No data'}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Car Driving Direction:</p>
         <span>${
           data.car.side.toString()[0].toUpperCase() + data.car.side.slice(1)
         }</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Continents:</p>
         <span>${data.continents.join(', ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Currencies:</p>
         <span>${currencies}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Direct Dialing Code:</p>
         <span>${data.idd.root || 'No data'}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Independent:</p>
         <span>${data.independent ? 'Yes' : 'No'}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Landlocked:</p>
         <span>${data.landlocked ? 'Yes' : 'No'}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Languages:</p>
         <span>${languages}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Location:</p>
         <span>${data.latlng.join(', ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Population:</p>
         <span>${data.population
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Region:</p>
         <span>${data.region} / ${data.subregion || '?'}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Start of Week:</p>
         <span>${
           data.startOfWeek[0].toUpperCase() + data.startOfWeek.toString().slice(1)
         }</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Timezones:</p>
         <span>${data.timezones.join(', ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Top Level Domain:</p>
         <span>${data.tld.join(', ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${this.theme}">
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>United Nations Member:</p>
         <span>${data.unMember ? 'Yes' : 'No'}</span>
       </div>
