@@ -51,6 +51,30 @@ This app is still under development so it may have bugs. For suggestions and cor
 
 <table>
   <tr>
+    <td><img src="./src/assets/screenshotsV2/NestHubMax-overview-light.png" alt="cp-overview-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshotsV2/NestHubMax-search-light.png" alt="cp-search-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshotsV2/NestHubMax-details-light.png" alt="cp-details-light-lg" width = 341.5px /></td>
+  </tr> 
+  <tr>
+    <td><img src="./src/assets/screenshotsV2/NestHubMax-overview-dark.png" alt="cp-overview-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshotsV2/NestHubMax-search-dark.png" alt="cp-search-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshotsV2/NestHubMax-details-dark.png" alt="cp-details-light-lg" width = 341.5px /></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-overview-light.png" alt="cp-overview-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-search-light.png" alt="cp-search-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-details-light.png" alt="cp-details-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-overview-dark.png" alt="cp-overview-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-search-dark.png" alt="cp-search-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-details-dark.png" alt="cp-details-light-lg" width = 170.75px /></td>
+  </tr>
+</table>
+
+<!--
+<table>
+  <tr>
     <td><img src="./src/assets/screenshots/cp-overview-light-lg.png" alt="cp-overview-light-lg" width = 341.5px /></td>
     <td><img src="./src/assets/screenshots/cp-search-light-lg.png" alt="cp-search-light-lg" width = 341.5px /></td>
     <td><img src="./src/assets/screenshots/cp-details-light-lg.png" alt="cp-details-light-lg" width = 341.5px /></td>
@@ -71,3 +95,4 @@ This app is still under development so it may have bugs. For suggestions and cor
     <td><img src="./src/assets/screenshots/cp-details-dark-sm.png" alt="cp-details-light-lg" width = 170.75px /></td>
   </tr>
 </table>
+-->
