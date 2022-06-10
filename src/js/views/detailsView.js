@@ -88,7 +88,7 @@ class DetailsView extends View {
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Currencies:</p>
-        <span>${currencies}</span>
+        <span>${currencies.slice(0, currencies.length - 2)}</span>
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Direct Dialing Code:</p>
@@ -104,7 +104,7 @@ class DetailsView extends View {
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Languages:</p>
-        <span>${languages}</span>
+        <span>${languages.slice(0, languages.length - 2)}</span>
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Location:</p>
