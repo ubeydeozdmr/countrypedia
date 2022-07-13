@@ -1,4 +1,3 @@
-import { ERROR_BAD_REQUEST, ERROR_NOT_FOUND } from './config';
 import { getData, state } from './model';
 import countriesView from './views/countriesView';
 import detailsView from './views/detailsView';
@@ -13,7 +12,6 @@ const input = document.querySelector('.search__input');
 const showAll = document.querySelector('.cflex__show-all');
 const detailsExit = document.querySelector('.details__exit');
 const flexTitle = document.querySelector('.cflex__title');
-// const btnClosePopup = document.querySelector('.btn--close-popup');
 
 toggler.addEventListener('click', function () {
   if (View.theme === 'light') {
@@ -39,7 +37,7 @@ search.addEventListener('click', async function () {
 
   // 4) Render list of countries if data has been received
   if (data) countriesView.render(data);
-  else viewObj.renderError();
+  else viewObj.renderError(404);
   flexTitle.textContent = `Countries matching your search "${input.value}"`;
 
   // 5) Render Show All button to be able to view all countries without having to refresh the page
@@ -47,7 +45,6 @@ search.addEventListener('click', async function () {
 
   listCardHandler();
 
-  // View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
   viewObj.hideFocus();
 });
 
@@ -85,20 +82,8 @@ window.addEventListener('hashchange', async function (e) {
 
 detailsExit.addEventListener('click', () => detailsView.hide());
 
-// btnClosePopup.addEventListener('click', () => viewObj.dismissError());
-
-const errorHandler = function () {
-  switch (state.status) {
-    case 404:
-      return ERROR_NOT_FOUND;
-    default:
-      return ERROR_BAD_REQUEST; // default: 400
-  }
-};
-
 const listCardHandler = function () {
   try {
-    // View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
     document.querySelectorAll('.country').forEach(item =>
       item.addEventListener('click', async function (e) {
         detailsView.renderPre();
@@ -106,7 +91,7 @@ const listCardHandler = function () {
         const id = e.target.closest('hover').getAttribute('cca3');
         const data = await getData(`alpha/${id}`);
         if (data) detailsView.render(data);
-        // else viewObj.renderError(errorHandler());
+        else viewObj.renderError(state.status);
       })
     );
   } catch (err) {
@@ -128,7 +113,7 @@ const init = async function () {
   state.countries ? (data = state.countries) : (data = await getData('all'));
 
   if (data) countriesView.render(data);
-  // else viewObj.renderError(errorHandler());
+  else viewObj.renderError(state.status);
 
   listCardHandler();
 };

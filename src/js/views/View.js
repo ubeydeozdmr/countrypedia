@@ -9,6 +9,7 @@ export default class View {
   popup = document.querySelector('.popup');
   overlay = document.querySelector('.overlay');
   noResult = document.querySelector('.cflex__no-result');
+  badRequest = document.querySelector('.cflex__bad-request');
   errorMessage = document.querySelector('.error-message');
 
   // STATUS METHODS
@@ -23,28 +24,33 @@ export default class View {
   }
 
   /**
-   * @param {string} errorMessage Error message which will be shown as popup.
+   * @param {Number} statusCode Status code of error
+   * @description Error message which will be shown as text.
    */
-  renderError() {
+  renderError(statusCode) {
     clear(document.querySelector('.countries'));
-    this.noResult.classList.remove('disabled');
-    // clear(this.errorMessage);
-    // this.errorMessage.insertAdjacentHTML('beforeend', errorMessage);
-    // this.popup.style.display = 'block';
-    // this.overlay.style.display = 'block';
+    switch (statusCode) {
+      case 404:
+        this.noResult.classList.remove('disabled');
+        break;
+      default:
+        this.badRequest.classList.remove('disabled');
+        break;
+    }
     this.spinnerMain.style.display = 'none';
   }
 
-  dismissError() {
-    // this.popup.style.display = 'none';
-    // this.overlay.style.display = 'none';
-  }
-
+  /**
+   * @description Implement blur effect to search bar when focused.
+   */
   renderFocus() {
     document.querySelector('nav.search').style.zIndex = '15';
     document.querySelector('.focus').classList.remove('hidden');
   }
 
+  /**
+   * @description Undo blur effect from search bar when not focused anymore.
+   */
   hideFocus() {
     document.querySelector('nav.search').style.zIndex = '8';
     document.querySelector('.focus').classList.add('hidden');
