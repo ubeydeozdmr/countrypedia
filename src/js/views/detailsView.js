@@ -4,6 +4,8 @@ import View from './View';
 class DetailsView extends View {
   body = document.querySelector('body');
   details = document.querySelector('.popup');
+  osmap = document.querySelector('.details__map-button--openstreetmap');
+  gmaps = document.querySelector('.details__map-button--googlemaps');
 
   renderPre() {
     this.isDetailsOpened = true;
@@ -126,6 +128,8 @@ class DetailsView extends View {
 
     this.spinnerDetails.style.display = 'none';
     insert(document.querySelector('.details__content'), markup);
+    this.osmap.setAttribute('href', data.maps.openStreetMaps);
+    this.gmaps.setAttribute('href', data.maps.googleMaps);
   }
 
   hide() {

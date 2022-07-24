@@ -27,13 +27,12 @@
   }
 
   &__map-button {
-    background-color: green;
-    padding: 1rem 2rem;
+    padding: 0.8rem 2rem;
     font-size: $font-medium;
-    color: #ddffdd;
     border-radius: 1000px;
     box-shadow: $shadow-dark;
-    position: absolute;
+    // position: absolute;
+    display: inline-block;
     right: 1.6rem;
     bottom: 1.6rem;
     cursor: pointer;
@@ -49,6 +48,16 @@
     &:active {
       transition: all 0.3s;
       transform: translateY(-0.4rem);
+    }
+
+    &--googlemaps {
+      background-color: green;
+      color: #ddffdd;
+    }
+
+    &--openstreetmap {
+      background-color: gray;
+      color: #cccccc;
     }
   }
 
