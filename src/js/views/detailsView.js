@@ -76,7 +76,9 @@ class DetailsView extends View {
         <span>${
           data.cca3 === 'USA'
             ? '+1'
-            : data.idd.root + data.idd?.suffixes[0] || 'No data'
+            : data.cca3 === 'ATA'
+            ? 'No data'
+            : data.idd.root + data.idd.suffixes[0]
         }</span>
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
