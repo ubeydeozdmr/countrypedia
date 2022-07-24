@@ -26,6 +26,12 @@
     color: white;
   }
 
+  &__buttonbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.4rem;
+  }
+
   &__map-button {
     padding: 0.8rem 2rem;
     font-size: $font-medium;
@@ -80,6 +86,7 @@
     cursor: pointer;
 
     &:hover {
+      transition: all 0.3s;
       transform: scale(1.2);
     }
   }
