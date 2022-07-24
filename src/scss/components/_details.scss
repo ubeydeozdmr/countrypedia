@@ -80,6 +80,18 @@
     letter-spacing: -0.2rem;
   }
 
+  &__save-icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    cursor: pointer;
+    margin-right: 1.6rem;
+
+    &:hover {
+      transition: all 0.3s;
+      transform: scale(1.2);
+    }
+  }
+
   &__exit {
     font-weight: 900;
     font-size: 1.6rem;

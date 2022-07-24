@@ -6,6 +6,8 @@ class DetailsView extends View {
   details = document.querySelector('.popup');
   osmap = document.querySelector('.details__map-button--openstreetmap');
   gmaps = document.querySelector('.details__map-button--googlemaps');
+  saveIcon = document.querySelector('.details__save-icon .save');
+  unsaveIcon = document.querySelector('.details__save-icon .unsave');
 
   renderPre() {
     this.isDetailsOpened = true;
@@ -15,8 +17,17 @@ class DetailsView extends View {
     this.details.classList.remove('hidden');
   }
 
-  render(data) {
+  render(data, isSaved) {
     data = data[0];
+
+    if (isSaved) {
+      this.saveIcon.classList.add('disabled');
+      this.unsaveIcon.classList.remove('disabled');
+    } else {
+      this.saveIcon.classList.remove('disabled');
+      this.unsaveIcon.classList.add('disabled');
+    }
+    isSaved;
 
     let currencies = '';
     let languages = '';

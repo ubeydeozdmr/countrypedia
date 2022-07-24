@@ -3,6 +3,9 @@ import { API_ROUTE } from './config';
 export const state = {
   status: undefined,
   countries: undefined,
+  currentCountry: undefined,
+  savedCountries: undefined,
+  savedHashs: undefined,
 };
 
 export const getData = async function (keyword) {
