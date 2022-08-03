@@ -11,6 +11,8 @@ export default class View {
   noResult = document.querySelector('.cflex__no-result');
   badRequest = document.querySelector('.cflex__bad-request');
   errorMessage = document.querySelector('.error-message');
+  saveIcon = document.querySelector('.details__save-icon .save');
+  unsaveIcon = document.querySelector('.details__save-icon .unsave');
 
   // STATUS METHODS
 
@@ -54,5 +56,15 @@ export default class View {
   hideFocus() {
     document.querySelector('nav.search').style.zIndex = '8';
     document.querySelector('.focus').classList.add('hidden');
+  }
+
+  addBookmark() {
+    this.saveIcon.classList.add('disabled');
+    this.unsaveIcon.classList.remove('disabled');
+  }
+
+  removeBookmark() {
+    this.saveIcon.classList.remove('disabled');
+    this.unsaveIcon.classList.add('disabled');
   }
 }

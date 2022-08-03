@@ -19,18 +19,14 @@ const saveIcon = document.querySelector('.details__save-icon .save');
 const unsaveIcon = document.querySelector('.details__save-icon .unsave');
 
 bookmark.addEventListener('click', function () {
-  // console.log(state.savedCountries);
-  // console.log(state.savedHashs);
-  countriesView.render(state.savedCountries);
-  flexTitle.textContent = `List of countries you saved`;
+  countriesView.render(state.savedCountries, `List of countries you saved`);
   countriesView.renderShowAll(input);
   listCardHandler();
 });
 
 addBookmark.addEventListener('click', function () {
   if (state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))) {
-    saveIcon.classList.remove('disabled');
-    unsaveIcon.classList.add('disabled');
+    removeBookmark();
     state.savedHashs = state.savedHashs.filter(
       cca3 => cca3 !== location.hash.slice(1)
     );
@@ -38,20 +34,13 @@ addBookmark.addEventListener('click', function () {
       countryObj => countryObj.cca3 !== location.hash.slice(1)
     );
   } else {
-    saveIcon.classList.add('disabled');
-    unsaveIcon.classList.remove('disabled');
+    addBookmark();
     state.savedHashs.push(location.hash.slice(1));
     state.savedCountries.push(state.currentCountry);
   }
 
-  // console.log(state.savedHashs);
-  // console.log(location.hash.slice(1));
-
-  // console.log(state.savedCountries);
   localStorage.setItem('savedCountries', JSON.stringify(state.savedCountries));
   localStorage.setItem('savedHashs', JSON.stringify(state.savedHashs));
-  console.log(localStorage.getItem('savedCountries'));
-  console.log(localStorage.getItem('savedHashs'));
 });
 
 toggler.addEventListener('click', function () {
@@ -77,9 +66,9 @@ search.addEventListener('click', async function () {
   const data = await getData(`name/${input.value}`);
 
   // 4) Render list of countries if data has been received
-  if (data) countriesView.render(data);
+  if (data)
+    countriesView.render(data, `Countries matching your search "${input.value}"`);
   else viewObj.renderError(404);
-  flexTitle.textContent = `Countries matching your search "${input.value}"`;
 
   // 5) Render Show All button to be able to view all countries without having to refresh the page
   countriesView.renderShowAll(input);
@@ -103,7 +92,6 @@ input.addEventListener('focusout', function () {
 
 showAll.addEventListener('click', function () {
   countriesView.hideShowAll();
-  document.querySelector('.cflex__title').textContent = 'List of All Countries';
   init();
 });
 
@@ -132,7 +120,6 @@ const listCardHandler = function () {
         const id = e.target.closest('hover').getAttribute('cca3');
         const data = await getData(`alpha/${id}`);
         [state.currentCountry] = data;
-        // console.log(state.currentCountry);
         if (data)
           detailsView.render(
             data,
@@ -170,7 +157,7 @@ const init = async function () {
 
     state.countries ? (data = state.countries) : (data = await getData('all'));
 
-    if (data) countriesView.render(data);
+    if (data) countriesView.render(data, `List of All Countries`);
     else viewObj.renderError(state.status);
 
     listCardHandler();

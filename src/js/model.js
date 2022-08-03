@@ -8,9 +8,13 @@ export const state = {
   savedHashs: undefined,
 };
 
-export const getData = async function (keyword) {
+/**
+ * @param {string} route A keyword which will be added to API_ROUTE static string
+ * @returns fetched data array
+ */
+export const getData = async function (route) {
   try {
-    const res = await fetch(API_ROUTE + keyword);
+    const res = await fetch(API_ROUTE + route);
     state.status = res.status;
     if (!res.ok) return;
     const data = await res.json();

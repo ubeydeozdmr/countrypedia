@@ -4,8 +4,9 @@ import View from './View';
 class CountriesView extends View {
   #listCards = document.querySelector('.countries');
   #showAll = document.querySelector('.cflex__show-all');
+  #title = document.querySelector('.cflex__title');
 
-  render(data) {
+  render(data, title) {
     let i = 0;
     clear(this.#listCards);
     this.noResult.classList.add('disabled');
@@ -28,7 +29,7 @@ class CountriesView extends View {
       ).style.backgroundImage = `url(${item.flags.svg})`;
     });
     this.spinnerMain.style.display = 'none';
-    // this.theme === 'light' ? themesView.setDayMode() : themesView.setNightMode();
+    this.#title.textContent = title;
   }
 
   /**
@@ -39,9 +40,6 @@ class CountriesView extends View {
     input.value = '';
   }
 
-  /**
-   * @param {Node} input An input which comes from input variable in controller.
-   */
   hideShowAll() {
     this.#showAll.classList.add('hidden');
     this.renderSpinner();
