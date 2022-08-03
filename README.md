@@ -18,6 +18,7 @@ This web application was created with [Rest Countries API](https://restcountries
 
 - Dark theme support
 - Search from countries list
+- Save the countries you want
 - Get information from the country card which you selected
 
 # Contents
