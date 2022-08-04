@@ -70,6 +70,7 @@
   &__header {
     display: flex;
     align-items: center;
+    gap: 3.2rem;
   }
 
   &__title {
@@ -84,7 +85,6 @@
     width: 1.6rem;
     height: 1.6rem;
     cursor: pointer;
-    margin-right: 1.6rem;
 
     &:hover {
       transition: all 0.3s;
@@ -105,9 +105,12 @@
 
   &__content {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 0.8fr 3.2fr;
     grid-template-rows: 1.2fr 1.8fr;
     flex: 1;
+    column-gap: 2rem;
+    min-width: 0;
+    min-height: 0;
 
     @media only screen and (max-width: 600px) {
       grid-template-columns: 1.8fr 1.2fr;
@@ -121,8 +124,8 @@
       transition: transform 0.3s;
 
       @media only screen and (max-width: 600px) {
-        width: 60%;
-        height: 60%;
+        max-width: 100%;
+        max-height: 100%;
       }
 
       &:hover {
@@ -133,7 +136,6 @@
 
   &__flag {
     align-self: center;
-    width: 80%;
 
     & img {
       border: 1px solid $color-gray-1;
@@ -143,7 +145,6 @@
   &__arms {
     order: 3;
     align-self: center;
-    width: 80%;
 
     @media only screen and (max-width: 600px) {
       order: 2;
