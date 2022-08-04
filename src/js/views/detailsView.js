@@ -130,7 +130,7 @@ class DetailsView extends View {
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Top Level Domain:</p>
-        <span>${data.tld.join(', ')}</span>
+        <span>${data.tld?.join(', ') || 'No data'}</span>
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>United Nations Member:</p>
