@@ -70,9 +70,7 @@ class DetailsView extends View {
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Car Driving Direction:</p>
-        <span>${
-          data.car.side.toString()[0].toUpperCase() + data.car.side.slice(1)
-        }</span>
+        <span>${data.car.side.toString()[0].toUpperCase() + data.car.side.slice(1)}</span>
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Continents:</p>
@@ -87,7 +85,7 @@ class DetailsView extends View {
         <span>${
           data.cca3 === 'USA'
             ? '+1'
-            : data.cca3 === 'ATA'
+            : data.cca3 === 'ATA' || data.cca3 === 'HMD'
             ? 'No data'
             : data.idd.root + data.idd.suffixes[0]
         }</span>
@@ -110,9 +108,7 @@ class DetailsView extends View {
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Population:</p>
-        <span>${data.population
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</span>
+        <span>${data.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</span>
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Region:</p>
