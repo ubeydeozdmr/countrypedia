@@ -51,9 +51,11 @@ class DetailsView extends View {
     } flag" class="details-img" />
     </div>
     <div class="details__arms">
-      <img src="${data.coatOfArms.svg}" alt="${
-      data.demonyms?.eng?.m
-    } arms" class="details-img" />
+      ${
+        data.coatOfArms.svg
+          ? `<img src=${data.coatOfArms.svg} alt=${data.demonyms?.eng?.m}></img>`
+          : 'No arms'
+      }
     </div>
     <div class="details__list">
       <div class="details__list-item details__list-item--${View.theme}">
