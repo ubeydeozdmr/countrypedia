@@ -63,7 +63,8 @@ footer.footer {
     }
   }
 
-  &__show-all {
+  &__show-all,
+  &__show-random {
     display: inline-block;
     background-color: $color-gray-2;
     color: $color-gray-8;
@@ -72,6 +73,7 @@ footer.footer {
     font-size: $font-small;
     border-radius: 1000px;
     cursor: pointer;
+    text-decoration: none;
 
     &--dark {
       background-color: $color-gray-7;
