@@ -48,7 +48,6 @@ class DetailsView extends View {
       this.saveIcon.classList.remove('disabled');
       this.unsaveIcon.classList.add('disabled');
     }
-    isSaved;
 
     let currencies = '';
     let languages = '';
@@ -81,7 +80,7 @@ class DetailsView extends View {
     <div class="details__list">
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Alt Spellings:</p>
-        <span>${data.altSpellings.join(', ')}</span>
+        <span>${data.name.common + ', ' + data.altSpellings.join(', ')}</span>
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
         <p>Borders:</p>
