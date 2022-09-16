@@ -1,3 +1,4 @@
+import { clear } from './helpers';
 import { getData, state } from './model';
 import countriesView from './views/countriesView';
 import detailsView from './views/detailsView';
@@ -13,10 +14,9 @@ const search = document.querySelector('.search__button');
 const input = document.querySelector('.search__input');
 const showAll = document.querySelector('.cflex__show-all');
 const detailsExit = document.querySelector('.details__exit');
-const flexTitle = document.querySelector('.cflex__title');
 
-const saveIcon = document.querySelector('.details__save-icon .save');
-const unsaveIcon = document.querySelector('.details__save-icon .unsave');
+const detailsButton = document.querySelector('.details__title-button--details');
+const mapButton = document.querySelector('.details__title-button--map');
 
 bookmark.addEventListener('click', function () {
   countriesView.render(state.savedCountries, `List of countries you saved`);
@@ -27,9 +27,7 @@ bookmark.addEventListener('click', function () {
 addBookmark.addEventListener('click', function () {
   if (state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))) {
     removeBookmark();
-    state.savedHashs = state.savedHashs.filter(
-      cca3 => cca3 !== location.hash.slice(1)
-    );
+    state.savedHashs = state.savedHashs.filter(cca3 => cca3 !== location.hash.slice(1));
     state.savedCountries = state.savedCountries.filter(
       countryObj => countryObj.cca3 !== location.hash.slice(1)
     );
@@ -66,8 +64,7 @@ search.addEventListener('click', async function () {
   const data = await getData(`name/${input.value}`);
 
   // 4) Render list of countries if data has been received
-  if (data)
-    countriesView.render(data, `Countries matching your search "${input.value}"`);
+  if (data) countriesView.render(data, `Countries matching your search "${input.value}"`);
   else viewObj.renderError(404);
 
   // 5) Render Show All button to be able to view all countries without having to refresh the page
@@ -133,13 +130,26 @@ const listCardHandler = function () {
   }
 };
 
+detailsButton.addEventListener('click', function () {
+  clear(document.querySelector('.details__content'));
+  const data = [state.currentCountry];
+  if (data)
+    detailsView.render(
+      data,
+      !!state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))
+    );
+  else viewObj.renderError(state.status);
+});
+
+mapButton.addEventListener('click', function () {
+  clear(document.querySelector('.details__content'));
+  detailsView.renderMap(state.currentCountry);
+});
+
 const init = async function () {
   try {
     let data;
-    if (
-      localStorage.getItem('savedCountries') &&
-      localStorage.getItem('savedHashs')
-    ) {
+    if (localStorage.getItem('savedCountries') && localStorage.getItem('savedHashs')) {
       state.savedCountries = JSON.parse(localStorage.getItem('savedCountries'));
       state.savedHashs = JSON.parse(localStorage.getItem('savedHashs'));
     } else {

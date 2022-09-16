@@ -8,8 +8,28 @@ class DetailsView extends View {
   gmaps = document.querySelector('.details__map-button--googlemaps');
   saveIcon = document.querySelector('.details__save-icon .save');
   unsaveIcon = document.querySelector('.details__save-icon .unsave');
+  detailsButton = document.querySelector('.details__title-button--details');
+  mapButton = document.querySelector('.details__title-button--map');
+
+  #buttonHoverHandler(detailsButton, mapButton, display) {
+    this.detailsButton.style.backgroundColor = detailsButton;
+    this.mapButton.style.backgroundColor = mapButton;
+    [this.detailsButton, this.mapButton].forEach(el => {
+      el.addEventListener('mouseover', () => {
+        el.style.backgroundColor = '#dddddd';
+      });
+    });
+    this.detailsButton.addEventListener('mouseleave', () => {
+      this.detailsButton.style.backgroundColor = detailsButton;
+    });
+    this.mapButton.addEventListener('mouseleave', () => {
+      this.mapButton.style.backgroundColor = mapButton;
+    });
+    document.querySelector('.details__buttonbar').style.display = display;
+  }
 
   renderPre() {
+    this.#buttonHoverHandler('#eeeeee', 'transparent', 'none');
     this.isDetailsOpened = true;
     document.querySelector('nav.search').style.zIndex = '8';
 
@@ -18,6 +38,7 @@ class DetailsView extends View {
   }
 
   render(data, isSaved) {
+    this.#buttonHoverHandler('#eeeeee', 'transparent', 'none');
     data = data[0];
 
     if (isSaved) {
@@ -141,6 +162,22 @@ class DetailsView extends View {
     insert(document.querySelector('.details__content'), markup);
     this.osmap.setAttribute('href', data.maps.openStreetMaps);
     this.gmaps.setAttribute('href', data.maps.googleMaps);
+  }
+
+  renderMap(data) {
+    this.#buttonHoverHandler('transparent', '#eeeeee', 'flex');
+    const markup = `<div id="map" class="map"></div>`;
+    insert(document.querySelector('.details__content'), markup);
+
+    var map = L.map('map').setView([data.latlng[0], data.latlng[1]], 5);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap',
+    }).addTo(map);
+    var marker = L.marker([data.latlng[0], data.latlng[1]]).addTo(map);
+    marker.bindPopup(
+      `<b style="font-size:2rem">${data.name.common}</b>`
+    ); /*.openPopup();*/
   }
 
   hide() {
