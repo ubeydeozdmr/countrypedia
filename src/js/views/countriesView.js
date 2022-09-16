@@ -1,9 +1,10 @@
-import { clear } from '../helpers';
+import { clear, insert } from '../helpers';
 import View from './View';
 
 class CountriesView extends View {
   #listCards = document.querySelector('.countries');
   #showAll = document.querySelector('.cflex__show-all');
+  #showRandom = document.querySelector('.cflex__show-random');
   #title = document.querySelector('.cflex__title');
 
   render(data, title) {
@@ -22,7 +23,7 @@ class CountriesView extends View {
 `;
       i++;
 
-      this.#listCards.insertAdjacentHTML('beforeend', cardContent);
+      insert(this.#listCards, cardContent);
 
       document.querySelector(
         `article hover:nth-child(${i}) .country .country__flag`
@@ -36,12 +37,14 @@ class CountriesView extends View {
    * @param {Node} input An input which comes from input variable in controller.
    */
   renderShowAll(input) {
-    this.#showAll.classList.remove('hidden');
+    this.#showAll.classList.remove('disabled');
+    this.#showRandom.classList.add('disabled');
     input.value = '';
   }
 
   hideShowAll() {
-    this.#showAll.classList.add('hidden');
+    this.#showAll.classList.add('disabled');
+    this.#showRandom.classList.remove('disabled');
     this.renderSpinner();
   }
 }

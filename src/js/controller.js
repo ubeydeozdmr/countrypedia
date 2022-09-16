@@ -7,12 +7,14 @@ import View from './views/View';
 
 const viewObj = new View();
 
-const bookmark = document.querySelector('.toolbar__saved');
 const addBookmark = document.querySelector('.details__save-icon');
+const random = document.querySelector('.toolbar__random');
+const bookmark = document.querySelector('.toolbar__saved');
 const toggler = document.querySelector('.toolbar__theme');
 const search = document.querySelector('.search__button');
 const input = document.querySelector('.search__input');
 const showAll = document.querySelector('.cflex__show-all');
+const showRandom = document.querySelector('.cflex__show-random');
 const detailsExit = document.querySelector('.details__exit');
 
 const detailsButton = document.querySelector('.details__title-button--details');
@@ -91,6 +93,21 @@ showAll.addEventListener('click', function () {
   countriesView.hideShowAll();
   init();
 });
+
+[random, showRandom].forEach(item =>
+  item.addEventListener('click', function () {
+    const random = Math.floor(Math.random() * state.countries.length);
+    const randomCountry = [state.countries[random]];
+    [state.currentCountry] = randomCountry;
+    if (randomCountry) {
+      detailsView.renderPre();
+      detailsView.render(
+        randomCountry,
+        !!state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))
+      );
+    } else viewObj.renderError(state.status);
+  })
+);
 
 window.addEventListener('hashchange', async function (e) {
   // console.log(e.newURL);
