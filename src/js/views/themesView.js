@@ -4,6 +4,7 @@ class ThemesView extends View {
   #body = document.querySelector('body');
   #cflexTitle = document.querySelector('.cflex__title');
   #cflexShowAll = document.querySelector('.cflex__show-all');
+  #cflexShowRandom = document.querySelector('.cflex__show-random');
   #country = document.querySelectorAll('.country');
   #footer = document.querySelector('footer');
   #footerText = document.querySelector('.footer__text');
@@ -29,6 +30,7 @@ class ThemesView extends View {
     this.#body.classList.add('body--dark');
     this.#cflexTitle.classList.add('cflex__title--dark');
     this.#cflexShowAll.classList.add('cflex__show-all--dark');
+    this.#cflexShowRandom.classList.add('cflex__show-random--dark');
     this.#country.forEach(item => item.classList.add('country--dark'));
     this.#footer.classList.add('footer--dark');
     this.#footerText.classList.add('footer__text--dark');
@@ -41,9 +43,7 @@ class ThemesView extends View {
     this.#searchIcon.classList.add('search__icon--dark');
     this.#toolbarIcon.forEach(item => item.classList.add('toolbar__icon--dark'));
     this.#details.classList.add('details--dark');
-    this.#detailsListItem.forEach(item =>
-      item.classList.add('details__list-item--dark')
-    );
+    this.#detailsListItem.forEach(item => item.classList.add('details__list-item--dark'));
   }
 
   setDayMode() {
@@ -55,6 +55,7 @@ class ThemesView extends View {
     this.#body.classList.remove('body--dark');
     this.#cflexTitle.classList.remove('cflex__title--dark');
     this.#cflexShowAll.classList.remove('cflex__show-all--dark');
+    this.#cflexShowRandom.classList.remove('cflex__show-random--dark');
     this.#country.forEach(item => item.classList.remove('country--dark'));
     this.#footer.classList.remove('footer--dark');
     this.#footerText.classList.remove('footer__text--dark');

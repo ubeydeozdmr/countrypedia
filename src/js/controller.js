@@ -8,23 +8,21 @@ import View from './views/View';
 const viewObj = new View();
 
 const addBookmark = document.querySelector('.details__save-icon');
-const random = document.querySelector('.toolbar__random');
-const bookmark = document.querySelector('.toolbar__saved');
 const toggler = document.querySelector('.toolbar__theme');
 const search = document.querySelector('.search__button');
 const input = document.querySelector('.search__input');
-const showAll = document.querySelector('.cflex__show-all');
-const showRandom = document.querySelector('.cflex__show-random');
-const detailsExit = document.querySelector('.details__exit');
-
 const detailsButton = document.querySelector('.details__title-button--details');
 const mapButton = document.querySelector('.details__title-button--map');
 
-bookmark.addEventListener('click', function () {
-  countriesView.render(state.savedCountries, `List of countries you saved`);
-  countriesView.renderShowAll(input);
+const bookmarkHandler = function () {
+  if (state.savedCountries.length === 0) {
+    viewObj.renderError('No saved countries');
+    return;
+  }
+  countriesView.render(state.savedCountries, 'Saved Countries');
+  countriesView.renderShowAll();
   listCardHandler();
-});
+};
 
 addBookmark.addEventListener('click', function () {
   if (state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))) {
@@ -55,9 +53,10 @@ toggler.addEventListener('click', function () {
   }
 });
 
-search.addEventListener('click', async function () {
+const searchHandler = async function () {
   // 1) Check for input value is empty or not
   if (input.value === '') return;
+  // state.lastSearch = input.value;
 
   // 2) If not empty, render spinner before fetch operation
   viewObj.renderSpinner('main');
@@ -75,6 +74,22 @@ search.addEventListener('click', async function () {
   listCardHandler();
 
   viewObj.hideFocus();
+};
+
+search.addEventListener('click', async function () {
+  // // 1) Check for input value is empty or not
+  // if (input.value === '') return;
+  // // 2) If not empty, render spinner before fetch operation
+  // viewObj.renderSpinner('main');
+  // // 3) Fetch data from API
+  // const data = await getData(`name/${input.value}`);
+  // // 4) Render list of countries if data has been received
+  // if (data) countriesView.render(data, `Countries matching your search "${input.value}"`);
+  // else viewObj.renderError(404);
+  // // 5) Render Show All button to be able to view all countries without having to refresh the page
+  // countriesView.renderShowAll(input);
+  // listCardHandler();
+  // viewObj.hideFocus();
 });
 
 input.addEventListener('keyup', function (e) {
@@ -89,41 +104,46 @@ input.addEventListener('focusout', function () {
   viewObj.hideFocus();
 });
 
-showAll.addEventListener('click', function () {
+const randomCountryHandler = function () {
+  const random = Math.floor(Math.random() * state.countries.length);
+  const randomCountry = [state.countries[random]];
+  [state.currentCountry] = randomCountry;
+  if (randomCountry) {
+    detailsView.renderPre();
+    detailsView.render(
+      randomCountry,
+      !!state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))
+    );
+  } else viewObj.renderError(state.status);
+};
+
+const showAllHandler = function () {
   countriesView.hideShowAll();
   init();
-});
-
-[random, showRandom].forEach(item =>
-  item.addEventListener('click', function () {
-    const random = Math.floor(Math.random() * state.countries.length);
-    const randomCountry = [state.countries[random]];
-    [state.currentCountry] = randomCountry;
-    if (randomCountry) {
-      detailsView.renderPre();
-      detailsView.render(
-        randomCountry,
-        !!state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))
-      );
-    } else viewObj.renderError(state.status);
-  })
-);
+};
 
 window.addEventListener('hashchange', async function (e) {
-  // console.log(e.newURL);
-  // console.log(detailsView.isDetailsOpened);
-  // if (e.newURL.slice(-1) !== '/' && detailsView.isDetailsOpened) {
-  //   detailsView.hideAlt();
-  // }
-  if (e.newURL.slice(-1) === '/' || e.newURL.slice(-1) === '#') {
-    detailsView.hide();
-  } else {
-    // const data = await getData(`alpha/${e.newURL.slice(-3)}`);
-    // if (data) detailsView.render(data);
+  console.log(e);
+  console.log(window.location.hash);
+
+  switch (window.location.hash) {
+    case '':
+      if (e.oldURL.includes('#saved')) showAllHandler();
+      if (e.oldURL.includes('#search')) showAllHandler();
+      detailsView.hide();
+      break;
+    case '#search':
+      searchHandler();
+      break;
+    case '#random':
+      randomCountryHandler();
+      break;
+    case '#saved':
+      bookmarkHandler();
+    default:
+      break;
   }
 });
-
-detailsExit.addEventListener('click', () => detailsView.hide());
 
 const listCardHandler = function () {
   try {

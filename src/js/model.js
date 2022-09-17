@@ -6,6 +6,7 @@ export const state = {
   currentCountry: undefined,
   savedCountries: undefined,
   savedHashs: undefined,
+  // lastSearch: undefined,
 };
 
 /**
