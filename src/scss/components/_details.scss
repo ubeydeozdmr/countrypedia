@@ -71,7 +71,7 @@
   &__header {
     display: flex;
     align-items: center;
-    gap: 3.2rem;
+    gap: 2.4rem;
   }
 
   &__title {
@@ -122,8 +122,10 @@
   }
 
   &__exit {
-    font-weight: 900;
-    font-size: 1.6rem;
+    // font-weight: 900;
+    // font-size: 1.6rem;
+    width: 1.6rem;
+    height: 1.6rem;
     cursor: pointer;
 
     &:hover {
