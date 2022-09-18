@@ -113,6 +113,10 @@ class DetailsView extends View {
         }</span>
       </div>
       <div class="details__list-item details__list-item--${View.theme}">
+        <p>GINI${data.gini ? `(${Object.keys(data.gini)[0]})` : ''}:</p>
+        <span>${data.gini ? Object.values(data.gini)[0] : 'No data'}</span>
+      </div>
+      <div class="details__list-item details__list-item--${View.theme}">
         <p>Independent:</p>
         <span>${data.independent ? 'Yes' : 'No'}</span>
       </div>
@@ -169,13 +173,13 @@ class DetailsView extends View {
     insert(document.querySelector('.details__content'), markup);
 
     var map = L.map('map').setView([data.latlng[0], data.latlng[1]], 5);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© OpenStreetMap',
-    }).addTo(map);
-    var marker = L.marker([data.latlng[0], data.latlng[1]]).addTo(map);
+    var marker = L.marker([data.capitalInfo.latlng[0], data.capitalInfo.latlng[1]]).addTo(
+      map
+    );
     marker.bindPopup(
-      `<b style="font-size:2rem">${data.name.common}</b>`
+      `<b style="font-size:1.6rem">${data.name.common}</b><p style="font-size:1rem">${
+        data?.capital || 'No capital'
+      }</p>`
     ); /*.openPopup();*/
     map.createPane('labels');
     map.getPane('labels').style.zIndex = 650;

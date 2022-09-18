@@ -30,6 +30,11 @@ $shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
   box-sizing: inherit;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 html {
   box-sizing: border-box;
   font-size: 62.5%;

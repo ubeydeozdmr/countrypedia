@@ -55,17 +55,21 @@ toggler.addEventListener('click', function () {
 
 const searchHandler = async function () {
   // 1) Check for input value is empty or not
-  if (input.value === '') return;
+  if (!window.location.hash.split('?query=')[1]) return;
   // state.lastSearch = input.value;
 
   // 2) If not empty, render spinner before fetch operation
   viewObj.renderSpinner('main');
 
   // 3) Fetch data from API
-  const data = await getData(`name/${input.value}`);
+  const data = await getData(`name/${window.location.hash.split('?query=')[1]}`);
 
   // 4) Render list of countries if data has been received
-  if (data) countriesView.render(data, `Countries matching your search "${input.value}"`);
+  if (data)
+    countriesView.render(
+      data,
+      `Countries matching your search "${window.location.hash.split('?query=')[1]}"`
+    );
   else viewObj.renderError(404);
 
   // 5) Render Show All button to be able to view all countries without having to refresh the page
@@ -104,10 +108,16 @@ input.addEventListener('focusout', function () {
   viewObj.hideFocus();
 });
 
+document.querySelector('.search__button').addEventListener('click', function () {
+  window.location.hash =
+    '#search?query=' + document.querySelector('.search__input').value;
+});
+
 const randomCountryHandler = function () {
   const random = Math.floor(Math.random() * state.countries.length);
   const randomCountry = [state.countries[random]];
   [state.currentCountry] = randomCountry;
+  state.coordinateY = window.scrollY;
   if (randomCountry) {
     detailsView.renderPre();
     detailsView.render(
@@ -123,18 +133,20 @@ const showAllHandler = function () {
 };
 
 window.addEventListener('hashchange', async function (e) {
-  console.log(e);
-  console.log(window.location.hash);
+  if (window.location.hash.includes('#search')) {
+    searchHandler();
+  }
 
   switch (window.location.hash) {
-    case '':
+    case '' || '#home':
+      // window.scrollTo(0, state.coordinateY);
       if (e.oldURL.includes('#saved')) showAllHandler();
       if (e.oldURL.includes('#search')) showAllHandler();
       detailsView.hide();
       break;
-    case '#search':
-      searchHandler();
-      break;
+    // case '#search':
+    //   searchHandler();
+    //   break;
     case '#random':
       randomCountryHandler();
       break;
@@ -154,6 +166,7 @@ const listCardHandler = function () {
         const id = e.target.closest('hover').getAttribute('cca3');
         const data = await getData(`alpha/${id}`);
         [state.currentCountry] = data;
+        state.coordinateY = window.scrollY;
         if (data)
           detailsView.render(
             data,
