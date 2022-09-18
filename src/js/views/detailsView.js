@@ -173,9 +173,10 @@ class DetailsView extends View {
     insert(document.querySelector('.details__content'), markup);
 
     var map = L.map('map').setView([data.latlng[0], data.latlng[1]], 5);
-    var marker = L.marker([data.capitalInfo.latlng[0], data.capitalInfo.latlng[1]]).addTo(
-      map
-    );
+    var marker = L.marker([
+      data.capitalInfo.latlng ? data.capitalInfo.latlng[0] : data.latlng[0],
+      data.capitalInfo.latlng ? data.capitalInfo.latlng[1] : data.latlng[1],
+    ]).addTo(map);
     marker.bindPopup(
       `<b style="font-size:1.6rem">${data.name.common}</b><p style="font-size:1rem">${
         data?.capital || 'No capital'
