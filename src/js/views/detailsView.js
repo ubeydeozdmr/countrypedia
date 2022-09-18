@@ -177,6 +177,32 @@ class DetailsView extends View {
     marker.bindPopup(
       `<b style="font-size:2rem">${data.name.common}</b>`
     ); /*.openPopup();*/
+    map.createPane('labels');
+    map.getPane('labels').style.zIndex = 650;
+    map.getPane('labels').style.pointerEvents = 'none';
+
+    var positron = L.tileLayer(
+      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png',
+      {
+        attribution: '©OpenStreetMap, ©CartoDB',
+      }
+    ).addTo(map);
+
+    var positronLabels = L.tileLayer(
+      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png',
+      {
+        attribution: '©OpenStreetMap, ©CartoDB',
+        pane: 'labels',
+      }
+    ).addTo(map);
+
+    var geojson = L.geoJson(GeoJsonData, geoJsonOptions).addTo(map);
+
+    geojson.eachLayer(function (layer) {
+      layer.bindPopup(layer.feature.properties.name);
+    });
+
+    map.fitBounds(geojson.getBounds());
   }
 
   hide() {
