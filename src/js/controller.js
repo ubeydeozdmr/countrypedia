@@ -56,13 +56,14 @@ toggler.addEventListener('click', function () {
 const searchHandler = async function () {
   // 1) Check for input value is empty or not
   if (!window.location.hash.split('?query=')[1]) return;
-  // state.lastSearch = input.value;
+  state.lastSearch = window.location.hash.split('?query=')[1];
 
   // 2) If not empty, render spinner before fetch operation
   viewObj.renderSpinner('main');
 
   // 3) Fetch data from API
   const data = await getData(`name/${window.location.hash.split('?query=')[1]}`);
+  state.searchHandler = window.location.hash.split('?query=')[1];
 
   // 4) Render list of countries if data has been received
   if (data)
@@ -113,6 +114,14 @@ document.querySelector('.search__button').addEventListener('click', function () 
     '#search?query=' + document.querySelector('.search__input').value;
 });
 
+document.querySelector('.details__exit').addEventListener('click', function () {
+  if (state.lastSearch) {
+    window.location.hash = '#search?query=' + state.lastSearch;
+  } else {
+    window.location.hash = '#home';
+  }
+});
+
 const randomCountryHandler = function () {
   const random = Math.floor(Math.random() * state.countries.length);
   const randomCountry = [state.countries[random]];
@@ -134,11 +143,14 @@ const showAllHandler = function () {
 
 window.addEventListener('hashchange', async function (e) {
   if (window.location.hash.includes('#search')) {
+    console.log('DENEME');
+    detailsView.hide();
     searchHandler();
   }
 
   switch (window.location.hash) {
     case '' || '#home':
+      state.lastSearch = undefined;
       // window.scrollTo(0, state.coordinateY);
       if (e.oldURL.includes('#saved')) showAllHandler();
       if (e.oldURL.includes('#search')) showAllHandler();
@@ -198,6 +210,7 @@ mapButton.addEventListener('click', function () {
 
 const init = async function () {
   try {
+    window.location.hash = '#home';
     let data;
     if (localStorage.getItem('savedCountries') && localStorage.getItem('savedHashs')) {
       state.savedCountries = JSON.parse(localStorage.getItem('savedCountries'));

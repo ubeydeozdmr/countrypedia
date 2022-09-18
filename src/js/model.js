@@ -7,7 +7,7 @@ export const state = {
   savedCountries: undefined,
   savedHashs: undefined,
   coordinateY: undefined,
-  // lastSearch: undefined,
+  lastSearch: undefined,
 };
 
 /**
