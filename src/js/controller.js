@@ -69,7 +69,9 @@ const searchHandler = async function () {
   if (data)
     countriesView.render(
       data,
-      `Countries matching your search "${window.location.hash.split('?query=')[1]}"`
+      `Countries matching your search "${decodeURI(
+        window.location.hash.split('?query=')[1]
+      )}"`
     );
   else viewObj.renderError(404);
 
