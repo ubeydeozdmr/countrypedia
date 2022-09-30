@@ -15,24 +15,28 @@ const detailsButton = document.querySelector('.details__title-button--details');
 const mapButton = document.querySelector('.details__title-button--map');
 
 const bookmarkHandler = function () {
-  if (state.savedCountries.length === 0) {
-    viewObj.renderError('No saved countries');
-    return;
+  try {
+    if (state.savedCountries.length === 0) {
+      viewObj.renderError('No saved countries');
+      return;
+    }
+    countriesView.render(state.savedCountries, 'Saved Countries');
+    countriesView.renderShowAll();
+    listCardHandler();
+  } catch (error) {
+    console.log(error);
   }
-  countriesView.render(state.savedCountries, 'Saved Countries');
-  countriesView.renderShowAll();
-  listCardHandler();
 };
 
 addBookmark.addEventListener('click', function () {
   if (state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))) {
-    removeBookmark();
+    viewObj.removeBookmark();
     state.savedHashs = state.savedHashs.filter(cca3 => cca3 !== location.hash.slice(1));
     state.savedCountries = state.savedCountries.filter(
       countryObj => countryObj.cca3 !== location.hash.slice(1)
     );
   } else {
-    addBookmark();
+    viewObj.addBookmark();
     state.savedHashs.push(location.hash.slice(1));
     state.savedCountries.push(state.currentCountry);
   }

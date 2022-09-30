@@ -39,7 +39,7 @@ class CountriesView extends View {
   renderShowAll(input) {
     this.#showAll.classList.remove('disabled');
     this.#showRandom.classList.add('disabled');
-    input.value = '';
+    if (input) input.value = '';
   }
 
   hideShowAll() {
