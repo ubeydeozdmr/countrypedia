@@ -16,10 +16,6 @@ const mapButton = document.querySelector('.details__title-button--map');
 
 const bookmarkHandler = function () {
   try {
-    if (state.savedCountries.length === 0) {
-      viewObj.renderError('No saved countries');
-      return;
-    }
     countriesView.render(state.savedCountries, 'Saved Countries');
     countriesView.renderShowAll();
     listCardHandler();
@@ -29,7 +25,7 @@ const bookmarkHandler = function () {
 };
 
 addBookmark.addEventListener('click', function () {
-  if (state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))) {
+  if (state.savedHashs.find(cca3 => cca3 === state.currentCountry.cca3)) {
     viewObj.removeBookmark();
     state.savedHashs = state.savedHashs.filter(cca3 => cca3 !== location.hash.slice(1));
     state.savedCountries = state.savedCountries.filter(
@@ -37,7 +33,7 @@ addBookmark.addEventListener('click', function () {
     );
   } else {
     viewObj.addBookmark();
-    state.savedHashs.push(location.hash.slice(1));
+    state.savedHashs.push(state.currentCountry.cca3);
     state.savedCountries.push(state.currentCountry);
   }
 
@@ -66,7 +62,7 @@ const searchHandler = async function () {
   viewObj.renderSpinner('main');
 
   // 3) Fetch data from API
-  const data = await getData(`name/${window.location.hash.split('?query=')[1]}`);
+  const data = await getData(`translation/${window.location.hash.split('?query=')[1]}`);
   state.searchHandler = window.location.hash.split('?query=')[1];
 
   // 4) Render list of countries if data has been received
@@ -134,6 +130,7 @@ const randomCountryHandler = function () {
   [state.currentCountry] = randomCountry;
   state.coordinateY = window.scrollY;
   if (randomCountry) {
+    console.log(randomCountry);
     detailsView.renderPre();
     detailsView.render(
       randomCountry,
