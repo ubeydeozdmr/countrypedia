@@ -16,6 +16,7 @@
 
   &__title {
     color: $color-gray-8;
+    font-weight: 900;
 
     &--dark {
       color: $color-gray-1;
@@ -24,6 +25,7 @@
 
   &__description {
     color: $color-gray-6;
+    font-weight: 500;
 
     &--dark {
       color: $color-gray-3;
