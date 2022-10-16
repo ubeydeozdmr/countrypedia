@@ -1,5 +1,14 @@
 import { clear } from './helpers';
-import { getData, state } from './model';
+
+import {
+  getAllCountries,
+  getCountry,
+  getLocalData,
+  getSearchResults,
+  state,
+  urlSwitcher,
+} from './model';
+
 import countriesView from './views/countriesView';
 import detailsView from './views/detailsView';
 import themesView from './views/themesView';
@@ -16,64 +25,88 @@ const mapButton = document.querySelector('.details__title-button--map');
 
 const bookmarkHandler = function () {
   try {
-    countriesView.render(state.savedCountries, 'Saved Countries');
-    countriesView.renderShowAll();
+    // 1) Check if data is invalid or there is no data
+    if (!state.cache.countries) return viewObj.renderError(state.cache.status);
+
+    // 2) Render saved countries
+    countriesView.render(
+      state.cache.countries.filter(country => state.data.saved.includes(country.cca3)),
+      state.data.theme,
+      'Saved Countries'
+    );
+
+    // 3) Add event listeners to all countries
     listCardHandler();
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.error(err);
   }
 };
 
 addBookmark.addEventListener('click', function () {
-  if (state.savedHashs.find(cca3 => cca3 === state.currentCountry.cca3)) {
-    viewObj.removeBookmark();
-    state.savedHashs = state.savedHashs.filter(cca3 => cca3 !== location.hash.slice(1));
-    state.savedCountries = state.savedCountries.filter(
-      countryObj => countryObj.cca3 !== location.hash.slice(1)
-    );
-  } else {
-    viewObj.addBookmark();
-    state.savedHashs.push(state.currentCountry.cca3);
-    state.savedCountries.push(state.currentCountry);
-  }
+  try {
+    // 1) Check if data is invalid or there is no data
+    if (!state.cache.countries) return viewObj.renderError(state.cache.status);
 
-  localStorage.setItem('savedCountries', JSON.stringify(state.savedCountries));
-  localStorage.setItem('savedHashs', JSON.stringify(state.savedHashs));
+    // 2) Check if country is already saved
+    if (state.data.saved.includes(state.cache.currentCountry[0].cca3)) {
+      // 2.1) Remove country from saved
+      state.data.saved = state.data.saved.filter(
+        cca3 => cca3 !== state.cache.country.cca3
+      );
+
+      // 2.2) Remove country from saved countries
+      viewObj.removeBookmark();
+
+      // 2.3) Add event listeners to all countries
+      listCardHandler();
+    } else {
+      // 3) Add country to saved
+      state.data.saved.push(state.cache.currentCountry[0].cca3);
+
+      viewObj.addBookmark();
+
+      // 3.1) Add event listeners to all countries
+      listCardHandler();
+    }
+
+    // 4) Save data to local storage
+    localStorage.setItem('data', JSON.stringify(state.data));
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 toggler.addEventListener('click', function () {
-  if (View.theme === 'light') {
-    View.theme = 'dark';
-    localStorage.setItem('theme', 'dark');
+  if (state.data.theme === 'light') {
+    state.data.theme = 'dark';
     themesView.setNightMode();
   } else {
-    View.theme = 'light';
-    localStorage.setItem('theme', 'light');
+    state.data.theme = 'light';
     themesView.setDayMode();
   }
+
+  localStorage.setItem('data', JSON.stringify(state.data));
 });
 
 const searchHandler = async function () {
   // 1) Check for input value is empty or not
   if (!window.location.hash.split('?query=')[1]) return;
-  state.lastSearch = window.location.hash.split('?query=')[1];
+  state.cache.lastSearch = window.location.hash.split('?query=')[1];
 
   // 2) If not empty, render spinner before fetch operation
   viewObj.renderSpinner('main');
 
   // 3) Fetch data from API
-  const data = await getData(`translation/${window.location.hash.split('?query=')[1]}`);
-  state.searchHandler = window.location.hash.split('?query=')[1];
+  await getSearchResults(state.cache.lastSearch);
+
+  if (!state.cache.filteredCountries) return viewObj.renderError(404);
 
   // 4) Render list of countries if data has been received
-  if (data)
-    countriesView.render(
-      data,
-      `Countries matching your search "${decodeURI(
-        window.location.hash.split('?query=')[1]
-      )}"`
-    );
-  else viewObj.renderError(404);
+  countriesView.render(
+    state.cache.filteredCountries,
+    state.data.theme,
+    `Countries matching your search "${decodeURI(state.cache.lastSearch)}"`
+  );
 
   // 5) Render Show All button to be able to view all countries without having to refresh the page
   countriesView.renderShowAll(input);
@@ -82,22 +115,6 @@ const searchHandler = async function () {
 
   viewObj.hideFocus();
 };
-
-search.addEventListener('click', async function () {
-  // // 1) Check for input value is empty or not
-  // if (input.value === '') return;
-  // // 2) If not empty, render spinner before fetch operation
-  // viewObj.renderSpinner('main');
-  // // 3) Fetch data from API
-  // const data = await getData(`name/${input.value}`);
-  // // 4) Render list of countries if data has been received
-  // if (data) countriesView.render(data, `Countries matching your search "${input.value}"`);
-  // else viewObj.renderError(404);
-  // // 5) Render Show All button to be able to view all countries without having to refresh the page
-  // countriesView.renderShowAll(input);
-  // listCardHandler();
-  // viewObj.hideFocus();
-});
 
 input.addEventListener('keyup', function (e) {
   if (e.keyCode === 13) search.click();
@@ -111,134 +128,205 @@ input.addEventListener('focusout', function () {
   viewObj.hideFocus();
 });
 
-document.querySelector('.search__button').addEventListener('click', function () {
+search.addEventListener('click', function () {
   window.location.hash =
     '#search?query=' + document.querySelector('.search__input').value;
 });
 
 document.querySelector('.details__exit').addEventListener('click', function () {
-  if (state.lastSearch) {
-    window.location.hash = '#search?query=' + state.lastSearch;
-  } else {
-    window.location.hash = '#home';
-  }
+  window.location.hash = state.cache.url.old;
 });
 
 const randomCountryHandler = function () {
-  const random = Math.floor(Math.random() * state.countries.length);
-  const randomCountry = [state.countries[random]];
-  [state.currentCountry] = randomCountry;
-  state.coordinateY = window.scrollY;
-  if (randomCountry) {
-    console.log(randomCountry);
+  try {
+    // 1) Render spinner before operation
     detailsView.renderPre();
+
+    // 1) Get random number
+    const random = Math.floor(Math.random() * state.cache.countries.length);
+
+    // 2) Get random country from random number
+    state.cache.currentCountry = [state.cache.countries[random]];
+
+    // 3) Check if country exists
+    if (!state.cache.currentCountry) return viewObj.renderError(state.cache.status);
+
+    // 4) Render country details
     detailsView.render(
-      randomCountry,
-      !!state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))
+      state.cache.currentCountry,
+      !!state.data.saved.find(cca3 => cca3 === location.hash.slice(-3)),
+      state.data.theme
     );
-  } else viewObj.renderError(state.status);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-const showAllHandler = function () {
-  countriesView.hideShowAll();
-  init();
+const listCardHandler = function () {
+  try {
+    document.querySelectorAll('.country').forEach(item =>
+      item.addEventListener('click', async function (event) {
+        // 1) Render spinner and countrycard before fetch operation
+        detailsView.renderPre();
+
+        // 2) Get id of the country
+        const id = event.target.closest('hover').getAttribute('cca3');
+
+        // 3) Fetch data from API
+        await getCountry(id);
+
+        // 4) Check if data has been received or not
+        if (!state.cache.currentCountry) return viewObj.renderError(state.cache.status);
+
+        // 5) Render countrycard if data has been received
+        detailsView.render(
+          state.cache.currentCountry,
+          !!state.data.saved.find(cca3 => cca3 === location.hash.slice(-3)),
+          state.data.theme
+        );
+      })
+    );
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-window.addEventListener('hashchange', async function (e) {
+detailsButton.addEventListener('click', function () {
+  clear(document.querySelector('.details__content'));
+  if (state.cache.currentCountry)
+    detailsView.render(
+      state.cache.currentCountry,
+      !!state.data.saved.find(cca3 => cca3 === location.hash.slice(-3)),
+      state.data.theme
+    );
+  else viewObj.renderError(state.cache.status);
+});
+
+mapButton.addEventListener('click', function () {
+  clear(document.querySelector('.details__content'));
+  detailsView.renderMap(state.cache.currentCountry);
+});
+
+window.addEventListener('hashchange', async function (event) {
+  urlSwitcher(window.location.hash);
+
   if (window.location.hash.includes('#search')) {
-    console.log('DENEME');
     detailsView.hide();
     searchHandler();
   }
 
   switch (window.location.hash) {
     case '' || '#home':
-      state.lastSearch = undefined;
-      // window.scrollTo(0, state.coordinateY);
-      if (e.oldURL.includes('#saved')) showAllHandler();
-      if (e.oldURL.includes('#search')) showAllHandler();
+      state.cache.lastSearch = null;
+      if (
+        event.oldURL.includes('#saved') ||
+        event.oldURL.includes('#search') ||
+        event.oldURL.includes('#country')
+      )
+        showAllHandler();
+
       detailsView.hide();
       break;
-    // case '#search':
-    //   searchHandler();
-    //   break;
     case '#random':
       randomCountryHandler();
       break;
     case '#saved':
+      detailsView.hide();
+      countriesView.renderShowAll();
       bookmarkHandler();
+      break;
     default:
       break;
   }
 });
 
-const listCardHandler = function () {
+const showAllHandler = function () {
   try {
-    document.querySelectorAll('.country').forEach(item =>
-      item.addEventListener('click', async function (e) {
-        detailsView.renderPre();
-        viewObj.renderSpinner('details');
-        const id = e.target.closest('hover').getAttribute('cca3');
-        const data = await getData(`alpha/${id}`);
-        [state.currentCountry] = data;
-        state.coordinateY = window.scrollY;
-        if (data)
-          detailsView.render(
-            data,
-            !!state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))
-          );
-        else viewObj.renderError(state.status);
-      })
+    // 1) Render spinner and hide countrycard
+    countriesView.hideShowAll();
+
+    // 2) Switch to home page
+    urlSwitcher('#home');
+
+    // 3) Check if fetched data is invalid or there is no data
+    if (!state.cache.countries) return viewObj.renderError(state.cache.status);
+
+    // 4) Render all countries if data is valid
+    countriesView.render(
+      state.cache.countries,
+      state.data.theme,
+      'List of All Countries'
     );
-  } catch (err) {
-    console.log(err);
-  }
-};
 
-detailsButton.addEventListener('click', function () {
-  clear(document.querySelector('.details__content'));
-  const data = [state.currentCountry];
-  if (data)
-    detailsView.render(
-      data,
-      !!state.savedHashs.find(cca3 => cca3 === location.hash.slice(1))
-    );
-  else viewObj.renderError(state.status);
-});
-
-mapButton.addEventListener('click', function () {
-  clear(document.querySelector('.details__content'));
-  detailsView.renderMap(state.currentCountry);
-});
-
-const init = async function () {
-  try {
-    window.location.hash = '#home';
-    let data;
-    if (localStorage.getItem('savedCountries') && localStorage.getItem('savedHashs')) {
-      state.savedCountries = JSON.parse(localStorage.getItem('savedCountries'));
-      state.savedHashs = JSON.parse(localStorage.getItem('savedHashs'));
-    } else {
-      state.savedCountries = [];
-      state.savedHashs = [];
-    }
-
-    if (!localStorage.getItem('theme')) {
-      localStorage.setItem('theme', 'light');
-      View.theme = localStorage.getItem('theme');
-    } else {
-      View.theme = localStorage.getItem('theme');
-      View.theme === 'light' ? themesView.setDayMode() : themesView.setNightMode();
-    }
-
-    state.countries ? (data = state.countries) : (data = await getData('all'));
-
-    if (data) countriesView.render(data, `List of All Countries`);
-    else viewObj.renderError(state.status);
-
+    // 5) Add event listeners to all countries
     listCardHandler();
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
-init();
+
+(async () => {
+  try {
+    // 1) Initialization of URL
+    window.location.hash = '#home';
+    state.cache.url.new = window.location.hash;
+
+    // 2) Get data from local storage
+    getLocalData();
+
+    // 3) Set theme
+    state.data.theme === 'light' ? themesView.setDayMode() : themesView.setNightMode();
+
+    // 4) Get data from API
+    await getAllCountries();
+
+    // 5) Check if fetched data is invalid or there is no data
+    if (!state.cache.countries) return viewObj.renderError(state.cache.status);
+
+    // 6) Render all countries if data is valid
+    countriesView.render(
+      state.cache.countries,
+      state.data.theme,
+      'List of All Countries'
+    );
+
+    // 7) Add event listeners to all countries
+    listCardHandler();
+  } catch (err) {
+    console.error(err);
+  }
+})();
+
+// const init = async function () {
+//   try {
+//     // 1) Initialization of URL
+//     window.location.hash = '#home';
+//     state.cache.url.new = window.location.hash;
+
+//     // 2) Get data from local storage
+//     getLocalData();
+
+//     // 3) Set theme
+//     state.data.theme === 'light' ? themesView.setDayMode() : themesView.setNightMode();
+
+//     // 4) Get data from API
+//     await getAllCountries();
+
+//     // 5) Check if fetched data is invalid or there is no data
+//     if (!state.cache.countries) return viewObj.renderError(state.status);
+
+//     // 6) Render countries
+//     countriesView.render(
+//       state.cache.countries,
+//       state.data.theme,
+//       'List of All Countries'
+//     );
+
+//     // 7) Add event listeners
+//     listCardHandler();
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+
+// init();

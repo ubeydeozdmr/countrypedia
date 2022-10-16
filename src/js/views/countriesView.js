@@ -7,26 +7,24 @@ class CountriesView extends View {
   #showRandom = document.querySelector('.cflex__show-random');
   #title = document.querySelector('.cflex__title');
 
-  render(data, title) {
-    let i = 0;
+  render(data, theme, title) {
     clear(this.#listCards);
     this.noResult.classList.add('disabled');
 
-    data.forEach(item => {
+    data.forEach((item, index) => {
       const cardContent = `
-        <hover cca3="${item.cca3}" tabindex="${i + 10}">
-          <a class="country country--${View.theme}" href="#${item.cca3}">
+        <hover cca3="${item.cca3}" tabindex="${index + 10}">
+          <a class="country country--${theme}" href="#country?cca3=${item.cca3}">
             <div class="country__flag"></div>
             <div class="country__name">${item.name.common}</div>
           </a>
         </hover>
 `;
-      i++;
 
       insert(this.#listCards, cardContent);
 
       document.querySelector(
-        `article hover:nth-child(${i}) .country .country__flag`
+        `article hover:nth-child(${index + 1}) .country .country__flag`
       ).style.backgroundImage = `url(${item.flags.svg})`;
     });
     this.spinnerMain.style.display = 'none';
