@@ -32,12 +32,13 @@ class DetailsView extends View {
     this.#buttonHoverHandler('#eeeeee', 'transparent', 'none');
     this.isDetailsOpened = true;
     document.querySelector('nav.search').style.zIndex = '8';
+    this.renderSpinner('details');
 
     this.body.style.overflowY = 'hidden';
     this.details.classList.remove('hidden');
   }
 
-  render(data, isSaved) {
+  render(data, isSaved, theme) {
     this.#buttonHoverHandler('#eeeeee', 'transparent', 'none');
     data = data[0];
 
@@ -78,31 +79,31 @@ class DetailsView extends View {
       }
     </div>
     <div class="details__list">
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Alt Spellings:</p>
         <span>${data.name.common + ', ' + data.altSpellings.join(', ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Borders:</p>
         <span>${data.borders ? data.borders.join(', ') : 'No borders'}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Capital:</p>
         <span>${data.capital?.join(', ') || 'No data'}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Car Driving Direction:</p>
         <span>${data.car.side.toString()[0].toUpperCase() + data.car.side.slice(1)}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Continents:</p>
         <span>${data.continents.join(', ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Currencies:</p>
         <span>${currencies.slice(0, currencies.length - 2)}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Direct Dialing Code:</p>
         <span>${
           data.cca3 === 'USA'
@@ -112,49 +113,49 @@ class DetailsView extends View {
             : data.idd.root + data.idd.suffixes[0]
         }</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>GINI${data.gini ? `(${Object.keys(data.gini)[0]})` : ''}:</p>
         <span>${data.gini ? Object.values(data.gini)[0] : 'No data'}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Independent:</p>
         <span>${data.independent ? 'Yes' : 'No'}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Landlocked:</p>
         <span>${data.landlocked ? 'Yes' : 'No'}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Languages:</p>
         <span>${languages.slice(0, languages.length - 2)}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Location:</p>
         <span>${data.latlng.join(', ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Population:</p>
         <span>${data.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Region:</p>
         <span>${data.region} / ${data.subregion || '?'}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Start of Week:</p>
         <span>${
           data.startOfWeek[0].toUpperCase() + data.startOfWeek.toString().slice(1)
         }</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Timezones:</p>
         <span>${data.timezones.join(', ')}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>Top Level Domain:</p>
         <span>${data.tld?.join(', ') || 'No data'}</span>
       </div>
-      <div class="details__list-item details__list-item--${View.theme}">
+      <div class="details__list-item details__list-item--${theme}">
         <p>United Nations Member:</p>
         <span>${data.unMember ? 'Yes' : 'No'}</span>
       </div>
@@ -168,6 +169,7 @@ class DetailsView extends View {
   }
 
   renderMap(data) {
+    data = data[0];
     this.#buttonHoverHandler('transparent', '#eeeeee', 'flex');
     const markup = `<div id="map" class="map"></div>`;
     insert(document.querySelector('.details__content'), markup);
@@ -180,34 +182,27 @@ class DetailsView extends View {
     marker.bindPopup(
       `<b style="font-size:1.6rem">${data.name.common}</b><p style="font-size:1rem">${
         data?.capital || 'No capital'
-      }</p>`
+      }</p>`,
+      { closeButton: false }
     ); /*.openPopup();*/
     map.createPane('labels');
     map.getPane('labels').style.zIndex = 650;
     map.getPane('labels').style.pointerEvents = 'none';
 
-    var positron = L.tileLayer(
+    L.tileLayer(
       'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png',
       {
         attribution: '©OpenStreetMap, ©CartoDB',
       }
     ).addTo(map);
 
-    var positronLabels = L.tileLayer(
+    L.tileLayer(
       'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png',
       {
         attribution: '©OpenStreetMap, ©CartoDB',
         pane: 'labels',
       }
     ).addTo(map);
-
-    var geojson = L.geoJson(GeoJsonData, geoJsonOptions).addTo(map);
-
-    geojson.eachLayer(function (layer) {
-      layer.bindPopup(layer.feature.properties.name);
-    });
-
-    map.fitBounds(geojson.getBounds());
   }
 
   hide() {
