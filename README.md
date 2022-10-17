@@ -8,7 +8,9 @@ This web application shows you the list of many countries. You can not only see 
 
 In the update made after a break for a while, the design was changed, as well as some improvements related to accessibility.
 
-Note: The previous design has not been removed yet. You can find the link of the old site in the site footer.
+~~Note: The previous design has not been removed yet. You can find the link of the old site in the site footer.~~
+
+Update (17.10.2022): The old design has been removed. But still you can find the old design in the [legacy-v1](https://github.com/ubeydeozdmr/countrypedia/tree/legacy-v1) branch.
 
 # Development
 
