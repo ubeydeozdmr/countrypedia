@@ -65,6 +65,7 @@ export const getCountry = async function (cca3) {
     state.cache.status = res.status;
     if (!res.ok) return;
     state.cache.currentCountry = await res.json();
+    if (cca3 === 'BRN') state.cache.currentCountry.shift(); // BRN (Brunei) is special case
   } catch (err) {
     console.error(err);
   }
