@@ -99,7 +99,7 @@ const searchHandler = async function () {
   // 3) Fetch data from API
   await getSearchResults(state.cache.lastSearch);
 
-  if (!state.cache.filteredCountries) return viewObj.renderError(404);
+  if (state.cache.status !== 200) return viewObj.renderError(state.cache.status);
 
   // 4) Render list of countries if data has been received
   countriesView.render(
@@ -130,7 +130,7 @@ input.addEventListener('focusout', function () {
 
 search.addEventListener('click', function () {
   window.location.hash =
-    '#search?query=' + document.querySelector('.search__input').value;
+    '#search?query=' + document.querySelector('.search__input').value.trim();
 });
 
 document.querySelector('.details__exit').addEventListener('click', function () {

@@ -9,7 +9,7 @@ class CountriesView extends View {
 
   render(data, theme, title) {
     clear(this.#listCards);
-    this.noResult.classList.add('disabled');
+    this.notFound.classList.add('disabled');
 
     data.forEach((item, index) => {
       const cardContent = `

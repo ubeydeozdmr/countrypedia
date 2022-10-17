@@ -80,6 +80,18 @@ footer.footer {
       color: $color-gray-1;
     }
   }
+
+  &__bad-request {
+    &--dark {
+      color: $color-gray-2;
+    }
+  }
+
+  &__not-found {
+    &--dark {
+      color: $color-gray-2;
+    }
+  }
 }
 
 .focus {

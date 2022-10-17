@@ -20,6 +20,8 @@ class ThemesView extends View {
   #detailsListItem = document.querySelectorAll('.details__list-item');
   #dayIcon = document.querySelector('.toolbar__theme--day-icon');
   #nightIcon = document.querySelector('.toolbar__theme--night-icon');
+  #badRequestText = document.querySelector('.cflex__bad-request');
+  #notFoundText = document.querySelector('.cflex__not-found');
 
   setNightMode() {
     this.#dayIcon.classList.add('disabled');
@@ -41,6 +43,8 @@ class ThemesView extends View {
     this.#search.classList.add('search--dark');
     this.#searchInput.classList.add('search__input--dark');
     this.#searchIcon.classList.add('search__icon--dark');
+    this.#badRequestText.classList.add('cflex__bad-request--dark');
+    this.#notFoundText.classList.add('cflex__not-found--dark');
     this.#toolbarIcon.forEach(item => item.classList.add('toolbar__icon--dark'));
     this.#details.classList.add('details--dark');
     this.#detailsListItem.forEach(item => item.classList.add('details__list-item--dark'));
@@ -66,6 +70,8 @@ class ThemesView extends View {
     this.#search.classList.remove('search--dark');
     this.#searchInput.classList.remove('search__input--dark');
     this.#searchIcon.classList.remove('search__icon--dark');
+    this.#badRequestText.classList.remove('cflex__bad-request--dark');
+    this.#notFoundText.classList.remove('cflex__not-found--dark');
     this.#toolbarIcon.forEach(item => item.classList.remove('toolbar__icon--dark'));
     this.#details.classList.remove('details--dark');
     this.#detailsListItem.forEach(item =>

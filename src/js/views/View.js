@@ -8,7 +8,7 @@ export default class View {
   spinnerDetails = document.querySelector('.loader-container--details');
   popup = document.querySelector('.popup');
   overlay = document.querySelector('.overlay');
-  noResult = document.querySelector('.cflex__no-result');
+  notFound = document.querySelector('.cflex__not-found');
   badRequest = document.querySelector('.cflex__bad-request');
   errorMessage = document.querySelector('.error-message');
   saveIcon = document.querySelector('.details__save-icon .save');
@@ -33,7 +33,7 @@ export default class View {
     clear(document.querySelector('.countries'));
     switch (statusCode) {
       case 404:
-        this.noResult.classList.remove('disabled');
+        this.notFound.classList.remove('disabled');
         break;
       default:
         this.badRequest.classList.remove('disabled');
