@@ -91,15 +91,23 @@ toggler.addEventListener('click', function () {
 const searchHandler = async function () {
   // 1) Check for input value is empty or not
   if (!window.location.hash.split('?query=')[1]) return;
+  state.cache.penultimateSearch = state.cache.lastSearch;
   state.cache.lastSearch = window.location.hash.split('?query=')[1];
 
   // 2) If not empty, render spinner before fetch operation
   viewObj.renderSpinner('main');
 
   // 3) Fetch data from API
-  await getSearchResults(state.cache.lastSearch);
+  if (state.cache.lastSearch !== state.cache.penultimateSearch)
+    await getSearchResults(state.cache.lastSearch);
 
-  if (state.cache.status !== 200) return viewObj.renderError(state.cache.status);
+  if (state.cache.status !== 200) {
+    // NOTE: WORKAROUND - it will be moved to view later
+    document.querySelector(
+      '.cflex__title'
+    ).textContent = `Couldn't find any results for "${state.cache.lastSearch}"`;
+    return viewObj.renderError(state.cache.status);
+  }
 
   // 4) Render list of countries if data has been received
   countriesView.render(

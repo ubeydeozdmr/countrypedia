@@ -20,6 +20,7 @@ export const state = {
     currentCountry: null,
     filteredCountries: null,
     lastSearch: null,
+    penultimateSearch: null,
     url: {
       old: null,
       new: null,
