@@ -160,6 +160,11 @@
     // &--sort {
     // order: 4;
     // }
+
+    &--show-all {
+      grid-row: 3;
+      grid-column: 1 / span 18;
+    }
   }
 
   &--search-by {
