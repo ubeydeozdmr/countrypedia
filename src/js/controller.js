@@ -22,6 +22,9 @@ const search = document.querySelector('.search__button');
 const input = document.querySelector('.search__input');
 const detailsButton = document.querySelector('.details__title-button--details');
 const mapButton = document.querySelector('.details__title-button--map');
+const switchButton = document.querySelector('.slider.round');
+const switchCheckButton = document.querySelector('.switch input[type="checkbox"]');
+const searchby = document.querySelector('#searchby');
 
 const bookmarkHandler = function () {
   try {
@@ -88,6 +91,17 @@ toggler.addEventListener('click', function () {
   localStorage.setItem('data', JSON.stringify(state.data));
 });
 
+const searchTrimHandler = function (untrimmedString) {
+  let trimmedString = decodeURI(untrimmedString);
+  const arrayTemp = trimmedString.split(',');
+  const arrayTemp2 = [];
+  arrayTemp.forEach(item => {
+    arrayTemp2.push(item.trim());
+  });
+  trimmedString = encodeURI(arrayTemp2.join(','));
+  return trimmedString;
+};
+
 const searchHandler = async function () {
   // 1) Check for input value is empty or not
   if (!window.location.hash.split('?query=')[1]) return;
@@ -97,9 +111,23 @@ const searchHandler = async function () {
   // 2) If not empty, render spinner before fetch operation
   viewObj.renderSpinner('main');
 
+  if (searchby.options.selectedIndex === 2)
+    state.cache.lastSearch = searchTrimHandler(state.cache.lastSearch);
+
+  // if (searchby.options.selectedIndex === 2) {
+  //   state.cache.lastSearch = decodeURI(state.cache.lastSearch);
+  //   const arrayTemp = state.cache.lastSearch.split(',');
+  //   const arrayTemp2 = [];
+  //   arrayTemp.forEach(item => {
+  //     item = item.trim();
+  //     arrayTemp2.push(item);
+  //   });
+  //   state.cache.lastSearch = encodeURI(arrayTemp2.join(','));
+  // }
+
   // 3) Fetch data from API
   if (state.cache.lastSearch !== state.cache.penultimateSearch)
-    await getSearchResults(state.cache.lastSearch);
+    await getSearchResults(state.cache.lastSearch, searchby.options.selectedIndex);
 
   if (state.cache.status !== 200) {
     // NOTE: WORKAROUND - it will be moved to view later
@@ -142,6 +170,7 @@ search.addEventListener('click', function () {
 });
 
 document.querySelector('.details__exit').addEventListener('click', function () {
+  switchCheckButton.checked = false;
   window.location.hash = state.cache.url.old;
 });
 
@@ -198,6 +227,20 @@ const listCardHandler = function () {
     console.error(err);
   }
 };
+
+switchButton.addEventListener('click', function () {
+  clear(document.querySelector('.details__content'));
+  // Check switchCheckButton checked attribute
+  if (switchCheckButton.checked) {
+    if (state.cache.currentCountry)
+      detailsView.render(
+        state.cache.currentCountry,
+        !!state.data.saved.find(cca3 => cca3 === location.hash.slice(-3)),
+        state.data.theme
+      );
+    else viewObj.renderError(state.cache.status);
+  } else detailsView.renderMap(state.cache.currentCountry);
+});
 
 detailsButton.addEventListener('click', function () {
   clear(document.querySelector('.details__content'));
