@@ -1,6 +1,6 @@
 {
   "name": "countrypedia",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "An application where you can see all countries",
   "default": "index.html",
   "scripts": {
