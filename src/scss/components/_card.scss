@@ -47,15 +47,158 @@
   gap: 1rem;
   cursor: pointer;
   transition: all 0.3s;
+  grid-column: span 3;
+  justify-content: center;
 
   &--dark {
     color: $color-gray-2;
     background-color: $color-gray-7;
   }
 
+  &--random {
+    grid-column: 15 / span 2;
+    // order: 2;
+  }
+
+  &--saved {
+    grid-column: 17 / span 2;
+    // order: 3;
+  }
+
   &--search-by {
-    grid-row: 1 / 2;
-    grid-column: 1 / 3;
+    grid-column: 1 / span 3;
+  }
+
+  // &--sort {
+  // order: 4;
+  // }
+
+  @media (max-width: 1359px) {
+    &--random {
+      grid-column: 14 / span 2;
+      // order: 2;
+    }
+
+    &--saved {
+      grid-column: 16 / span 3;
+      // order: 3;
+    }
+
+    &--search-by {
+      grid-column: 1 / span 4;
+      // order: 1;
+    }
+
+    // &--sort {
+    // order: 4;
+    // }
+  }
+
+  @media (max-width: 1220px) {
+    &--random {
+      grid-column: 13 / span 3;
+      // order: 2;
+    }
+
+    &--saved {
+      grid-column: 16 / span 3;
+      // order: 3;
+    }
+
+    // &--search-by {
+    // order: 1;
+    // }
+
+    // &--sort {
+    // order: 4;
+    // }
+  }
+
+  @media (max-width: 900px) {
+    &--random {
+      grid-column: 12 / span 3;
+      // order: 2;
+    }
+
+    &--saved {
+      grid-column: 15 / span 4;
+      // order: 3;
+    }
+
+    &--search-by {
+      grid-row: 1;
+      grid-column: 1 / span 5;
+    }
+
+    // &--search-by {
+    // order: 1;
+    // }
+
+    // &--sort {
+    // order: 4;
+    // }
+  }
+
+  @media (max-width: 600px) {
+    &--search-by {
+      grid-row: 1;
+      grid-column: 1 / span 18;
+    }
+
+    &--random {
+      grid-row: 2;
+      grid-column: 1 / span 9;
+      // order: 2;
+    }
+
+    &--saved {
+      grid-row: 2;
+      grid-column: 10 / span 9;
+      // order: 3;
+    }
+
+    // &--sort {
+    // order: 4;
+    // }
+  }
+
+  &--search-by {
+    grid-row: span 1;
+    width: 100%;
+    padding-left: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+
+    & select {
+      width: 100%;
+      padding: 0.8rem 1.6rem;
+      border-radius: 9999px;
+      border: 1px solid $color-gray-4;
+      font-size: $font-medium;
+      color: $color-gray-7;
+      background-color: $color-gray-0;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        border-color: $color-gray-5;
+      }
+
+      &:focus {
+        border-color: $color-gray-6;
+      }
+
+      & option {
+        color: $color-gray-7;
+      }
+    }
+  }
+
+  &--sort {
+    grid-row: span 1;
+    grid-column: span 6;
     width: 100%;
     padding-left: 1.6rem;
     display: flex;
@@ -89,18 +232,80 @@
   }
 
   &:hover {
-    transform: translateY(-3px);
+    transform: scale(1.1);
   }
 
   &__icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4.4rem;
+    width: 2.4rem;
   }
 
   &__name {
     font-size: 1.6rem;
     align-self: center;
   }
+
+  &__switch {
+    align-self: center;
+    pointer-events: none;
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+
+    & input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+  }
+}
+
+.country-tool__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.country-tool__slider:before {
+  position: absolute;
+  content: '';
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .country-tool__slider {
+  background-color: #2196f3;
+}
+
+input:focus + .country-tool__slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .country-tool__slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.country-tool__slider.round {
+  border-radius: 17px;
+}
+
+.country-tool__slider.round:before {
+  border-radius: 50%;
 }

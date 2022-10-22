@@ -22,13 +22,17 @@ nav.search {
 article.countries {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   width: 100%;
   row-gap: 1.2rem;
   column-gap: 1.8rem;
 
+  @media only screen and (max-width: 1500px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   @media only screen and (max-width: 900px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @media only screen and (max-width: 600px) {
@@ -39,22 +43,22 @@ article.countries {
 .country-tools {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(18, 1fr);
   width: 100%;
   row-gap: 1.2rem;
   column-gap: 1.8rem;
 
-  @media only screen and (max-width: 1000px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-
-  // @media only screen and (max-width: 600px) {
-  //   grid-template-columns: 1fr 1fr 1fr;
+  // @media only screen and (max-width: 1000px) {
+  //   grid-template-columns: repeat(12, 1fr);
   // }
 
-  @media only screen and (max-width: 500px) {
-    grid-template-columns: 1fr 1fr;
-  }
+  // // @media only screen and (max-width: 600px) {
+  // //   grid-template-columns: repeat(9, 1fr);
+  // // }
+
+  // @media only screen and (max-width: 500px) {
+  //   grid-template-columns: repeat(6, 1fr);
+  // }
 }
 
 footer.footer {

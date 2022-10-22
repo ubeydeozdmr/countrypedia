@@ -67,6 +67,11 @@ export const getAllCountries = async function () {
     state.cache.status = res.status;
     if (!res.ok) return;
     state.cache.countries = await res.json();
+    state.cache.countries.sort((a, b) => {
+      if (a.name.common < b.name.common) return -1;
+      if (a.name.common > b.name.common) return 1;
+      return 0;
+    });
   } catch (err) {
     console.error(err);
   }
@@ -105,34 +110,34 @@ export const getSearchResults = async function (query, selectedIndex) {
   try {
     let res;
     switch (selectedIndex) {
-      case 0:
+      case 1:
         res = await fetch(API_ROUTE_NAME + query);
         break;
-      case 1:
+      case 2:
         res = await fetch(API_ROUTE_CODE + query);
         break;
-      case 2:
+      case 3:
         res = await fetch(API_ROUTE_CODELIST + query);
         break;
-      case 3:
+      case 4:
         res = await fetch(API_ROUTE_CAPITAL + query);
         break;
-      case 4:
+      case 5:
         res = await fetch(API_ROUTE_CURRENCY + query);
         break;
-      case 5:
+      case 6:
         res = await fetch(API_ROUTE_DEMONYM + query);
         break;
-      case 6:
+      case 7:
         res = await fetch(API_ROUTE_LANG + query);
         break;
-      case 7:
+      case 8:
         res = await fetch(API_ROUTE_REGION + query);
         break;
-      case 8:
+      case 9:
         res = await fetch(API_ROUTE_SUBREGION + query);
         break;
-      case 9:
+      case 10:
         res = await fetch(API_ROUTE_TRANSLATION + query);
         break;
       default:
@@ -143,6 +148,12 @@ export const getSearchResults = async function (query, selectedIndex) {
     state.cache.status = res.status;
     if (!res.ok) return;
     state.cache.filteredCountries = await res.json();
+
+    state.cache.filteredCountries.sort((a, b) => {
+      if (a.name.common < b.name.common) return -1;
+      if (a.name.common > b.name.common) return 1;
+      return 0;
+    });
 
     // const res = await fetch(API_ROUTE_NAME + query);
     // state.cache.status = res.status;

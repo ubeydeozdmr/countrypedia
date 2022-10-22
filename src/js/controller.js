@@ -25,6 +25,63 @@ const mapButton = document.querySelector('.details__title-button--map');
 const switchButton = document.querySelector('.slider.round');
 const switchCheckButton = document.querySelector('.switch input[type="checkbox"]');
 const searchby = document.querySelector('#searchby');
+const saveSwitch = document.querySelector('.country-tool__switch input[type="checkbox"]');
+const countryToolSaved = document.querySelector('.country-tool--saved');
+
+window.addEventListener('click', e => {
+  if (e.target === document.querySelector('.popup')) {
+    switchCheckButton.checked = false;
+    window.location.hash = state.cache.url.old;
+  }
+});
+
+document.querySelector('#searchby').addEventListener('change', function () {
+  switch (this.value) {
+    case 'name':
+      input.placeholder = 'Search by country name (eg: Germany)';
+      break;
+    case 'code':
+      input.placeholder = 'Search by country code (eg: per)';
+      break;
+    case 'codelist':
+      input.placeholder = 'Search by country code list (eg: per,usa,ind)';
+      break;
+    case 'capital':
+      input.placeholder = 'Search by capital city (eg: Jakarta)';
+      break;
+    case 'currency':
+      input.placeholder = 'Search by currency (eg: euro)';
+      break;
+    case 'demonym':
+      input.placeholder = 'Search by demonym (eg: french)';
+      break;
+    case 'lang':
+      input.placeholder = 'Search by language (eg: english)';
+      break;
+    case 'region':
+      input.placeholder = 'Search by region (eg: africa)';
+      break;
+    case 'subregion':
+      input.placeholder = 'Search by subregion (eg: caribbean)';
+      break;
+    case 'translation':
+      input.placeholder = 'Search by country name (eg: Turkki)';
+      break;
+    default:
+      input.placeholder = 'Search by country name';
+      break;
+  }
+});
+
+countryToolSaved.addEventListener('click', function () {
+  if (window.location.hash === '#home') {
+    countryToolSaved.setAttribute('href', '#saved');
+    saveSwitch.checked = true;
+  } else {
+    countryToolSaved.setAttribute('href', '#home');
+    saveSwitch.checked = false;
+  }
+});
 
 const bookmarkHandler = function () {
   try {
@@ -124,6 +181,7 @@ const searchHandler = async function () {
   //   });
   //   state.cache.lastSearch = encodeURI(arrayTemp2.join(','));
   // }
+  saveSwitch.checked = false;
 
   // 3) Fetch data from API
   if (state.cache.lastSearch !== state.cache.penultimateSearch)
@@ -283,7 +341,7 @@ window.addEventListener('hashchange', async function (event) {
       break;
     case '#saved':
       detailsView.hide();
-      countriesView.renderShowAll();
+      // countriesView.renderShowAll();
       bookmarkHandler();
       break;
     default:

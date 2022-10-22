@@ -31,6 +31,10 @@
 
     &:placeholder-shown {
       font-size: $font-big;
+
+      @media (max-width: 600px) {
+        font-size: $font-medium;
+      }
     }
   }
 
