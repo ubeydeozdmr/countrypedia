@@ -39,7 +39,12 @@
       <div class="details">
         <div class="details__header">
           <div class="details__title">
-            <div class="details__title-frame">
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+
+            <div class="details__title-frame disabled">
               <div class="details__title-button details__title-button--details">
                 <p>Details</p>
               </div>
@@ -47,6 +52,7 @@
                 <p>Map</p>
               </div>
             </div>
+            <p>Show Map View</p>
           </div>
           <a class="details__save-icon">
             <svg
@@ -133,7 +139,7 @@
     </div>
     <header class="hero hero">
       <div class="toolbar">
-        <a class="toolbar__random" href="#random">
+        <!-- <a class="toolbar__random" href="#random">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -149,8 +155,8 @@
               d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm4-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
             />
           </svg>
-        </a>
-        <a href="#saved" class="toolbar__saved">
+        </a> -->
+        <!-- <a href="#saved" class="toolbar__saved">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -163,7 +169,7 @@
               d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"
             />
           </svg>
-        </a>
+        </a> -->
         <a href="#home" class="toolbar__theme">
           <svg
             class="bi bi-moon toolbar__icon toolbar__theme--day-icon"
@@ -245,9 +251,112 @@
       <div class="cflex">
         <span class="cflex__row">
           <h2 class="cflex__title">List of All Countries</h2>
-          <a href="#home" class="cflex__show-all disabled">Show All</a>
-          <a href="#random" class="cflex__show-random">Random</a>
+          <a href="#home" class="cflex__show-all disabled hidden">Show All</a>
+          <!-- <a href="#random" class="cflex__show-random">Random</a> -->
         </span>
+        <div class="country-tools">
+          <a class="country-tool country-tool--random" href="#random">
+            <div class="country-tool__icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-dice-5 toolbar__icon toolbar__icon--random"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z"
+                />
+                <path
+                  d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm4-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                />
+              </svg>
+            </div>
+            <div class="country-tool__name">Random</div>
+          </a>
+          <a class="country-tool country-tool--saved" href="#saved">
+            <div class="country-tool__icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-bookmark toolbar__icon toolbar__icon--saved"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"
+                />
+              </svg>
+            </div>
+            <div class="country-tool__name">Saved</div>
+          </a>
+          <a class="country-tool country-tool--show-all disabled" href="#home">
+            <div class="country-tool__icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-grid"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"
+                />
+              </svg>
+              <!-- <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-house"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
+                />
+              </svg> -->
+            </div>
+            <div class="country-tool__name">Show All</div>
+          </a>
+          <a class="country-tool country-tool--search-by">
+            <div class="country-tool__icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-funnel"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"
+                />
+              </svg>
+            </div>
+            <select name="searchby" id="searchby">
+              <option value="name">Search by name (eg: Germany)</option>
+              <option value="code">Search by code (eg: per)</option>
+              <option value="codelist">Search by multiple code (eg: per,usa,can)</option>
+              <option value="capital">Search by capital (eg: Jakarta)</option>
+              <option value="currency">Search by currency (eg: euro)</option>
+              <option value="demonym">Search by demonym (eg: french)</option>
+              <option value="lang">Search by language (eg: english)</option>
+              <option value="region">Search by region (eg: africa)</option>
+              <option value="subregion">Search by subregion (eg: caribbean)</option>
+              <option value="translation">
+                Search by name with different languages (eg: Turkki)
+              </option>
+            </select>
+          </a>
+        </div>
         <div class="loader-container loader-container--main">
           <div class="loader"></div>
         </div>
