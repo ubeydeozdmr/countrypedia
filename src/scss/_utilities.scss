@@ -1,8 +1,8 @@
 .hidden {
-  visibility: hidden;
-  opacity: 0;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 .disabled {
-  display: none;
+  display: none !important;
 }
