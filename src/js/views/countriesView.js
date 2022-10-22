@@ -4,7 +4,10 @@ import View from './View';
 class CountriesView extends View {
   #listCards = document.querySelector('.countries');
   #showAll = document.querySelector('.cflex__show-all');
-  #showRandom = document.querySelector('.cflex__show-random');
+  #toolRandom = document.querySelector('.country-tool--random');
+  #toolSaved = document.querySelector('.country-tool--saved');
+  #toolShowAll = document.querySelector('.country-tool--show-all');
+  // #showRandom = document.querySelector('.cflex__show-random');
   #title = document.querySelector('.cflex__title');
 
   render(data, theme, title) {
@@ -36,13 +39,19 @@ class CountriesView extends View {
    */
   renderShowAll(input) {
     this.#showAll.classList.remove('disabled');
-    this.#showRandom.classList.add('disabled');
+    this.#toolRandom.classList.add('disabled');
+    this.#toolSaved.classList.add('disabled');
+    this.#toolShowAll.classList.remove('disabled');
+    // this.#showRandom.classList.add('disabled');
     if (input) input.value = '';
   }
 
   hideShowAll() {
     this.#showAll.classList.add('disabled');
-    this.#showRandom.classList.remove('disabled');
+    this.#toolRandom.classList.remove('disabled');
+    this.#toolSaved.classList.remove('disabled');
+    this.#toolShowAll.classList.add('disabled');
+    // this.#showRandom.classList.remove('disabled');
     this.renderSpinner();
   }
 }

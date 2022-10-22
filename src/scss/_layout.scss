@@ -36,6 +36,27 @@ article.countries {
   }
 }
 
+.country-tools {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 100%;
+  row-gap: 1.2rem;
+  column-gap: 1.8rem;
+
+  @media only screen and (max-width: 1000px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  // @media only screen and (max-width: 600px) {
+  //   grid-template-columns: 1fr 1fr 1fr;
+  // }
+
+  @media only screen and (max-width: 500px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 footer.footer {
   width: 100%;
   height: auto;

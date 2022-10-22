@@ -2,10 +2,12 @@ import View from './View';
 
 class ThemesView extends View {
   #body = document.querySelector('body');
+  #detailsTitle = document.querySelector('.details__title');
   #cflexTitle = document.querySelector('.cflex__title');
   #cflexShowAll = document.querySelector('.cflex__show-all');
-  #cflexShowRandom = document.querySelector('.cflex__show-random');
+  // #cflexShowRandom = document.querySelector('.cflex__show-random');
   #country = document.querySelectorAll('.country');
+  #countryTool = document.querySelectorAll('.country-tool');
   #footer = document.querySelector('footer');
   #footerText = document.querySelector('.footer__text');
   #footerTextLink = document.querySelectorAll('.footer__link');
@@ -30,10 +32,12 @@ class ThemesView extends View {
     this.#country = document.querySelectorAll('.country');
 
     this.#body.classList.add('body--dark');
+    this.#detailsTitle.classList.add('details__title--dark');
     this.#cflexTitle.classList.add('cflex__title--dark');
     this.#cflexShowAll.classList.add('cflex__show-all--dark');
-    this.#cflexShowRandom.classList.add('cflex__show-random--dark');
+    // this.#cflexShowRandom.classList.add('cflex__show-random--dark');
     this.#country.forEach(item => item.classList.add('country--dark'));
+    this.#countryTool.forEach(item => item.classList.add('country-tool--dark'));
     this.#footer.classList.add('footer--dark');
     this.#footerText.classList.add('footer__text--dark');
     this.#footerTextLink.forEach(item => item.classList.add('footer__link--dark'));
@@ -57,10 +61,12 @@ class ThemesView extends View {
     this.#country = document.querySelectorAll('.country');
 
     this.#body.classList.remove('body--dark');
+    this.#detailsTitle.classList.remove('details__title--dark');
     this.#cflexTitle.classList.remove('cflex__title--dark');
     this.#cflexShowAll.classList.remove('cflex__show-all--dark');
-    this.#cflexShowRandom.classList.remove('cflex__show-random--dark');
+    // this.#cflexShowRandom.classList.remove('cflex__show-random--dark');
     this.#country.forEach(item => item.classList.remove('country--dark'));
+    this.#countryTool.forEach(item => item.classList.remove('country-tool--dark'));
     this.#footer.classList.remove('footer--dark');
     this.#footerText.classList.remove('footer__text--dark');
     this.#footerTextLink.forEach(itm => itm.classList.remove('footer__link--dark'));
