@@ -79,65 +79,66 @@ export const getCountry = async function (cca3) {
     if (!res.ok) return;
     state.cache.currentCountry = await res.json();
     if (cca3 === 'BRN') state.cache.currentCountry.shift(); // BRN (Brunei) is special case
+
+    if (
+      state.cache.currentCountry[0].borders &&
+      state.cache.currentCountry[0].borders.length > 0
+    ) {
+      const res2 = await fetch(
+        API_ROUTE_CODELIST + state.cache.currentCountry[0].borders.join(',')
+      );
+      if (!res2.ok) return;
+      const arrayTemp = await res2.json();
+      const arrayTemp2 = [];
+      arrayTemp.forEach(item => {
+        arrayTemp2.push(item.name.common);
+      });
+      arrayTemp2.sort();
+      state.cache.currentCountry[0].borders = arrayTemp2;
+    }
   } catch (err) {
     console.error(err);
   }
 };
 
-export const getSearchResults = async function (query) {
+export const getSearchResults = async function (query, selectedIndex) {
   try {
-    // NOTE: I'm working on different ways to search for countries here,
-    // I haven't released this feature yet. I'm still working on it.
-    // If you want to try the feature now, try typing these ones into Countrypedia's search bar:
-    // #CURRENCY#euro
-    // #CAPITAL#paris
-    // #DEMONYM#french
-    // #LANG#french
-    // #REGION#europe
-    // #SUBREGION#western europe
-    // #TRANSLATION#french
-    // #CODE#fra
-    // #NAME#france
-    const splittedQuery = query.split('#');
-
     let res;
-    if (splittedQuery.length > 1)
-      switch (splittedQuery[1]) {
-        case 'NAME':
-          res = await fetch(API_ROUTE_NAME + splittedQuery[2]);
-          break;
-        case 'CODE':
-          res = await fetch(API_ROUTE_CODE + splittedQuery[2]);
-          break;
-        case 'CODELIST':
-          res = await fetch(API_ROUTE_CODELIST + splittedQuery[2]);
-          break;
-        case 'CAPITAL':
-          res = await fetch(API_ROUTE_CAPITAL + splittedQuery[2]);
-          break;
-        case 'CURRENCY':
-          res = await fetch(API_ROUTE_CURRENCY + splittedQuery[2]);
-          break;
-        case 'DEMONYM':
-          res = await fetch(API_ROUTE_DEMONYM + splittedQuery[2]);
-          break;
-        case 'LANG':
-          res = await fetch(API_ROUTE_LANG + splittedQuery[2]);
-          break;
-        case 'REGION':
-          res = await fetch(API_ROUTE_REGION + splittedQuery[2]);
-          break;
-        case 'SUBREGION':
-          res = await fetch(API_ROUTE_SUBREGION + splittedQuery[2]);
-          break;
-        case 'TRANSLATION':
-          res = await fetch(API_ROUTE_TRANSLATION + splittedQuery[2]);
-          break;
-        default:
-          res = await fetch(API_ROUTE_NAME + splittedQuery[2]);
-          break;
-      }
-    else res = await fetch(API_ROUTE_NAME + query);
+    switch (selectedIndex) {
+      case 0:
+        res = await fetch(API_ROUTE_NAME + query);
+        break;
+      case 1:
+        res = await fetch(API_ROUTE_CODE + query);
+        break;
+      case 2:
+        res = await fetch(API_ROUTE_CODELIST + query);
+        break;
+      case 3:
+        res = await fetch(API_ROUTE_CAPITAL + query);
+        break;
+      case 4:
+        res = await fetch(API_ROUTE_CURRENCY + query);
+        break;
+      case 5:
+        res = await fetch(API_ROUTE_DEMONYM + query);
+        break;
+      case 6:
+        res = await fetch(API_ROUTE_LANG + query);
+        break;
+      case 7:
+        res = await fetch(API_ROUTE_REGION + query);
+        break;
+      case 8:
+        res = await fetch(API_ROUTE_SUBREGION + query);
+        break;
+      case 9:
+        res = await fetch(API_ROUTE_TRANSLATION + query);
+        break;
+      default:
+        res = await fetch(API_ROUTE_NAME + query);
+        break;
+    }
 
     state.cache.status = res.status;
     if (!res.ok) return;
