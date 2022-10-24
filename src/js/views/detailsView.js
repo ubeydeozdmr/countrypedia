@@ -10,6 +10,7 @@ class DetailsView extends View {
   unsaveIcon = document.querySelector('.details__save-icon .unsave');
   detailsButton = document.querySelector('.details__title-button--details');
   mapButton = document.querySelector('.details__title-button--map');
+  switchCheckButton = document.querySelector('.switch input[type="checkbox"]');
 
   #buttonHoverHandler(detailsButton, mapButton, display) {
     this.detailsButton.style.backgroundColor = detailsButton;
@@ -210,6 +211,7 @@ class DetailsView extends View {
     this.details.classList.add('hidden');
     this.body.style.overflowY = 'auto';
     this.isDetailsOpened = false;
+    this.switchCheckButton.checked = false;
   }
 }
 

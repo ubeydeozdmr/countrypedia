@@ -30,7 +30,6 @@ const countryToolSaved = document.querySelector('.country-tool--saved');
 
 window.addEventListener('click', e => {
   if (e.target === document.querySelector('.popup')) {
-    switchCheckButton.checked = false;
     window.location.hash = state.cache.url.old;
   }
 });
