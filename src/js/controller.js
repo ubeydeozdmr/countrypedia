@@ -171,16 +171,6 @@ const searchHandler = async function () {
   if (searchby.options.selectedIndex === 2)
     state.cache.lastSearch = searchTrimHandler(state.cache.lastSearch);
 
-  // if (searchby.options.selectedIndex === 2) {
-  //   state.cache.lastSearch = decodeURI(state.cache.lastSearch);
-  //   const arrayTemp = state.cache.lastSearch.split(',');
-  //   const arrayTemp2 = [];
-  //   arrayTemp.forEach(item => {
-  //     item = item.trim();
-  //     arrayTemp2.push(item);
-  //   });
-  //   state.cache.lastSearch = encodeURI(arrayTemp2.join(','));
-  // }
   saveSwitch.checked = false;
 
   // 3) Fetch data from API
@@ -405,37 +395,3 @@ const showAllHandler = function () {
     console.error(err);
   }
 })();
-
-// const init = async function () {
-//   try {
-//     // 1) Initialization of URL
-//     window.location.hash = '#home';
-//     state.cache.url.new = window.location.hash;
-
-//     // 2) Get data from local storage
-//     getLocalData();
-
-//     // 3) Set theme
-//     state.data.theme === 'light' ? themesView.setDayMode() : themesView.setNightMode();
-
-//     // 4) Get data from API
-//     await getAllCountries();
-
-//     // 5) Check if fetched data is invalid or there is no data
-//     if (!state.cache.countries) return viewObj.renderError(state.status);
-
-//     // 6) Render countries
-//     countriesView.render(
-//       state.cache.countries,
-//       state.data.theme,
-//       'List of All Countries'
-//     );
-
-//     // 7) Add event listeners
-//     listCardHandler();
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
-
-// init();
