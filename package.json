@@ -5,7 +5,8 @@
   "default": "index.html",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir ./dist"
+    "build": "parcel build index.html --dist-dir ./dist",
+    "all": "npm run build && npm start"
   },
   "source": "index.html",
   "browserslist": "> 1%",

@@ -16,9 +16,11 @@ export const state = {
   data: null,
   cache: {
     status: null,
-    countries: null,
     currentCountry: null,
+    countries: null,
+    countriesAlphabetical: null,
     filteredCountries: null,
+    filteredCountriesAlphabetical: null,
     lastSearch: null,
     penultimateSearch: null,
     url: {
@@ -36,8 +38,9 @@ export const urlSwitcher = function (hash) {
 const initData = function () {
   try {
     state.data = {
-      version: 1,
+      version: 2,
       theme: 'light',
+      sort: 'random',
       saved: [],
     };
     localStorage.setItem('data', JSON.stringify(state.data));
@@ -50,8 +53,14 @@ export const getLocalData = function () {
   if (localStorage.getItem('data')) {
     const checkObj = JSON.parse(localStorage.getItem('data'));
     switch (checkObj.version) {
+      case 2:
+        state.data = checkObj;
+        break;
       case 1:
         state.data = checkObj;
+        state.data.sort = 'random';
+        state.data.version = 2;
+        localStorage.setItem('data', JSON.stringify(state.data));
         break;
       default:
         localStorage.clear();
@@ -67,7 +76,8 @@ export const getAllCountries = async function () {
     state.cache.status = res.status;
     if (!res.ok) return;
     state.cache.countries = await res.json();
-    state.cache.countries.sort((a, b) => {
+    state.cache.countriesAlphabetical = [...state.cache.countries];
+    state.cache.countriesAlphabetical.sort((a, b) => {
       if (a.name.common < b.name.common) return -1;
       if (a.name.common > b.name.common) return 1;
       return 0;
@@ -148,8 +158,8 @@ export const getSearchResults = async function (query, selectedIndex) {
     state.cache.status = res.status;
     if (!res.ok) return;
     state.cache.filteredCountries = await res.json();
-
-    state.cache.filteredCountries.sort((a, b) => {
+    state.cache.filteredCountriesAlphabetical = [...state.cache.filteredCountries];
+    state.cache.filteredCountriesAlphabetical.sort((a, b) => {
       if (a.name.common < b.name.common) return -1;
       if (a.name.common > b.name.common) return 1;
       return 0;

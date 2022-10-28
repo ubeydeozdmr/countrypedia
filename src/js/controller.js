@@ -72,6 +72,22 @@ document.querySelector('#searchby').addEventListener('change', function () {
   }
 });
 
+document.querySelector('#sort').addEventListener('change', async function () {
+  await getAllCountries();
+
+  state.data.sort = this.value;
+
+  countriesView.render(
+    this.value === 'random' ? state.cache.countries : state.cache.countriesAlphabetical,
+    state.data.theme,
+    'List of All Countries'
+  );
+
+  listCardHandler();
+
+  localStorage.setItem('data', JSON.stringify(state.data));
+});
+
 countryToolSaved.addEventListener('click', function () {
   if (window.location.hash === '#home') {
     countryToolSaved.setAttribute('href', '#saved');
@@ -375,6 +391,8 @@ const showAllHandler = function () {
     // 3) Set theme
     state.data.theme === 'light' ? themesView.setDayMode() : themesView.setNightMode();
 
+    document.querySelector('#sort').value = state.data.sort;
+
     // 4) Get data from API
     await getAllCountries();
 
@@ -383,7 +401,9 @@ const showAllHandler = function () {
 
     // 6) Render all countries if data is valid
     countriesView.render(
-      state.cache.countries,
+      state.data.sort === 'random'
+        ? state.cache.countries
+        : state.cache.countriesAlphabetical,
       state.data.theme,
       'List of All Countries'
     );

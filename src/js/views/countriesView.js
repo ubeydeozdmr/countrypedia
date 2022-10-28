@@ -3,6 +3,8 @@ import View from './View';
 
 class CountriesView extends View {
   #listCards = document.querySelector('.countries');
+  #toolSearchBy = document.querySelector('.country-tool--search-by');
+  #toolSort = document.querySelector('.country-tool--sort');
   #toolRandom = document.querySelector('.country-tool--random');
   #toolSaved = document.querySelector('.country-tool--saved');
   #toolShowAll = document.querySelector('.country-tool--show-all');
@@ -36,6 +38,8 @@ class CountriesView extends View {
    * @param {Node} input An input which comes from input variable in controller.
    */
   renderShowAll(input) {
+    this.#toolSearchBy.classList.add('disabled');
+    this.#toolSort.classList.add('disabled');
     this.#toolRandom.classList.add('disabled');
     this.#toolSaved.classList.add('disabled');
     this.#toolShowAll.classList.remove('disabled');
@@ -43,6 +47,8 @@ class CountriesView extends View {
   }
 
   hideShowAll() {
+    this.#toolSearchBy.classList.remove('disabled');
+    this.#toolSort.classList.remove('disabled');
     this.#toolRandom.classList.remove('disabled');
     this.#toolSaved.classList.remove('disabled');
     this.#toolShowAll.classList.add('disabled');

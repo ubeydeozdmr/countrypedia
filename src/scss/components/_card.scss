@@ -69,9 +69,9 @@
     grid-column: 1 / span 3;
   }
 
-  // &--sort {
-  // order: 4;
-  // }
+  &--sort {
+    grid-column: 4 / span 3;
+  }
 
   @media (max-width: 1359px) {
     &--random {
@@ -89,9 +89,9 @@
       // order: 1;
     }
 
-    // &--sort {
-    // order: 4;
-    // }
+    &--sort {
+      grid-column: 5 / span 4;
+    }
   }
 
   @media (max-width: 1220px) {
@@ -126,8 +126,11 @@
     }
 
     &--search-by {
-      grid-row: 1;
       grid-column: 1 / span 5;
+    }
+
+    &--sort {
+      grid-column: 6 / span 4;
     }
 
     // &--search-by {
@@ -141,8 +144,7 @@
 
   @media (max-width: 600px) {
     &--search-by {
-      grid-row: 1;
-      grid-column: 1 / span 18;
+      grid-column: 1 / span 9;
     }
 
     &--random {
@@ -157,9 +159,9 @@
       // order: 3;
     }
 
-    // &--sort {
-    // order: 4;
-    // }
+    &--sort {
+      grid-column: 10 / span 9;
+    }
 
     &--show-all {
       grid-row: 3;
@@ -203,7 +205,6 @@
 
   &--sort {
     grid-row: span 1;
-    grid-column: span 6;
     width: 100%;
     padding-left: 1.6rem;
     display: flex;
