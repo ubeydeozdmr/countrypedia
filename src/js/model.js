@@ -95,10 +95,7 @@ export const getCountry = async function (cca3) {
     state.cache.currentCountry = await res.json();
     if (cca3 === 'BRN') state.cache.currentCountry.shift(); // BRN (Brunei) is special case
 
-    if (
-      state.cache.currentCountry[0].borders &&
-      state.cache.currentCountry[0].borders.length > 0
-    ) {
+    if (state.cache.currentCountry[0].borders?.length > 0) {
       const res2 = await fetch(
         API_ROUTE_CODELIST + state.cache.currentCountry[0].borders.join(',')
       );

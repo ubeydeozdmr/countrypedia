@@ -105,6 +105,11 @@ const bookmarkHandler = function () {
 
     // 2) Render saved countries
     countriesView.render(
+      state.data.sort === 'random'
+        ? state.cache.countries.filter(country => state.data.saved.includes(country.cca3))
+        : state.cache.countriesAlphabetical.filter(country =>
+            state.data.saved.includes(country.cca3)
+          ),
       state.cache.countries.filter(country => state.data.saved.includes(country.cca3)),
       state.data.theme,
       'Saved Countries'
@@ -202,7 +207,9 @@ const searchHandler = async function () {
 
   // 4) Render list of countries if data has been received
   countriesView.render(
-    state.cache.filteredCountries,
+    state.data.sort === 'random'
+      ? state.cache.filteredCountries
+      : state.cache.filteredCountriesAlphabetical,
     state.data.theme,
     `Countries matching your search "${decodeURI(state.cache.lastSearch)}"`
   );
@@ -346,7 +353,6 @@ window.addEventListener('hashchange', async function (event) {
       break;
     case '#saved':
       detailsView.hide();
-      // countriesView.renderShowAll();
       bookmarkHandler();
       break;
     default:
@@ -367,7 +373,9 @@ const showAllHandler = function () {
 
     // 4) Render all countries if data is valid
     countriesView.render(
-      state.cache.countries,
+      state.data.sort === 'random'
+        ? state.cache.countries
+        : state.cache.countriesAlphabetical,
       state.data.theme,
       'List of All Countries'
     );
