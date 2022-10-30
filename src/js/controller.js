@@ -110,7 +110,6 @@ const bookmarkHandler = function () {
         : state.cache.countriesAlphabetical.filter(country =>
             state.data.saved.includes(country.cca3)
           ),
-      state.cache.countries.filter(country => state.data.saved.includes(country.cca3)),
       state.data.theme,
       'Saved Countries'
     );
