@@ -70,6 +70,23 @@ export const getLocalData = function () {
   } else initData();
 };
 
+export const getAllCountriesOverview = async function () {
+  try {
+    const res = await fetch(API_ROUTE_ALL + '?fields=name,cca3,flags');
+    state.cache.status = res.status;
+    if (!res.ok) return;
+    state.cache.countries = await res.json();
+    state.cache.countriesAlphabetical = [...state.cache.countries];
+    state.cache.countriesAlphabetical.sort((a, b) => {
+      if (a.name.common < b.name.common) return -1;
+      if (a.name.common > b.name.common) return 1;
+      return 0;
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const getAllCountries = async function () {
   try {
     const res = await fetch(API_ROUTE_ALL);

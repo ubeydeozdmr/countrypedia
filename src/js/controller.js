@@ -2,6 +2,7 @@ import { clear } from './helpers';
 
 import {
   getAllCountries,
+  getAllCountriesOverview,
   getCountry,
   getLocalData,
   getSearchResults,
@@ -401,7 +402,7 @@ const showAllHandler = function () {
     document.querySelector('#sort').value = state.data.sort;
 
     // 4) Get data from API
-    await getAllCountries();
+    await getAllCountriesOverview();
 
     // 5) Check if fetched data is invalid or there is no data
     if (!state.cache.countries) return viewObj.renderError(state.cache.status);
@@ -417,6 +418,9 @@ const showAllHandler = function () {
 
     // 7) Add event listeners to all countries
     listCardHandler();
+
+    // 8) Get full data from API
+    await getAllCountries();
   } catch (err) {
     console.error(err);
   }

@@ -68,14 +68,12 @@ class DetailsView extends View {
 
     const markup = `
     <div class="details__flag">
-      <img src="${data.flags.svg}" alt="${
-      data.demonyms?.eng?.m
-    } flag" class="details-img" />
+      <img src="${data.flags.svg}" alt="${data.demonyms?.eng?.m} flag" />
     </div>
     <div class="details__arms">
       ${
         data.coatOfArms.svg
-          ? `<img src=${data.coatOfArms.svg} alt=${data.demonyms?.eng?.m}></img>`
+          ? `<img src=${data.coatOfArms.svg} alt="${data.demonyms?.eng?.m} coat of arms" />`
           : 'No arms'
       }
     </div>
