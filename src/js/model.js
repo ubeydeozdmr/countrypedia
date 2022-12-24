@@ -118,10 +118,7 @@ export const getCountry = async function (cca3) {
       );
       if (!res2.ok) return;
       const arrayTemp = await res2.json();
-      const arrayTemp2 = [];
-      arrayTemp.forEach(item => {
-        arrayTemp2.push(item.name.common);
-      });
+      const arrayTemp2 = arrayTemp.map(item => item.name.common);
       arrayTemp2.sort();
       state.cache.currentCountry[0].borders = arrayTemp2;
     }

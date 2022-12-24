@@ -171,10 +171,7 @@ toggler.addEventListener('click', function () {
 const searchTrimHandler = function (untrimmedString) {
   let trimmedString = decodeURI(untrimmedString);
   const arrayTemp = trimmedString.split(',');
-  const arrayTemp2 = [];
-  arrayTemp.forEach(item => {
-    arrayTemp2.push(item.trim());
-  });
+  const arrayTemp2 = arrayTemp.map(el => el.trim());
   trimmedString = encodeURI(arrayTemp2.join(','));
   return trimmedString;
 };

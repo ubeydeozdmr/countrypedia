@@ -26,10 +26,12 @@
       integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
       crossorigin=""
     />
+    <script type="module" src="src/js/controller.js" defer></script>
     <script
       src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
       integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
       crossorigin=""
+      defer
     ></script>
     <title>Countrypedia</title>
   </head>
@@ -166,6 +168,7 @@
           target="_blank"
           href="https://github.com/ubeydeozdmr/countrypedia"
           class="toolbar__github"
+          rel="noopener noreferrer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +256,7 @@
                 d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
               />
             </svg>
-            <select name="searchby" id="searchby">
+            <select name="searchby" id="searchby" title="searchby">
               <option value="unselected">Search by...</option>
               <option value="name">Name</option>
               <option value="code">Code</option>
@@ -286,7 +289,7 @@
                 />
               </svg>
             </div>
-            <select name="sort" id="sort">
+            <select name="sort" id="sort" title="sort">
               <option value="random" selected>Random</option>
               <option value="alphabetical">Sort alphabetically</option>
             </select>
@@ -388,6 +391,7 @@
         target="_blank"
         href="https://restcountries.com"
         tabindex="981"
+        rel="noopener noreferrer"
         >API Reference</a
       >
       <a
@@ -395,6 +399,7 @@
         target="_blank"
         href="https://github.com/ubeydeozdmr/countrypedia"
         tabindex="982"
+        rel="noopener noreferrer"
         >GitHub</a
       >
       <a
@@ -405,6 +410,5 @@
         >Backup &amp; Restore Data (Unstable)</a
       >
     </footer>
-    <script type="module" src="src/js/controller.js"></script>
   </body>
 </html>
