@@ -20,8 +20,7 @@
     "url": "https://github.com/ubeydeozdmr/countrypedia/issues"
   },
   "homepage": "https://github.com/ubeydeozdmr/countrypedia#readme",
-  "dependencies": {
-    "bootstrap-icons": "^1.8.1",
-    "parcel": "^2.4.1"
+  "devDependencies": {
+    "parcel": "^2.8.3"
   }
 }

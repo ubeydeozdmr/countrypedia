@@ -17,11 +17,11 @@ const btnClosePopup = document.querySelector('.btn--close-popup');
 toggler.addEventListener('click', function () {
   if (View.theme === 'day') {
     View.theme = 'night';
-    localStorage.setItem('theme', 'night');
+    localStorage.setItem('theme-v1', 'night');
     themesView.setNightMode();
   } else {
     View.theme = 'day';
-    localStorage.setItem('theme', 'day');
+    localStorage.setItem('theme-v1', 'day');
     themesView.setDayMode();
   }
 });
@@ -63,7 +63,7 @@ const errorHandler = function () {
 const listCardHandler = function () {
   try {
     View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
-    document.querySelectorAll('.list-card').forEach(item =>
+    document.querySelectorAll('.list-card').forEach((item) =>
       item.addEventListener('click', async function (e) {
         const id = e.target.closest('hover').getAttribute('cca3');
         const data = await getData(`alpha/${id}`);
@@ -79,11 +79,11 @@ const listCardHandler = function () {
 const init = async function () {
   let data;
 
-  if (!localStorage.getItem('theme')) {
-    localStorage.setItem('theme', 'day');
-    View.theme = localStorage.getItem('theme');
+  if (!localStorage.getItem('theme-v1')) {
+    localStorage.setItem('theme-v1', 'day');
+    View.theme = localStorage.getItem('theme-v1');
   } else {
-    View.theme = localStorage.getItem('theme');
+    View.theme = localStorage.getItem('theme-v1');
     View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
   }
 

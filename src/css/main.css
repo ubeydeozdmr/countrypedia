@@ -60,15 +60,6 @@ header.hero {
   color: #333333;
 }
 
-.beta-tag {
-  background-color: #555555;
-  color: #ffffff;
-  font-size: 1.2rem;
-  letter-spacing: 0.12rem;
-  padding: 0 0.2rem;
-  border-radius: 4px;
-}
-
 .hero-description {
   font-size: 1.6rem;
   font-weight: 500;

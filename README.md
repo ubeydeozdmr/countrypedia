@@ -1,20 +1,24 @@
-# Countrypedia
+# IMPORTANT NOTE
+
+**THIS VERSION (v1) IS NO LONGER MAINTAINED. YOU CAN VISIT THE NEW VERSION** [here](https://github.com/ubeydeozdmr/countrypedia) and [here](https://countrypedia.app)
+
+## Countrypedia
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3942ad82-ee34-40dd-8abc-4e586e4e6039/deploy-status)](https://app.netlify.com/sites/simplecountrypedia/deploys)
 
-This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, coat of arms, population, region of the country you selected. [Click here](https://simplecountrypedia.netlify.app) for visit website.
+This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, coat of arms, population, region of the country you selected. [Click here](https://v1--simplecountrypedia.netlify.app) for visit website.
 
-# Development
+## Development
 
 This web application was created with [Rest Countries API](https://restcountries.com/).
 
-# Features
+## Features
 
 - Dark theme support
 - Search from countries list
 - Get information from the country card which you selected
 
-# Contents
+## Contents
 
 - Alt spellings
 - Border countries
@@ -37,11 +41,11 @@ This web application was created with [Rest Countries API](https://restcountries
 - Top-level domain
 - United nations membership status
 
-# Extra Notes
+## Extra Notes
 
 This app is still under development so it may have bugs. For suggestions and corrections, you can make a pull request or contact me by email. You can edit this project, embed it and publish it yourself.
 
-# Screenshots
+## Screenshots
 
 <table>
   <tr>
