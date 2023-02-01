@@ -2,18 +2,18 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3942ad82-ee34-40dd-8abc-4e586e4e6039/deploy-status)](https://app.netlify.com/sites/simplecountrypedia/deploys)
 
-This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, coat of arms, population, region of the country you selected. [Click here](https://countrypedia.app/) for visit website.
+This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, coat of arms, population, region of the country you selected. [Click here](https://countrypedia.app) for visit website.
 
 # UPDATE: V2 has arrived!
 
 In the update made after a break for a while, the design was changed, as well as some improvements related to accessibility.
 
-If you want to see the old design, you can find the link of the old site in the site footer. [or click here](https://v1--simplecountrypedia.netlify.app) for visit old design.
+If you want to see the old design, you can find the link of the old site in the site footer. [or click here](https://v1.countrypedia.app) for visit old design.
 
 # Development
 
-The data of the countries' information is obtained from the [Rest Countries API](https://restcountries.com/).
-Map feature added, thanks to [Leaflet](https://leafletjs.com/).
+The data of the countries' information is obtained from the [Rest Countries API](https://restcountries.com).
+Map feature added, thanks to [Leaflet](https://leafletjs.com).
 
 # Features
 
