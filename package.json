@@ -4,8 +4,8 @@
   "description": "An application where you can see all countries",
   "default": "index.html",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir ./dist",
+    "start": "parcel index.html --cache-dir ./.cache/parcel",
+    "build": "parcel build index.html --cache-dir ./.cache/parcel --dist-dir ./dist",
     "all": "npm run build && npm start"
   },
   "source": "index.html",
