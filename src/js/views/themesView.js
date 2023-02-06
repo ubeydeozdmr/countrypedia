@@ -24,6 +24,8 @@ class ThemesView extends View {
   #notFoundText = document.querySelector('.cflex__not-found');
 
   setNightMode() {
+    document.documentElement.style.setProperty('color-scheme', 'dark');
+
     this.#dayIcon.classList.add('disabled');
     this.#nightIcon.classList.remove('disabled');
 
@@ -51,6 +53,8 @@ class ThemesView extends View {
   }
 
   setDayMode() {
+    document.documentElement.style.setProperty('color-scheme', 'light');
+
     this.#dayIcon.classList.remove('disabled');
     this.#nightIcon.classList.add('disabled');
 

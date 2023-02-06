@@ -19,6 +19,10 @@ $font-gilroy: 'Gilroy', 'Plus Jakarta Sans', 'Open Sans', sans-serif;
 $shadow-light: 0 2rem 6rem rgba(0, 0, 0, 0.1);
 $shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
 
+:root {
+  color-scheme: light;
+}
+
 * {
   margin: 0;
   padding: 0;
