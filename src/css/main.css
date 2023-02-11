@@ -1,3 +1,7 @@
+:root {
+  color-scheme: light;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -235,6 +239,7 @@ header.hero {
   display: flex;
   align-items: center;
   width: 100%;
+  -webkit-user-select: none;
   user-select: none;
 }
 

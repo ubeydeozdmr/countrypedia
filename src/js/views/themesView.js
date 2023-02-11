@@ -28,6 +28,8 @@ class ThemesView extends View {
   #footerApiRefLink = document.querySelector('.footer-link--apiref');
 
   setNightMode() {
+    document.documentElement.style.setProperty('color-scheme', 'dark');
+
     // Redefining #listCard item
     this.#listCard = document.querySelectorAll('.list-card');
 
@@ -81,6 +83,8 @@ class ThemesView extends View {
   }
 
   setDayMode() {
+    document.documentElement.style.setProperty('color-scheme', 'light');
+
     // Redefining #listCard item
     this.#listCard = document.querySelectorAll('.list-card');
 
