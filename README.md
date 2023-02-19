@@ -55,23 +55,23 @@ Countrypedia app may have bugs. For suggestions and corrections, you can make a 
 
 <table>
   <tr>
-    <td><img src="./src/assets/screenshotsV2/NestHubMax-overview-light.png" alt="cp-overview-light-lg" width = 341.5px /></td>
-    <td><img src="./src/assets/screenshotsV2/NestHubMax-search-light.png" alt="cp-search-light-lg" width = 341.5px /></td>
-    <td><img src="./src/assets/screenshotsV2/NestHubMax-details-light.png" alt="cp-details-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/NestHubMax-overview-light.png" alt="cp-overview-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/NestHubMax-search-light.png" alt="cp-search-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/NestHubMax-details-light.png" alt="cp-details-light-lg" width = 341.5px /></td>
   </tr> 
   <tr>
-    <td><img src="./src/assets/screenshotsV2/NestHubMax-overview-dark.png" alt="cp-overview-light-lg" width = 341.5px /></td>
-    <td><img src="./src/assets/screenshotsV2/NestHubMax-search-dark.png" alt="cp-search-light-lg" width = 341.5px /></td>
-    <td><img src="./src/assets/screenshotsV2/NestHubMax-details-dark.png" alt="cp-details-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/NestHubMax-overview-dark.png" alt="cp-overview-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/NestHubMax-search-dark.png" alt="cp-search-light-lg" width = 341.5px /></td>
+    <td><img src="./src/assets/screenshots/NestHubMax-details-dark.png" alt="cp-details-light-lg" width = 341.5px /></td>
   </tr>
 </table>
 <table>
   <tr>
-    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-overview-light.png" alt="cp-overview-light-lg" width = 170.75px /></td>
-    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-search-light.png" alt="cp-search-light-lg" width = 170.75px /></td>
-    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-details-light.png" alt="cp-details-light-lg" width = 170.75px /></td>
-    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-overview-dark.png" alt="cp-overview-light-lg" width = 170.75px /></td>
-    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-search-dark.png" alt="cp-search-light-lg" width = 170.75px /></td>
-    <td><img src="./src/assets/screenshotsV2/iPhone12Pro-details-dark.png" alt="cp-details-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/iPhone12Pro-overview-light.png" alt="cp-overview-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/iPhone12Pro-search-light.png" alt="cp-search-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/iPhone12Pro-details-light.png" alt="cp-details-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/iPhone12Pro-overview-dark.png" alt="cp-overview-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/iPhone12Pro-search-dark.png" alt="cp-search-light-lg" width = 170.75px /></td>
+    <td><img src="./src/assets/screenshots/iPhone12Pro-details-dark.png" alt="cp-details-light-lg" width = 170.75px /></td>
   </tr>
 </table>
