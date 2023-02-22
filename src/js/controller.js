@@ -81,7 +81,7 @@ document.querySelector('#sort').addEventListener('change', async function () {
   countriesView.render(
     this.value === 'random' ? state.cache.countries : state.cache.countriesAlphabetical,
     state.data.theme,
-    'List of All Countries'
+    'List of All Countries',
   );
 
   listCardHandler();
@@ -109,10 +109,10 @@ const bookmarkHandler = function () {
       state.data.sort === 'random'
         ? state.cache.countries.filter(country => state.data.saved.includes(country.cca3))
         : state.cache.countriesAlphabetical.filter(country =>
-            state.data.saved.includes(country.cca3)
+            state.data.saved.includes(country.cca3),
           ),
       state.data.theme,
-      'Saved Countries'
+      'Saved Countries',
     );
 
     // 3) Add event listeners to all countries
@@ -131,7 +131,7 @@ addBookmark.addEventListener('click', function () {
     if (state.data.saved.includes(state.cache.currentCountry[0].cca3)) {
       // 2.1) Remove country from saved
       state.data.saved = state.data.saved.filter(
-        cca3 => cca3 !== state.cache.country.cca3
+        cca3 => cca3 !== state.cache.country.cca3,
       );
 
       // 2.2) Remove country from saved countries
@@ -197,7 +197,7 @@ const searchHandler = async function () {
   if (state.cache.status !== 200) {
     // NOTE: WORKAROUND - it will be moved to view later
     document.querySelector(
-      '.cflex__title'
+      '.cflex__title',
     ).textContent = `Couldn't find any results for "${state.cache.lastSearch}"`;
     return viewObj.renderError(state.cache.status);
   }
@@ -208,7 +208,7 @@ const searchHandler = async function () {
       ? state.cache.filteredCountries
       : state.cache.filteredCountriesAlphabetical,
     state.data.theme,
-    `Countries matching your search "${decodeURI(state.cache.lastSearch)}"`
+    `Countries matching your search "${decodeURI(state.cache.lastSearch)}"`,
   );
 
   // 5) Render Show All button to be able to view all countries without having to refresh the page
@@ -259,7 +259,7 @@ const randomCountryHandler = function () {
     detailsView.render(
       state.cache.currentCountry,
       !!state.data.saved.find(cca3 => cca3 === location.hash.slice(-3)),
-      state.data.theme
+      state.data.theme,
     );
   } catch (err) {
     console.error(err);
@@ -286,9 +286,9 @@ const listCardHandler = function () {
         detailsView.render(
           state.cache.currentCountry,
           !!state.data.saved.find(cca3 => cca3 === location.hash.slice(-3)),
-          state.data.theme
+          state.data.theme,
         );
-      })
+      }),
     );
   } catch (err) {
     console.error(err);
@@ -303,7 +303,7 @@ switchButton.addEventListener('click', function () {
       detailsView.render(
         state.cache.currentCountry,
         !!state.data.saved.find(cca3 => cca3 === location.hash.slice(-3)),
-        state.data.theme
+        state.data.theme,
       );
     else viewObj.renderError(state.cache.status);
   } else detailsView.renderMap(state.cache.currentCountry);
@@ -315,7 +315,7 @@ detailsButton.addEventListener('click', function () {
     detailsView.render(
       state.cache.currentCountry,
       !!state.data.saved.find(cca3 => cca3 === location.hash.slice(-3)),
-      state.data.theme
+      state.data.theme,
     );
   else viewObj.renderError(state.cache.status);
 });
@@ -374,7 +374,7 @@ const showAllHandler = function () {
         ? state.cache.countries
         : state.cache.countriesAlphabetical,
       state.data.theme,
-      'List of All Countries'
+      'List of All Countries',
     );
 
     // 5) Add event listeners to all countries
@@ -410,7 +410,7 @@ const showAllHandler = function () {
         ? state.cache.countries
         : state.cache.countriesAlphabetical,
       state.data.theme,
-      'List of All Countries'
+      'List of All Countries',
     );
 
     // 7) Add event listeners to all countries
