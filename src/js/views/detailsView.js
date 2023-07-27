@@ -175,8 +175,8 @@ class DetailsView extends View {
     const markup = `<div id="map" class="map"></div>`;
     insert(document.querySelector('.details__content'), markup);
 
-    var map = L.map('map').setView([data.latlng[0], data.latlng[1]], 5);
-    var marker = L.marker([
+    const map = L.map('map').setView([data.latlng[0], data.latlng[1]], 5);
+    const marker = L.marker([
       data.capitalInfo.latlng ? data.capitalInfo.latlng[0] : data.latlng[0],
       data.capitalInfo.latlng ? data.capitalInfo.latlng[1] : data.latlng[1],
     ]).addTo(map);
