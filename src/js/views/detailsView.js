@@ -69,8 +69,8 @@ class DetailsView extends View {
     const markup = `
     <div class="details__flag">
       <img src="${data.flags.svg}" alt="${
-      data.flags.alt || data.demonyms?.eng?.m
-    } flag" />
+      data.flags.alt || data.demonyms?.eng?.m + ' flag'
+    }" />
     </div>
     <div class="details__arms">
       ${
