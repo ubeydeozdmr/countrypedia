@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "development"
-  ],
+  "extends": ["development"],
   "hints": {
     "axe/forms": [
       "default",
@@ -14,16 +12,6 @@
       {
         "link-name": "off"
       }
-    ],
-    "compat-api/css": [
-      "default",
-      {
-        "ignore": [
-          "backdrop-filter"
-        ]
-      }
-    ],
-    "detect-css-reflows/composite": "off",
-    "detect-css-reflows/paint": "off"
+    ]
   }
 }
