@@ -69,8 +69,8 @@ class DetailsView extends View {
     const markup = `
     <div class="details__flag">
       <img src="${data.flags.svg}" alt="${
-      data.flags.alt || data.demonyms?.eng?.m + ' flag'
-    }" />
+      data.flags.alt || data.demonyms?.eng?.m
+    } flag" />
     </div>
     <div class="details__arms">
       ${
@@ -175,8 +175,8 @@ class DetailsView extends View {
     const markup = `<div id="map" class="map"></div>`;
     insert(document.querySelector('.details__content'), markup);
 
-    const map = L.map('map').setView([data.latlng[0], data.latlng[1]], 5);
-    const marker = L.marker([
+    var map = L.map('map').setView([data.latlng[0], data.latlng[1]], 5);
+    var marker = L.marker([
       data.capitalInfo.latlng ? data.capitalInfo.latlng[0] : data.latlng[0],
       data.capitalInfo.latlng ? data.capitalInfo.latlng[1] : data.latlng[1],
     ]).addTo(map);
@@ -184,7 +184,7 @@ class DetailsView extends View {
       `<b style="font-size:1.6rem">${data.name.common}</b><p style="font-size:1rem">${
         data?.capital || 'No capital'
       }</p>`,
-      { closeButton: false }
+      { closeButton: false },
     ); /*.openPopup();*/
     map.createPane('labels');
     map.getPane('labels').style.zIndex = 650;
@@ -194,7 +194,7 @@ class DetailsView extends View {
       'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png',
       {
         attribution: '©OpenStreetMap, ©CartoDB',
-      }
+      },
     ).addTo(map);
 
     L.tileLayer(
@@ -202,7 +202,7 @@ class DetailsView extends View {
       {
         attribution: '©OpenStreetMap, ©CartoDB',
         pane: 'labels',
-      }
+      },
     ).addTo(map);
   }
 
