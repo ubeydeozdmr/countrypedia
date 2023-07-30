@@ -113,7 +113,7 @@ export const getCountry = async function (cca3) {
 
     if (state.cache.currentCountry[0].borders?.length > 0) {
       const res2 = await fetch(
-        API_ROUTE_CODELIST + state.cache.currentCountry[0].borders.join(','),
+        API_ROUTE_CODELIST + state.cache.currentCountry[0].borders.join(',')
       );
       if (!res2.ok) return;
       const arrayTemp = await res2.json();

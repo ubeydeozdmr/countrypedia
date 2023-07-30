@@ -3,7 +3,8 @@
  * @description Delete all content of parent item which entered as parameter.
  */
 export const clear = function (parentItem) {
-  while (parentItem.hasChildNodes()) parentItem.removeChild(parentItem.firstChild);
+  while (parentItem.hasChildNodes())
+    parentItem.removeChild(parentItem.firstChild);
 };
 
 /**

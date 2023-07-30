@@ -27,7 +27,7 @@ class CountriesView extends View {
       insert(this.#listCards, cardContent);
 
       document.querySelector(
-        `article hover:nth-child(${index + 1}) .country .country__flag`,
+        `article hover:nth-child(${index + 1}) .country .country__flag`
       ).style.backgroundImage = `url(${item.flags.svg})`;
     });
     this.spinnerMain.style.display = 'none';
