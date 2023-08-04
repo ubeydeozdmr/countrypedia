@@ -4,6 +4,7 @@ import View from './View';
 class DetailsView extends View {
   body = document.querySelector('body');
   details = document.querySelector('.popup');
+  detailsContent = document.querySelector('.details__content');
   osmap = document.querySelector('.details__map-button--openstreetmap');
   gmaps = document.querySelector('.details__map-button--googlemaps');
   saveIcon = document.querySelector('.details__save-icon .save');
@@ -11,6 +12,8 @@ class DetailsView extends View {
   detailsButton = document.querySelector('.details__title-button--details');
   mapButton = document.querySelector('.details__title-button--map');
   switchCheckButton = document.querySelector('.switch input[type="checkbox"]');
+  detailsErrorMsgBox = document.querySelector('details__bad-request');
+  detailsErrorMsg = document.querySelector('details__bad-request error-message');
 
   #buttonHoverHandler(detailsButton, mapButton, display) {
     this.detailsButton.style.backgroundColor = detailsButton;
@@ -27,6 +30,18 @@ class DetailsView extends View {
       this.mapButton.style.backgroundColor = mapButton;
     });
     document.querySelector('.details__buttonbar').style.display = display;
+  }
+
+  renderError() {
+    this.spinnerDetails.style.display = 'none';
+    const errorMessage = `
+      <div></div>
+      <div></div>
+      <p class="error-message">
+        We've encountered an error. Please try again later.
+      </p>
+    `;
+    insert(this.detailsContent, errorMessage);
   }
 
   renderPre() {
@@ -76,7 +91,7 @@ class DetailsView extends View {
       ${
         data.coatOfArms.svg
           ? `<img src=${data.coatOfArms.svg} alt="${data.demonyms?.eng?.m} coat of arms" />`
-          : 'No arms'
+          : 'No coat of arms'
       }
     </div>
     <div class="details__list">
@@ -164,7 +179,7 @@ class DetailsView extends View {
 `;
 
     this.spinnerDetails.style.display = 'none';
-    insert(document.querySelector('.details__content'), markup);
+    insert(this.detailsContent, markup);
     this.osmap.setAttribute('href', data.maps.openStreetMaps);
     this.gmaps.setAttribute('href', data.maps.googleMaps);
   }
@@ -184,26 +199,16 @@ class DetailsView extends View {
       `<b style="font-size:1.6rem">${data.name.common}</b><p style="font-size:1rem">${
         data?.capital || 'No capital'
       }</p>`,
-      { closeButton: false },
+      { closeButton: true },
     ); /*.openPopup();*/
     map.createPane('labels');
     map.getPane('labels').style.zIndex = 650;
     map.getPane('labels').style.pointerEvents = 'none';
 
-    L.tileLayer(
-      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png',
-      {
-        attribution: '©OpenStreetMap, ©CartoDB',
-      },
-    ).addTo(map);
-
-    L.tileLayer(
-      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png',
-      {
-        attribution: '©OpenStreetMap, ©CartoDB',
-        pane: 'labels',
-      },
-    ).addTo(map);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
+      attribution:
+        '<a target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">©OpenStreetMap</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/CartoDB/cartodb/blob/master/LICENSE">©CartoDB</a>',
+    }).addTo(map);
   }
 
   hide() {

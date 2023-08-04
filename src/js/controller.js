@@ -280,7 +280,7 @@ const listCardHandler = function () {
         await getCountry(id);
 
         // 4) Check if data has been received or not
-        if (!state.cache.currentCountry) return viewObj.renderError(state.cache.status);
+        if (!state.cache.currentCountry) return detailsView.renderError();
 
         // 5) Render countrycard if data has been received
         detailsView.render(
