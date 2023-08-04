@@ -184,7 +184,7 @@ class DetailsView extends View {
       `<b style="font-size:1.6rem">${data.name.common}</b><p style="font-size:1rem">${
         data?.capital || 'No capital'
       }</p>`,
-      { closeButton: false },
+      { closeButton: true },
     ); /*.openPopup();*/
     map.createPane('labels');
     map.getPane('labels').style.zIndex = 650;
