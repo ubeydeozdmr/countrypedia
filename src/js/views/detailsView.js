@@ -4,6 +4,7 @@ import View from './View';
 class DetailsView extends View {
   body = document.querySelector('body');
   details = document.querySelector('.popup');
+  detailsContent = document.querySelector('.details__content');
   osmap = document.querySelector('.details__map-button--openstreetmap');
   gmaps = document.querySelector('.details__map-button--googlemaps');
   saveIcon = document.querySelector('.details__save-icon .save');
@@ -11,6 +12,8 @@ class DetailsView extends View {
   detailsButton = document.querySelector('.details__title-button--details');
   mapButton = document.querySelector('.details__title-button--map');
   switchCheckButton = document.querySelector('.switch input[type="checkbox"]');
+  detailsErrorMsgBox = document.querySelector('details__bad-request');
+  detailsErrorMsg = document.querySelector('details__bad-request error-message');
 
   #buttonHoverHandler(detailsButton, mapButton, display) {
     this.detailsButton.style.backgroundColor = detailsButton;
@@ -27,6 +30,18 @@ class DetailsView extends View {
       this.mapButton.style.backgroundColor = mapButton;
     });
     document.querySelector('.details__buttonbar').style.display = display;
+  }
+
+  renderError() {
+    this.spinnerDetails.style.display = 'none';
+    const errorMessage = `
+      <div></div>
+      <div></div>
+      <p class="error-message">
+        We've encountered an error. Please try again later.
+      </p>
+    `;
+    insert(this.detailsContent, errorMessage);
   }
 
   renderPre() {
@@ -164,7 +179,7 @@ class DetailsView extends View {
 `;
 
     this.spinnerDetails.style.display = 'none';
-    insert(document.querySelector('.details__content'), markup);
+    insert(this.detailsContent, markup);
     this.osmap.setAttribute('href', data.maps.openStreetMaps);
     this.gmaps.setAttribute('href', data.maps.googleMaps);
   }

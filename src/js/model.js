@@ -106,6 +106,7 @@ export const getAllCountries = async function () {
 
 export const getCountry = async function (cca3) {
   try {
+    state.cache.currentCountry = null;
     const res = await fetch(API_ROUTE_CODE + cca3);
     state.cache.status = res.status;
     if (!res.ok) return;
