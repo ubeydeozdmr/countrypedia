@@ -76,7 +76,7 @@ class DetailsView extends View {
       ${
         data.coatOfArms.svg
           ? `<img src=${data.coatOfArms.svg} alt="${data.demonyms?.eng?.m} coat of arms" />`
-          : 'No arms'
+          : 'No coat of arms'
       }
     </div>
     <div class="details__list">
