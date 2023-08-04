@@ -190,20 +190,10 @@ class DetailsView extends View {
     map.getPane('labels').style.zIndex = 650;
     map.getPane('labels').style.pointerEvents = 'none';
 
-    L.tileLayer(
-      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png',
-      {
-        attribution: '©OpenStreetMap, ©CartoDB',
-      },
-    ).addTo(map);
-
-    L.tileLayer(
-      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png',
-      {
-        attribution: '©OpenStreetMap, ©CartoDB',
-        pane: 'labels',
-      },
-    ).addTo(map);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
+      attribution:
+        '<a target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">©OpenStreetMap</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/CartoDB/cartodb/blob/master/LICENSE">©CartoDB</a>',
+    }).addTo(map);
   }
 
   hide() {
