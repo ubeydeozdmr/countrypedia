@@ -195,7 +195,10 @@ const searchHandler = async function () {
     await getSearchResults(state.cache.lastSearch, searchby.options.selectedIndex);
 
   if (state.cache.status !== 200) {
+    countriesView.renderShowAll();
     // NOTE: WORKAROUND - it will be moved to view later
+    input.blur();
+    input.value = '';
     document.querySelector(
       '.cflex__title',
     ).textContent = `Couldn't find any results for "${state.cache.lastSearch}"`;
