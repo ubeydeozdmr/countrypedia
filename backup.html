@@ -2,192 +2,118 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Backup &amp; Restore Data</title>
     <style>
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html {
-        font-size: 62.5%;
-      }
-      body {
-        font-family: sans-serif;
-        font-size: 1.6rem;
-        line-height: 1.6;
-        background-color: #f5f5f5;
-      }
-      hr {
-        margin: 2rem 0;
-      }
-      br {
-        display: block;
-        margin: 1rem 0;
-      }
-      a {
-        color: #000;
-        text-decoration: none;
-      }
-      .title-primary {
-        font-size: 2.4rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        margin-bottom: 1.6rem;
-      }
-      .title-secondary {
-        font-size: 2rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        margin-bottom: 1.6rem;
-      }
-      .title-description {
-        font-size: 1.8rem;
-        font-weight: 400;
-        margin-bottom: 1.6rem;
-      }
-      .link {
-        font-size: 1.8rem;
-        font-weight: 400;
-        margin-bottom: 1.6rem;
-      }
-      .input-text {
-        font-size: 1.8rem;
-        font-weight: 400;
-        margin-bottom: 1.6rem;
-        padding: 1.6rem;
-        border: 1px solid #ccc;
-        border-radius: 0.4rem;
-        width: 100%;
-      }
-      .input-file {
-        font-size: 1.8rem;
-        font-weight: 400;
-        margin-bottom: 1.6rem;
-        border: 1px solid #ccc;
-        border-radius: 0.4rem;
-        width: 100%;
-      }
-      .btn {
-        font-size: 1.8rem;
-        font-weight: 400;
-        margin-bottom: 1.6rem;
-        padding: 1.6rem;
-        border: 1px solid #ccc;
-        border-radius: 0.4rem;
-        width: 100%;
-        background-color: #fff;
+      details {
         cursor: pointer;
-      }
-      .btn:hover,
-      .btn:focus {
-        background-color: #ccc;
-      }
-      .btn-green {
-        background-color: #4caf50;
-        color: #fff;
-      }
-      .btn-green:hover,
-      .btn-green:focus {
-        background-color: #43a047;
-      }
-      .input-file::file-selector-button {
-        font-size: 1.8rem;
-        font-weight: 400;
-        padding: 1.6rem;
-        border: 1px solid #ccc;
-        border-radius: 0.4rem;
-        /* background-color: #fff; */
-        cursor: pointer;
-        background-color: #2196f3;
-        color: #fff;
-      }
-      .input-file::file-selector-button:hover,
-      .input-file::file-selector-button:focus {
-        background-color: #1976d2;
-      }
-      .btn-red {
-        background-color: #f44336;
-        color: #fff;
-      }
-      .btn-red:hover,
-      .btn-red:focus {
-        background-color: #d32f2f;
       }
     </style>
   </head>
   <body>
     <h1 class="title-primary">Backup &amp; Restore Data (Unstable)</h1>
     <p class="title-description">
-      Backup file includes <strong>your theme preference</strong> and
-      <strong>saved countries.</strong> <br />
-      <strong>NOTE:</strong> This feature is still <strong>under development.</strong> It
-      can be changed or removed in the future. Please use this feature only if necessary.
+      This page allows you to backup and restore data from localStorage. This backup
+      contains the codes of the countries you have saved, your country listing and theme
+      preference. The backup feature may be changed or deleted in the future, so use it
+      only when necessary.
     </p>
-    <a class="link" href="/">Click here to go to home page</a>
+    <p>
+      (ex: when we upgraded parcel npm package from 2.8 to 2.9, the backup function
+      stopped working properly, so we made some changes to the backup feature behind the
+      scenes.)
+    </p>
+    <details>
+      <summary class="title-secondary">How to Backup Data</summary>
+      <p class="title-description">
+        Click the "Download Backup" link below to download a JSON file containing your
+        data. You can use this file to restore your data later from restore data section.
+      </p>
+    </details>
     <hr />
-    <h2 class="title-secondary">Backup Data</h2>
-    <input class="input-text" disabled type="text" />
-    <br />
-    <br />
-    <a class="btn btn-green" data-function="localStorageBackup">Download backup file</a>
-    <hr />
-    <h2 class="title-secondary">Restore Data</h2>
-    <input class="input-file fileinput" type="file" />
-    <hr />
-    <h2 class="title-secondary">Clear Data</h2>
-    <a class="btn btn-red" data-function="localStorageClear">Clear all data</a>
+
+    <script>
+      // Create a divider
+      const divider1 = document.createElement('hr');
+
+      // Get the data from localStorage
+      const dataToBackup = JSON.stringify(localStorage);
+
+      // Create a Blob with the JSON data
+      const blob = new Blob([dataToBackup], { type: 'application/json' });
+
+      // Create a download link
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = `countrypedia-backup_${Date.now()}.json`;
+      downloadLink.textContent = 'Download Backup';
+
+      // Append the link to the document
+      document.body.appendChild(downloadLink);
+
+      // Append a divider to the document
+      document.body.appendChild(divider1);
+
+      const fileInputLabel = document.createElement('label');
+      fileInputLabel.textContent = 'Restore Data: ';
+      document.body.appendChild(fileInputLabel);
+
+      const uploadInput = document.createElement('input');
+      uploadInput.type = 'file';
+      document.body.appendChild(uploadInput);
+
+      uploadInput.addEventListener('change', async event => {
+        const file = event.target.files[0];
+
+        if (file) {
+          try {
+            const content = await file.text();
+            const jsonData = JSON.parse(content);
+
+            // Clear existing data in localStorage
+            localStorage.clear();
+
+            // Restore data from the JSON object
+            for (const key in jsonData) {
+              localStorage.setItem(key, jsonData[key]);
+            }
+
+            alert('Data restored successfully!');
+          } catch (error) {
+            alert('Error restoring data. Please make sure the file is valid JSON.');
+          }
+        }
+      });
+
+      // Create a divider
+      const divider2 = document.createElement('hr');
+
+      // Append a divider to the document
+      document.body.appendChild(divider2);
+
+      // Create a button to clear localStorage
+      const clearButton = document.createElement('button');
+      clearButton.textContent = 'Clear Data';
+      document.body.appendChild(clearButton);
+
+      clearButton.addEventListener('click', () => {
+        if (window.confirm('Do you really want to delete all items of this website?')) {
+          localStorage.clear();
+          alert('All data in localStorage has been cleared.');
+        }
+      });
+
+      // Create a divider
+      const divider3 = document.createElement('hr');
+
+      // Append a divider to the document
+      document.body.appendChild(divider3);
+
+      // Add link to return home page
+      const homeLink = document.createElement('a');
+      homeLink.href = '/';
+      homeLink.textContent = 'Return to Home Page';
+      document.body.appendChild(homeLink);
+    </script>
   </body>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const buttons = document.querySelectorAll('a.btn');
-      for (i = 0; i < buttons.length; ++i) {
-        let button = buttons[i];
-        let functionName = button.getAttribute('data-function');
-        let functionBody = window[functionName].toString();
-        button.setAttribute('href', 'javascript:(' + functionBody + ')()');
-      }
-    });
-
-    let input = document.querySelector('input');
-    input.value = localStorage.getItem('data');
-
-    function localStorageBackup() {
-      const data = localStorage.getItem('data');
-      const base = btoa(data);
-      const href = 'data:text/javascript;charset=utf-8;base64,' + base;
-      const link = document.createElement('a');
-      link.setAttribute('download', `countrypedia-backup_${Date.now()}.json`);
-      link.setAttribute('href', href);
-      document.querySelector('body').appendChild(link);
-      link.click();
-      document.querySelector('body').removeChild(link);
-    }
-
-    document.querySelector('.fileinput').onchange = function (e) {
-      var f = e.target.files[0];
-      if (f) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          var text = e.target.result;
-          var backup = JSON.parse(text);
-          console.log(backup);
-          localStorage.setItem('data', JSON.stringify(backup));
-          alert('Imported ' + Object.keys(backup).length + ' items from backup.');
-        };
-        reader.readAsText(f);
-      } else {
-        alert('Failed to load file');
-      }
-    };
-
-    function localStorageClear() {
-      if (window.confirm('Do you really want to delete all items of this website?'))
-        localStorage.clear();
-    }
-  </script>
 </html>
