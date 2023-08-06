@@ -4,6 +4,47 @@
 
 This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, coat of arms, population, region of the country you selected. [Click here](https://countrypedia.app) for visit website.
 
+## To-do List
+
+You can preview the changes made in the development branch by [clicking here](https://dev.countrypedia.app). As the following todos are completed, the preview version will look more like the full release in the future.
+
+### 1st Priority (Must-do things)
+
+- [ ] Project must be initialized
+- [ ] Project structure must be created
+- [ ] Layout must be created
+- [ ] Routing structure should be created
+- [ ] The project must be responsive
+- [ ] Dark mode feature must be added
+- [ ] A home page with all countries must be created.
+- [ ] When countries are clicked, the details of the clicked country must appear.
+- [ ] Search filtering feature must be added to the project
+  - [ ] Instead of the country name, the capital of the country, currency, by region, etc. must be searchable
+  - [ ] The ordering of countries must be changeable.
+  - [ ] Pressing the Saved button must only show the saved countries.
+- [ ] When the Random button is pressed, the details of a random country must be displayed.
+- [ ] Data backup feature (local or cloud) must be added
+- [ ] Countries should be saved when the bookmark button is pressed
+- [ ] The map of the countries must be displayed in the details section.
+
+### 2nd Priority (Should-do things)
+
+- [ ] Details of any country should be shared with the link and the details should be displayed directly when the link is clicked.
+- [ ] Map page should be added
+- [ ] Saved countries should be shown with markers on the map
+- [ ] When you click on a certain place on the map, the details page of the country at the selected point should appear.
+- [ ] Stats page should be added
+- [ ] Preferences or settings page should be added
+- [ ] Theme feature (different color options) should be added
+- [ ] Data can be backed up on a cloud basis
+
+### 3rd Priority (Nice-to-do things)
+
+- [ ] It would be nice if the user could login.
+- [ ] It would be nice if users could share their stats.
+- [ ] It would be nice if the data was synced to the Countrypedia account.
+- [ ] It would be nice if it was possible to login with the OAuth method (ex: Google login method).
+
 ## Development
 
 The data of the countries' information is obtained from the [Rest Countries API](https://restcountries.com).
@@ -41,67 +82,3 @@ Some bugs I've discovered so far:
 So the point I want to focus on in v3 will be developability and user experience (UX) rather than design. I will use ChakraUI (probably) as design and write the project with React. As the project grows, it becomes harder to write and add/remove with VanillaJS (also error-prone), while React is quite flexible.
 
 From this point on I will not add any new features to v2, only bug fixes and package updates (Max until end of 2024). I will also add a new section to the README.md file for v3.
-
-**I will develop v3 on the development branch before fully releasing it. You can view it by** [clicking here](https://github.com/ubeydeozdmr/countrypedia/tree/dev).
-
-**You can also review the new README.md. When it reaches a certain stage, the preview link will be shared. Also the to-do list for v3 is shown in this file. [Click here](https://github.com/ubeydeozdmr/countrypedia/blob/dev/README.md) to review.**
-
-## Features
-
-### What's new in v2
-
-- Save the countries you want
-- Show a country randomly
-- Sort countries alphabetically or randomly
-- Search from countries list by capital, currency, language, region etc.
-- Map support for countries
-- Import and export your saved countries
-- Better animations and transitions
-- URL based navigation
-- GINI index on details page
-- Full country names on borders section instead of cca3 codes (details page)
-- Fix for direct calling code (details page)
-
-### Others
-
-- Dark theme support
-- Search from countries list by country name
-- Get information from the country card which you selected
-
-## Contents
-
-- Alt spellings
-- Border countries
-- Capital
-- Car driving direction
-- Coat of Arms
-- Continents
-- Currencies
-- Direct dialing code
-- Flag
-- GINI index
-- Independence status
-- Landlocked status
-- Languages
-- Location
-- Maps link
-- Population
-- Region
-- Start of week
-- Timezones
-- Top-level domain
-- United nations membership status
-
-## Extra Notes
-
-Countrypedia app may have bugs. For suggestions and corrections, you can make a merge request or open a new issue. You can edit this project, embed it and publish it yourself.
-
-## Screenshots
-
-| ![cp-overview-light-lg](./src/assets/screenshots/NestHubMax-overview-light.png) | ![cp-search-light-lg](./src/assets/screenshots/NestHubMax-search-light.png) | ![cp-details-light-lg](./src/assets/screenshots/NestHubMax-details-light.png) |
-| ------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| ![cp-overview-light-lg](./src/assets/screenshots/NestHubMax-overview-dark.png)  | ![cp-search-light-lg](./src/assets/screenshots/NestHubMax-search-dark.png)  | ![cp-details-light-lg](./src/assets/screenshots/NestHubMax-details-dark.png)  |
-
-|                                                                                  |                                                                              |                                                                                |                                                                                 |                                                                             |                                                                               |
-| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| ![cp-overview-light-lg](./src/assets/screenshots/iPhone12Pro-overview-light.png) | ![cp-search-light-lg](./src/assets/screenshots/iPhone12Pro-search-light.png) | ![cp-details-light-lg](./src/assets/screenshots/iPhone12Pro-details-light.png) | ![cp-overview-light-lg](./src/assets/screenshots/iPhone12Pro-overview-dark.png) | ![cp-search-light-lg](./src/assets/screenshots/iPhone12Pro-search-dark.png) | ![cp-details-light-lg](./src/assets/screenshots/iPhone12Pro-details-dark.png) |
