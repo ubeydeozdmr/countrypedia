@@ -10,26 +10,28 @@ You can preview the changes made in the development branch by [clicking here](ht
 
 ### 1st Priority (Must-do things)
 
+- Update for 08.03.2024: I did something for first three items, but I need to do more for them. I will focus on them in the next days.
+
 - [ ] Project must be initialized
 - [ ] Project structure must be created
 - [ ] Layout must be created
-- [ ] Routing structure should be created
+- [x] Routing structure should be created
 - [ ] The project must be responsive
-- [ ] Dark mode feature must be added
-- [ ] A home page with all countries must be created.
-- [ ] When countries are clicked, the details of the clicked country must appear.
+- [x] Dark mode feature must be added
+- [x] A home page with all countries must be created.
+- [x] When countries are clicked, the details of the clicked country must appear.
 - [ ] Search filtering feature must be added to the project
   - [ ] Instead of the country name, the capital of the country, currency, by region, etc. must be searchable
   - [ ] The ordering of countries must be changeable.
-  - [ ] Pressing the Saved button must only show the saved countries.
+  - [x] Pressing the Saved button must only show the saved countries.
 - [ ] When the Random button is pressed, the details of a random country must be displayed.
 - [ ] Data backup feature (local or cloud) must be added
-- [ ] Countries should be saved when the bookmark button is pressed
+- [x] Countries should be saved when the bookmark button is pressed
 - [ ] The map of the countries must be displayed in the details section.
 
 ### 2nd Priority (Should-do things)
 
-- [ ] Details of any country should be shared with the link and the details should be displayed directly when the link is clicked.
+- [x] Details of any country should be shared with the link and the details should be displayed directly when the link is clicked.
 - [ ] Map page should be added
 - [ ] Saved countries should be shown with markers on the map
 - [ ] When you click on a certain place on the map, the details page of the country at the selected point should appear.

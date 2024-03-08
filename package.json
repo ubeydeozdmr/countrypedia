@@ -1,15 +1,14 @@
 {
   "name": "countrypedia",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "An application where you can see all countries",
-  "default": "index.html",
+  "type": "module",
   "scripts": {
-    "start": "parcel index.html --cache-dir ./.cache/parcel",
-    "build": "parcel build index.html --cache-dir ./.cache/parcel --dist-dir ./dist",
-    "all": "npm run build && npm start"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-  "source": "index.html",
-  "browserslist": "> 1%",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubeydeozdmr/countrypedia.git"
@@ -25,8 +24,29 @@
     "url": "https://github.com/ubeydeozdmr/countrypedia/issues"
   },
   "homepage": "https://github.com/ubeydeozdmr/countrypedia#readme",
+  "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource-variable/plus-jakarta-sans": "^5.0.20",
+    "@fontsource/plus-jakarta-sans": "^5.0.19",
+    "framer-motion": "^11.0.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
+    "react-router-dom": "^6.22.2"
+  },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.9.3",
-    "parcel": "^2.9.3"
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
   }
 }
