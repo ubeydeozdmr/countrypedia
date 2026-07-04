@@ -11,13 +11,13 @@ class CountriesView extends View {
 
     data.forEach(item => {
       const cardContent = `
-        <hover cca3="${item.cca3}">
+        <hover country-code="${item.code}">
           <div class="list-card list-card--${this.theme}">
             <div class="list-card-img-frame">
-              <img class="list-card-img" src="${item.flags.svg}" alt="${item.name.common} flag">
+              <img class="list-card-img" src="${item.flag}" alt="${item.name} flag">
             </div>
             <div class="list-card-text">
-              <p>${item.name.common}</p>
+              <p>${item.name}</p>
             </div>
             <div class="list-card-save-icon"></div>
           </div>

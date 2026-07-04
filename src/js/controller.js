@@ -1,5 +1,10 @@
 import { ERROR_BAD_REQUEST, ERROR_NOT_FOUND } from './config';
-import { getData, state } from './model';
+import {
+  getAllCountries,
+  getCountriesByName,
+  getCountryByCode,
+  state,
+} from './model';
 import countriesView from './views/countriesView';
 import detailsView from './views/detailsView';
 import themesView from './views/themesView';
@@ -27,10 +32,11 @@ toggler.addEventListener('click', function () {
 });
 
 search.addEventListener('click', async function () {
-  if (input.value === '') return;
+  const query = input.value.trim();
+  if (query === '') return;
   // !
   statusView.renderSpinner();
-  const data = await getData(`name/${input.value}`);
+  const data = await getCountriesByName(query);
   if (data) countriesView.render(data);
   else statusView.renderError(errorHandler());
   countriesView.renderShowAll(input);
@@ -65,8 +71,8 @@ const listCardHandler = function () {
     View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
     document.querySelectorAll('.list-card').forEach((item) =>
       item.addEventListener('click', async function (e) {
-        const id = e.target.closest('hover').getAttribute('cca3');
-        const data = await getData(`alpha/${id}`);
+        const id = e.target.closest('hover').getAttribute('country-code');
+        const data = await getCountryByCode(id);
         if (data) detailsView.render(data);
         else statusView.renderError(errorHandler());
       })
@@ -87,7 +93,7 @@ const init = async function () {
     View.theme === 'day' ? themesView.setDayMode() : themesView.setNightMode();
   }
 
-  state.countries ? (data = state.countries) : (data = await getData('all'));
+  state.countries ? (data = state.countries) : (data = await getAllCountries());
 
   if (data) countriesView.render(data);
   else statusView.renderError(errorHandler());

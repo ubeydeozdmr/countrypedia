@@ -1,4 +1,19 @@
-export const API_ROUTE = 'https://restcountries.com/v3.1/';
+export const API_BASE_URL = 'https://countries.dev';
+
+export const API_ENDPOINTS = {
+  countries: 'countries',
+  name: 'name',
+  alpha: 'alpha',
+};
+
+export const COUNTRY_LIST_FIELDS = [
+  'name',
+  'alpha2Code',
+  'alpha3Code',
+  'flag',
+  'flags',
+].join(',');
+
 // prettier-ignore
 export const ERROR_NOT_FOUND = "&#9888 We couldn't find what you're looking for. Try another query.";
 // prettier-ignore

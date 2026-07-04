@@ -10,7 +10,7 @@ This web application shows you the list of many countries. You can not only see 
 
 ## Development
 
-This web application was created with [Rest Countries API](https://restcountries.com/).
+This web application has used to [REST Countries API](https://restcountries.com/) for getting the data of countries since early versions (2022-2026). But starting from mid 2026, the older API versions have been deprecated and now this web application uses [Country API](https://countries.dev/) for getting the data of countries.
 
 ## Features
 

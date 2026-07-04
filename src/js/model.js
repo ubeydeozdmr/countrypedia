@@ -1,21 +1,85 @@
-import { API_ROUTE } from './config';
+import { API_BASE_URL, API_ENDPOINTS, COUNTRY_LIST_FIELDS } from './config';
 
 export const state = {
   status: undefined,
   countries: undefined,
 };
 
-export const getData = async function (keyword) {
+const formatCountry = function (country) {
+  return {
+    altSpellings: country.altSpellings || [],
+    borders: country.borders || [],
+    capital: country.capital || '',
+    carDirection: country.car?.side || '',
+    code: country.alpha3Code || country.alpha2Code || country.numericCode,
+    coatOfArms: country.coatOfArms?.svg || '',
+    continents: country.continents || [],
+    currencies: country.currencies || [],
+    dialingCodes: country.callingCodes || [],
+    flag: country.flags?.svg || country.flag || country.flags?.png || '',
+    independent: country.independent,
+    landlocked: country.landlocked,
+    languages: country.languages || [],
+    location: country.latlng || [],
+    maps: {
+      google: country.maps?.googleMaps || '',
+      openStreetMaps: country.maps?.openStreetMaps || '',
+    },
+    name: country.name || country.nativeName || 'Unknown country',
+    population: country.population,
+    region: country.region || '',
+    startOfWeek: country.startOfWeek || '',
+    subregion: country.subregion || '',
+    timezones: country.timezones || [],
+    topLevelDomain: country.topLevelDomain || [],
+    unMember: country.unMember,
+  };
+};
+
+const normalizeResponse = function (data) {
+  if (Array.isArray(data)) return data.map(formatCountry);
+  return formatCountry(data);
+};
+
+const buildUrl = function (endpoint, params = {}) {
+  const url = new URL(`${API_BASE_URL}/${endpoint}`);
+  Object.entries(params).forEach(([key, value]) => {
+    url.searchParams.set(key, value);
+  });
+  return url;
+};
+
+const getData = async function (endpoint, params) {
   try {
-    const res = await fetch(API_ROUTE + keyword);
+    const res = await fetch(buildUrl(endpoint, params));
     state.status = res.status;
     if (!res.ok) return;
     const data = await res.json();
-    if (!state.countries) state.countries = data;
-    return data;
+    return normalizeResponse(data);
   } catch (err) {
     console.error(err);
     state.status = err.message;
-    console.log(state.status); // Failed to fetch
   }
+};
+
+export const getAllCountries = async function () {
+  if (state.countries) return state.countries;
+
+  state.countries = await getData(API_ENDPOINTS.countries, {
+    fields: COUNTRY_LIST_FIELDS,
+  });
+
+  return state.countries;
+};
+
+export const getCountriesByName = async function (name) {
+  return await getData(`${API_ENDPOINTS.name}/${encodeURIComponent(name)}`, {
+    fields: COUNTRY_LIST_FIELDS,
+  });
+};
+
+export const getCountryByCode = async function (code) {
+  return await getData(`${API_ENDPOINTS.alpha}/${encodeURIComponent(code)}`, {
+    full: true,
+  });
 };
