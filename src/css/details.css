@@ -65,6 +65,11 @@
   color: #555555;
 }
 
+.details-flag-emoji {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
 .details-img {
   height: 12rem;
   margin-top: 0.4rem;
@@ -74,6 +79,19 @@
 
 .details-group {
   padding: 0.8rem 2.4rem;
+}
+
+.details-support-note {
+  grid-column: 1 / -1;
+  padding: 1rem 2.4rem;
+  border-top: 1px solid #aaaaaa;
+  font-size: 0.8rem;
+  color: #555555;
+}
+
+.details-support-note-link {
+  color: #333333;
+  font-weight: 600;
 }
 
 .details-map-link {

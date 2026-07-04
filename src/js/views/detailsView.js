@@ -6,25 +6,28 @@ class DetailsView extends View {
   #details = document.querySelector('.details');
   #detailsFlag = document.querySelector('.details-flag');
   #detailsAltSpellings = document.querySelector('.details-alt-spellings');
+  #detailsArea = document.querySelector('.details-area');
   #detailsBorders = document.querySelector('.details-borders');
   #detailsCapital = document.querySelector('.details-capital');
-  #detailsCarDirection = document.querySelector('.details-car-direction');
-  #detailsCoatOfArms = document.querySelector('.details-coat-of-arms');
-  #detailsContinents = document.querySelector('.details-continents');
+  #detailsCioc = document.querySelector('.details-cioc');
+  #detailsCodes = document.querySelector('.details-codes');
   #detailsCurrencies = document.querySelector('.details-currencies');
+  #detailsDemonym = document.querySelector('.details-demonym');
+  #detailsFlagEmoji = document.querySelector('.details-flag-emoji');
+  #detailsGini = document.querySelector('.details-gini');
   #detailsIdd = document.querySelector('.details-idd');
   #detailsIndependent = document.querySelector('.details-independent');
-  #detailsLandlocked = document.querySelector('.details-landlocked');
   #detailsLanguages = document.querySelector('.details-languages');
   #detailsLocation = document.querySelector('.details-location');
   #detailsMapsGoogle = document.querySelector('.details-map-link--google');
   #detailsMapsOpenSt = document.querySelector('.details-map-link--openst');
+  #detailsNativeName = document.querySelector('.details-native-name');
   #detailsPopulation = document.querySelector('.details-population');
+  #detailsPopulationDensity = document.querySelector('.details-population-density');
   #detailsRegion = document.querySelector('.details-region');
-  #detailsStartOfWeek = document.querySelector('.details-start-of-week');
+  #detailsRegionalBlocs = document.querySelector('.details-regional-blocs');
   #detailsTimezones = document.querySelector('.details-timezones');
   #detailsTld = document.querySelector('.details-top-level-domain');
-  #detailsUnMember = document.querySelector('.details-un-member');
 
   #formatList(data, fallback = 'No data') {
     if (!data?.length) return fallback;
@@ -56,9 +59,41 @@ class DetailsView extends View {
     return data.map(code => `+${code}`).join(', ');
   }
 
-  #formatPopulation(data) {
-    if (!data) return 'No data';
+  #formatNumber(data) {
+    if (data === undefined || data === null) return 'No data';
     return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
+
+  #formatArea(data) {
+    if (data === undefined || data === null) return 'No data';
+    return `${this.#formatNumber(data)} sq km`;
+  }
+
+  #formatDensity(data) {
+    if (data === undefined || data === null) return 'No data';
+    return `${data} people / sq km`;
+  }
+
+  #formatGini(data) {
+    if (data === undefined || data === null) return 'No data';
+    return data.toString();
+  }
+
+  #formatCodes(data) {
+    const codes = [
+      data.alpha2 && `Alpha-2: ${data.alpha2}`,
+      data.alpha3 && `Alpha-3: ${data.alpha3}`,
+      data.numeric && `Numeric: ${data.numeric}`,
+    ].filter(Boolean);
+
+    return this.#formatList(codes);
+  }
+
+  #formatRegionalBlocs(data) {
+    if (!data?.length) return 'No data';
+    return data
+      .map(bloc => `${bloc.name}${bloc.acronym ? ` (${bloc.acronym})` : ''}`)
+      .join(', ');
   }
 
   #renderImage(element, src, alt) {
@@ -79,49 +114,58 @@ class DetailsView extends View {
     this.#details.style.display = 'grid';
 
     this.#renderImage(this.#detailsFlag, data.flag, `${data.name} flag`);
-    this.#renderImage(this.#detailsCoatOfArms, data.coatOfArms, `${data.name} arms`);
     insert(this.#detailsAltSpellings, this.#formatList(data.altSpellings));
+    insert(this.#detailsArea, this.#formatArea(data.area));
     insert(this.#detailsBorders, this.#formatList(data.borders, 'No borders'));
     insert(this.#detailsCapital, data.capital || 'No data');
-    insert(this.#detailsCarDirection, this.#formatTitleCase(data.carDirection));
-    insert(this.#detailsContinents, this.#formatList(data.continents));
+    insert(this.#detailsCioc, data.cioc || 'No data');
+    insert(this.#detailsCodes, this.#formatCodes(data.codes));
     insert(this.#detailsCurrencies, this.#formatCurrencies(data.currencies));
+    insert(this.#detailsDemonym, data.demonym || 'No data');
+    insert(this.#detailsFlagEmoji, data.flagEmoji || 'No data');
+    insert(this.#detailsGini, this.#formatGini(data.gini));
     insert(this.#detailsIdd, this.#formatDialingCodes(data.dialingCodes));
     insert(this.#detailsIndependent, this.#formatBoolean(data.independent));
-    insert(this.#detailsLandlocked, this.#formatBoolean(data.landlocked));
     insert(this.#detailsLanguages, this.#formatLanguages(data.languages));
     insert(this.#detailsLocation, this.#formatList(data.location));
-    insert(this.#detailsPopulation, this.#formatPopulation(data.population));
+    insert(this.#detailsNativeName, data.nativeName || 'No data');
+    insert(this.#detailsPopulation, this.#formatNumber(data.population));
+    insert(
+      this.#detailsPopulationDensity,
+      this.#formatDensity(data.populationDensity)
+    );
     insert(this.#detailsRegion, `${data.region || 'No data'} / ${data.subregion || '?'}`);
-    insert(this.#detailsStartOfWeek, this.#formatTitleCase(data.startOfWeek));
+    insert(this.#detailsRegionalBlocs, this.#formatRegionalBlocs(data.regionalBlocs));
     insert(this.#detailsTimezones, this.#formatList(data.timezones));
     insert(this.#detailsTld, this.#formatList(data.topLevelDomain));
-    insert(this.#detailsUnMember, this.#formatBoolean(data.unMember));
     this.#setMapLink(this.#detailsMapsGoogle, data.maps.google);
     this.#setMapLink(this.#detailsMapsOpenSt, data.maps.openStreetMaps);
   }
 
   hide() {
     this.#detailsFlag.removeChild(this.#detailsFlag.lastChild);
-    this.#detailsCoatOfArms.removeChild(this.#detailsCoatOfArms.lastChild);
     [
       this.#detailsAltSpellings,
+      this.#detailsArea,
       this.#detailsBorders,
       this.#detailsCapital,
-      this.#detailsCarDirection,
-      this.#detailsContinents,
+      this.#detailsCioc,
+      this.#detailsCodes,
       this.#detailsCurrencies,
+      this.#detailsDemonym,
+      this.#detailsFlagEmoji,
+      this.#detailsGini,
       this.#detailsIdd,
       this.#detailsIndependent,
-      this.#detailsLandlocked,
       this.#detailsLanguages,
       this.#detailsLocation,
+      this.#detailsNativeName,
       this.#detailsPopulation,
+      this.#detailsPopulationDensity,
       this.#detailsRegion,
-      this.#detailsStartOfWeek,
+      this.#detailsRegionalBlocs,
       this.#detailsTimezones,
       this.#detailsTld,
-      this.#detailsUnMember,
     ].forEach(domItem => clear(domItem));
 
     this.#details.style.display = 'none';

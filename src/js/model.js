@@ -8,17 +8,23 @@ export const state = {
 const formatCountry = function (country) {
   return {
     altSpellings: country.altSpellings || [],
+    area: country.area,
     borders: country.borders || [],
     capital: country.capital || '',
-    carDirection: country.car?.side || '',
+    cioc: country.cioc || '',
     code: country.alpha3Code || country.alpha2Code || country.numericCode,
-    coatOfArms: country.coatOfArms?.svg || '',
-    continents: country.continents || [],
+    codes: {
+      alpha2: country.alpha2Code || '',
+      alpha3: country.alpha3Code || '',
+      numeric: country.numericCode || '',
+    },
     currencies: country.currencies || [],
+    demonym: country.demonym || '',
     dialingCodes: country.callingCodes || [],
     flag: country.flags?.svg || country.flag || country.flags?.png || '',
+    flagEmoji: country.flag || '',
+    gini: country.gini,
     independent: country.independent,
-    landlocked: country.landlocked,
     languages: country.languages || [],
     location: country.latlng || [],
     maps: {
@@ -26,13 +32,14 @@ const formatCountry = function (country) {
       openStreetMaps: country.maps?.openStreetMaps || '',
     },
     name: country.name || country.nativeName || 'Unknown country',
+    nativeName: country.nativeName || '',
     population: country.population,
+    populationDensity: country.populationDensity,
+    regionalBlocs: country.regionalBlocs || [],
     region: country.region || '',
-    startOfWeek: country.startOfWeek || '',
     subregion: country.subregion || '',
     timezones: country.timezones || [],
     topLevelDomain: country.topLevelDomain || [],
-    unMember: country.unMember,
   };
 };
 

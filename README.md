@@ -6,7 +6,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3942ad82-ee34-40dd-8abc-4e586e4e6039/deploy-status)](https://app.netlify.com/sites/simplecountrypedia/deploys)
 
-This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, coat of arms, population, region of the country you selected. [Click here](https://v1.countrypedia.app) for visit website.
+This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, native name, population, and region of the country you selected. [Click here](https://v1.countrypedia.app) for visit website.
 
 ## Development
 
@@ -21,25 +21,27 @@ This web application has used to [REST Countries API](https://restcountries.com/
 ## Contents
 
 - Alt spellings
+- Area
 - Border countries
 - Capital
-- Car driving direction
-- Coat of Arms
-- Continents
+- Country codes
 - Currencies
+- Demonym
 - Direct dialing code
+- Flag emoji
 - Flag
+- Gini index
 - Independence status
-- Landlocked status
 - Languages
 - Location
 - Maps link
+- Native name
 - Population
+- Population density
 - Region
-- Start of week
+- Regional blocs
 - Timezones
 - Top-level domain
-- United nations membership status
 
 ## Extra Notes
 
