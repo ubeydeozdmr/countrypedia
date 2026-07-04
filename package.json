@@ -1,6 +1,6 @@
 {
   "name": "countrypedia",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "An application where you can see all countries",
   "default": "index.html",
   "scripts": {
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/ubeydeozdmr/countrypedia#readme",
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.9.3",
-    "parcel": "^2.9.3"
+    "@parcel/transformer-sass": "^2.16.4",
+    "parcel": "^2.16.4"
   }
 }
