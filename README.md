@@ -12,6 +12,10 @@ This web application shows you the list of many countries. You can not only see 
 
 This web application has used to [REST Countries API](https://restcountries.com/) for getting the data of countries since early versions (2022-2026). But starting from mid 2026, the older API versions have been deprecated and now this web application uses [Country API](https://countries.dev/) for getting the data of countries.
 
+### Control of the data
+
+**IMPORTANT:** Please note that this web application uses the Country API for fetching country data, this means that the data exists in the Countrypedia web application depends on the Country API. That's why if some data is missing or incorrect, it may be due to the Country API. In this case, I have no control over the data, and I cannot fix it. If you want to report a problem with the data, you can contact the Country API team.
+
 ## Features
 
 - Dark theme support
