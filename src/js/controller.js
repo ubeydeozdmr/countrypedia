@@ -55,6 +55,9 @@ document.querySelector('#searchby').addEventListener('change', function () {
     case 'demonym':
       input.placeholder = 'Search by demonym (eg: french)';
       break;
+    case 'ip':
+      input.placeholder = 'Search by IP address (eg: 8.8.8.8)';
+      break;
     case 'lang':
       input.placeholder = 'Search by language (eg: english)';
       break;
@@ -185,7 +188,7 @@ const searchHandler = async function () {
   // 2) If not empty, render spinner before fetch operation
   viewObj.renderSpinner('main');
 
-  if (searchby.options.selectedIndex === 2)
+  if (searchby.options.selectedIndex === 3)
     state.cache.lastSearch = searchTrimHandler(state.cache.lastSearch);
 
   saveSwitch.checked = false;
@@ -244,7 +247,7 @@ document.querySelector('.details__exit').addEventListener('click', function () {
   window.location.hash = state.cache.url.old;
 });
 
-const randomCountryHandler = function () {
+const randomCountryHandler = async function () {
   try {
     // 1) Render spinner before operation
     detailsView.renderPre();
@@ -252,8 +255,8 @@ const randomCountryHandler = function () {
     // 1) Get random number
     const random = Math.floor(Math.random() * state.cache.countries.length);
 
-    // 2) Get random country from random number
-    state.cache.currentCountry = [state.cache.countries[random]];
+    // 2) Get random country details from random number
+    await getCountry(state.cache.countries[random].cca3);
 
     // 3) Check if country exists
     if (!state.cache.currentCountry) return viewObj.renderError(state.cache.status);
@@ -261,7 +264,7 @@ const randomCountryHandler = function () {
     // 4) Render country details
     detailsView.render(
       state.cache.currentCountry,
-      !!state.data.saved.find(cca3 => cca3 === location.hash.slice(-3)),
+      !!state.data.saved.find(cca3 => cca3 === state.cache.currentCountry[0].cca3),
       state.data.theme,
     );
   } catch (err) {

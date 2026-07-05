@@ -2,11 +2,11 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3942ad82-ee34-40dd-8abc-4e586e4e6039/deploy-status)](https://app.netlify.com/sites/simplecountrypedia/deploys)
 
-This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, coat of arms, population, region of the country you selected. [Click here](https://countrypedia.app) for visit website.
+This web application shows you the list of many countries. You can not only see the list of countries, but also search for countries, get information such as the flag, native name, population, and region of the country you selected. [Click here](https://countrypedia.app) for visit website.
 
 ## Development
 
-The data of the countries' information is obtained from the [Rest Countries API](https://restcountries.com).
+The data of the countries' information was obtained from the [Rest Countries API](https://restcountries.com) in earlier versions. It now uses [countries.dev](https://countries.dev).
 Map feature added, thanks to [Leaflet](https://leafletjs.com).
 
 For running Countrypedia on your local machine, you need to install [Node.js](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com) (or [npm](https://www.npmjs.com)).
@@ -23,6 +23,10 @@ npm install
 # Run the project
 npm start
 ```
+
+### Control of the data
+
+**IMPORTANT:** Please note that this web application uses the Country API for fetching country data, this means that the data exists in the Countrypedia web application depends on the Country API. That's why if some data is missing or incorrect, it may be due to the Country API. In this case, I have no control over the data, and I cannot fix it. If you want to report a problem with the data, you can contact the Country API team.
 
 ## Working on V3
 
@@ -54,6 +58,7 @@ From this point on I will not add any new features to v2, only bug fixes and pac
 - Show a country randomly
 - Sort countries alphabetically or randomly
 - Search from countries list by capital, currency, language, region etc.
+- Search country by IP address
 - Map support for countries
 - Import and export your saved countries
 - Better animations and transitions
@@ -71,26 +76,27 @@ From this point on I will not add any new features to v2, only bug fixes and pac
 ## Contents
 
 - Alt spellings
+- Area
 - Border countries
 - Capital
-- Car driving direction
-- Coat of Arms
-- Continents
 - Currencies
+- Country codes
+- Demonym
 - Direct dialing code
 - Flag
+- Flag emoji
 - GINI index
 - Independence status
-- Landlocked status
 - Languages
 - Location
 - Maps link
+- Native name
 - Population
+- Population density
 - Region
-- Start of week
+- Regional blocs
 - Timezones
 - Top-level domain
-- United nations membership status
 
 ## Extra Notes
 

@@ -54,6 +54,38 @@ class DetailsView extends View {
     this.details.classList.remove('hidden');
   }
 
+  #formatNumber(data) {
+    if (data === undefined || data === null) return 'No data';
+    return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
+
+  #formatArea(data) {
+    if (data === undefined || data === null) return 'No data';
+    return `${this.#formatNumber(data)} km2`;
+  }
+
+  #formatDensity(data) {
+    if (data === undefined || data === null) return 'No data';
+    return `${data} people / km2`;
+  }
+
+  #formatCodes(data) {
+    return [
+      data.cca2 && `Alpha-2: ${data.cca2}`,
+      data.cca3 && `Alpha-3: ${data.cca3}`,
+      data.numericCode && `Numeric: ${data.numericCode}`,
+    ]
+      .filter(Boolean)
+      .join(', ');
+  }
+
+  #formatRegionalBlocs(data) {
+    if (!data?.length) return 'No data';
+    return data
+      .map(bloc => `${bloc.name}${bloc.acronym ? ` (${bloc.acronym})` : ''}`)
+      .join(', ');
+  }
+
   render(data, isSaved, theme) {
     this.#buttonHoverHandler('#eeeeee', 'transparent', 'none');
     data = data[0];
@@ -66,17 +98,19 @@ class DetailsView extends View {
       this.unsaveIcon.classList.add('disabled');
     }
 
+    const currencyValues = Object.values(data.currencies || {});
+    const languageValues = Object.values(data.languages || {});
     let currencies = '';
     let languages = '';
 
-    if (data.currencies)
-      Object.values(data.currencies).forEach(cur => {
+    if (currencyValues.length > 0)
+      currencyValues.forEach(cur => {
         currencies += `${cur.name} (${cur.symbol || '?'}), `;
       });
     else currencies = 'No data  ';
 
-    if (data.languages)
-      Object.values(data.languages).forEach(lang => {
+    if (languageValues.length > 0)
+      languageValues.forEach(lang => {
         languages += `${lang}, `;
       });
     else languages = 'No data  ';
@@ -87,59 +121,54 @@ class DetailsView extends View {
       data.flags.alt || data.demonyms?.eng?.m + ' flag'
     }" />
     </div>
-    <div class="details__arms">
-      ${
-        data.coatOfArms.svg
-          ? `<img src=${data.coatOfArms.svg} alt="${data.demonyms?.eng?.m} coat of arms" />`
-          : 'No coat of arms'
-      }
-    </div>
     <div class="details__list">
       <div class="details__list-item details__list-item--${theme}">
         <p>Alt Spellings:</p>
         <span>${data.name.common + ', ' + data.altSpellings.join(', ')}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
+        <p>Area:</p>
+        <span>${this.#formatArea(data.area)}</span>
+      </div>
+      <div class="details__list-item details__list-item--${theme}">
         <p>Borders:</p>
-        <span>${data.borders ? data.borders.join(', ') : 'No borders'}</span>
+        <span>${data.borders?.length ? data.borders.join(', ') : 'No borders'}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
         <p>Capital:</p>
         <span>${data.capital?.join(', ') || 'No data'}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
-        <p>Car Driving Direction:</p>
-        <span>${data.car.side.toString()[0].toUpperCase() + data.car.side.slice(1)}</span>
-      </div>
-      <div class="details__list-item details__list-item--${theme}">
-        <p>Continents:</p>
-        <span>${data.continents.join(', ')}</span>
+        <p>Country Codes:</p>
+        <span>${this.#formatCodes(data) || 'No data'}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
         <p>Currencies:</p>
         <span>${currencies.slice(0, currencies.length - 2)}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
-        <p>Direct Dialing Code:</p>
-        <span>${
-          data.cca3 === 'USA'
-            ? '+1'
-            : data.cca3 === 'ATA' || data.cca3 === 'HMD'
-            ? 'No data'
-            : data.idd.root + data.idd.suffixes[0]
-        }</span>
+        <p>Demonym:</p>
+        <span>${data.demonym || 'No data'}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
-        <p>GINI${data.gini ? `(${Object.keys(data.gini)[0]})` : ''}:</p>
-        <span>${data.gini ? Object.values(data.gini)[0] : 'No data'}</span>
+        <p>Direct Dialing Code:</p>
+        <span>${data.idd.suffixes?.length ? data.idd.suffixes.map(code => `${data.idd.root}${code}`).join(', ') : 'No data'}</span>
+      </div>
+      <div class="details__list-item details__list-item--${theme}">
+        <p>Flag Emoji:</p>
+        <span>${data.flag || 'No data'}</span>
+      </div>
+      <div class="details__list-item details__list-item--${theme}">
+        <p>GINI:</p>
+        <span>${data.gini ?? 'No data'}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
         <p>Independent:</p>
         <span>${data.independent ? 'Yes' : 'No'}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
-        <p>Landlocked:</p>
-        <span>${data.landlocked ? 'Yes' : 'No'}</span>
+        <p>Native Name:</p>
+        <span>${data.nativeName || 'No data'}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
         <p>Languages:</p>
@@ -151,17 +180,19 @@ class DetailsView extends View {
       </div>
       <div class="details__list-item details__list-item--${theme}">
         <p>Population:</p>
-        <span>${data.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</span>
+        <span>${this.#formatNumber(data.population)}</span>
+      </div>
+      <div class="details__list-item details__list-item--${theme}">
+        <p>Population Density:</p>
+        <span>${this.#formatDensity(data.populationDensity)}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
         <p>Region:</p>
         <span>${data.region} / ${data.subregion || '?'}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
-        <p>Start of Week:</p>
-        <span>${
-          data.startOfWeek[0].toUpperCase() + data.startOfWeek.toString().slice(1)
-        }</span>
+        <p>Regional Blocs:</p>
+        <span>${this.#formatRegionalBlocs(data.regionalBlocs)}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
         <p>Timezones:</p>
@@ -172,8 +203,21 @@ class DetailsView extends View {
         <span>${data.tld?.join(', ') || 'No data'}</span>
       </div>
       <div class="details__list-item details__list-item--${theme}">
-        <p>United Nations Member:</p>
-        <span>${data.unMember ? 'Yes' : 'No'}</span>
+        <p>Olympic Code:</p>
+        <span>${data.cioc || 'No data'}</span>
+      </div>
+      <div class="details__note details__note--${theme}">
+        <p>
+          Car driving direction, coat of arms, continents, landlocked status,
+          start of week, and United Nations membership are no longer supported.
+          <a target="_blank" rel="noopener noreferrer" href="https://countries.dev/blog/alternative-to-restcountries">Here's why.</a>
+        </p>
+        <p>
+          The data you see in the Countrypedia web application comes from the
+          <a target="_blank" rel="noopener noreferrer" href="https://countries.dev/">countries.dev</a>
+          API. If the information you see here is not up-to-date or you think
+          there are any inaccuracies, you should contact the API provider team.
+        </p>
       </div>
     </div>
 `;
