@@ -24,6 +24,10 @@ npm install
 npm start
 ```
 
+### Control of the data
+
+**IMPORTANT:** Please note that this web application uses the Country API for fetching country data, this means that the data exists in the Countrypedia web application depends on the Country API. That's why if some data is missing or incorrect, it may be due to the Country API. In this case, I have no control over the data, and I cannot fix it. If you want to report a problem with the data, you can contact the Country API team.
+
 ## Working on V3
 
 As I stated on [my website](https://ubeydeozdmr.github.io/),
