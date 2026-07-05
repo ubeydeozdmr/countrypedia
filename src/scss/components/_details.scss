@@ -225,6 +225,29 @@
       }
     }
   }
+
+  &__note {
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    border-left: 3px solid $color-gray-4;
+    color: $color-gray-7;
+    font-size: $font-small;
+    line-height: 1.5;
+
+    &--dark {
+      border-left-color: $color-gray-6;
+      color: $color-gray-2;
+    }
+
+    & p + p {
+      margin-top: 0.8rem;
+    }
+
+    & a {
+      font-weight: 700;
+      text-decoration: underline;
+    }
+  }
 }
 
 .map {

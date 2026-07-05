@@ -206,6 +206,19 @@ class DetailsView extends View {
         <p>Olympic Code:</p>
         <span>${data.cioc || 'No data'}</span>
       </div>
+      <div class="details__note details__note--${theme}">
+        <p>
+          Car driving direction, coat of arms, continents, landlocked status,
+          start of week, and United Nations membership are no longer supported.
+          <a target="_blank" rel="noopener noreferrer" href="https://countries.dev/blog/alternative-to-restcountries">Here's why.</a>
+        </p>
+        <p>
+          The data you see in the Countrypedia web application comes from the
+          <a target="_blank" rel="noopener noreferrer" href="https://countries.dev/">countries.dev</a>
+          API. If the information you see here is not up-to-date or you think
+          there are any inaccuracies, you should contact the API provider team.
+        </p>
+      </div>
     </div>
 `;
 
