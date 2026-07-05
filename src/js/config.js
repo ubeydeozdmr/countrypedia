@@ -6,6 +6,7 @@ export const API_ENDPOINTS = {
   capital: 'capital',
   currency: 'currency',
   demonym: 'demonym',
+  ip: 'ip',
   language: 'lang',
   name: 'name',
   region: 'region',

@@ -55,6 +55,9 @@ document.querySelector('#searchby').addEventListener('change', function () {
     case 'demonym':
       input.placeholder = 'Search by demonym (eg: french)';
       break;
+    case 'ip':
+      input.placeholder = 'Search by IP address (eg: 8.8.8.8)';
+      break;
     case 'lang':
       input.placeholder = 'Search by language (eg: english)';
       break;

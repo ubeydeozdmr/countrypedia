@@ -54,6 +54,7 @@ From this point on I will not add any new features to v2, only bug fixes and pac
 - Show a country randomly
 - Sort countries alphabetically or randomly
 - Search from countries list by capital, currency, language, region etc.
+- Search country by IP address
 - Map support for countries
 - Import and export your saved countries
 - Better animations and transitions

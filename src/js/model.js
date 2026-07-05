@@ -111,6 +111,7 @@ const formatCountry = function (country) {
 
 const formatCountries = function (countries) {
   if (!countries) return null;
+  if (countries.country) return [formatCountry(countries.country)];
   return Array.isArray(countries)
     ? countries.map(formatCountry)
     : [formatCountry(countries)];
@@ -335,6 +336,11 @@ export const getSearchResults = async function (query, selectedIndex) {
         break;
       case 10:
         countries = await findCountriesByTranslation(query);
+        break;
+      case 11:
+        countries = await fetchCountries(
+          `${API_ENDPOINTS.ip}/${encodeURIComponent(decodeURI(query))}`,
+        );
         break;
       default:
         countries = await fetchCountries(
