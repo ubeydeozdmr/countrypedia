@@ -1,15 +1,7 @@
 import {
-  API_ROUTE_ALL,
-  API_ROUTE_CAPITAL,
-  API_ROUTE_CODE,
-  API_ROUTE_CODELIST,
-  API_ROUTE_CURRENCY,
-  API_ROUTE_DEMONYM,
-  API_ROUTE_LANG,
-  API_ROUTE_NAME,
-  API_ROUTE_REGION,
-  API_ROUTE_SUBREGION,
-  API_ROUTE_TRANSLATION,
+  API_BASE_URL,
+  API_ENDPOINTS,
+  API_OVERVIEW_FIELDS,
 } from './config';
 
 export const state = {
@@ -33,6 +25,179 @@ export const state = {
 export const urlSwitcher = function (hash) {
   state.cache.url.old = state.cache.url.new;
   state.cache.url.new = hash;
+};
+
+const buildUrl = function (endpoint, params = {}) {
+  const url = new URL(`${API_BASE_URL}/${endpoint}`);
+  Object.entries(params).forEach(([key, value]) => {
+    url.searchParams.set(key, value);
+  });
+  return url;
+};
+
+const fetchJson = async function (endpoint, params) {
+  const res = await fetch(buildUrl(endpoint, params));
+  state.cache.status = res.status;
+  if (!res.ok) return null;
+  return await res.json();
+};
+
+const formatCountry = function (country) {
+  const commonName = country.name || country.nativeName || 'Unknown country';
+  const alpha3Code = country.alpha3Code || country.cca3 || country.cioc || '';
+  const alpha2Code = country.alpha2Code || country.cca2 || '';
+  const callingCodes = country.callingCodes || [];
+
+  return {
+    area: country.area,
+    altSpellings: country.altSpellings || [],
+    borders: country.borders || [],
+    capital: country.capital ? [country.capital] : [],
+    capitalInfo: {
+      latlng: country.capitalInfo?.latlng || country.latlng || null,
+    },
+    cca2: alpha2Code,
+    cca3: alpha3Code,
+    cioc: country.cioc || '',
+    currencies: (country.currencies || []).reduce((currencies, cur) => {
+      currencies[cur.code || cur.name] = cur;
+      return currencies;
+    }, {}),
+    demonym: country.demonym || '',
+    demonyms: {
+      eng: {
+        f: country.demonym || '',
+        m: country.demonym || '',
+      },
+    },
+    flag: country.flag || '',
+    flags: {
+      alt: `${commonName} flag`,
+      png: country.flags?.png || '',
+      svg: country.flags?.svg || country.flag || country.flags?.png || '',
+    },
+    gini: country.gini,
+    idd: {
+      root: '+',
+      suffixes: callingCodes,
+    },
+    independent: country.independent,
+    languages: (country.languages || []).reduce((languages, lang) => {
+      languages[lang.iso639_1 || lang.iso639_2 || lang.name] = lang.name;
+      return languages;
+    }, {}),
+    latlng: country.latlng || [],
+    maps: {
+      googleMaps: country.maps?.googleMaps || '',
+      openStreetMaps: country.maps?.openStreetMaps || '',
+    },
+    name: {
+      common: commonName,
+      official: commonName,
+      nativeName: country.nativeName || '',
+    },
+    nativeName: country.nativeName || '',
+    numericCode: country.numericCode || '',
+    population: country.population,
+    populationDensity: country.populationDensity,
+    region: country.region || '',
+    regionalBlocs: country.regionalBlocs || [],
+    subregion: country.subregion || '',
+    timezones: country.timezones || [],
+    tld: country.topLevelDomain || [],
+    translations: country.translations || {},
+  };
+};
+
+const formatCountries = function (countries) {
+  if (!countries) return null;
+  return Array.isArray(countries)
+    ? countries.map(formatCountry)
+    : [formatCountry(countries)];
+};
+
+const sortCountries = function (countries) {
+  countries.sort((a, b) => {
+    if (a.name.common < b.name.common) return -1;
+    if (a.name.common > b.name.common) return 1;
+    return 0;
+  });
+};
+
+const cacheCountries = function (countries, cacheKey, alphabeticalCacheKey) {
+  state.cache[cacheKey] = countries;
+  state.cache[alphabeticalCacheKey] = [...countries];
+  sortCountries(state.cache[alphabeticalCacheKey]);
+};
+
+const fetchCountries = async function (endpoint, params) {
+  return formatCountries(await fetchJson(endpoint, params));
+};
+
+const getCountriesByCodes = async function (codes) {
+  const codeList = decodeURI(codes)
+    .split(',')
+    .map(code => code.trim())
+    .filter(Boolean);
+
+  const countries = await Promise.all(
+    codeList.map(async code => {
+      const data = await fetchJson(`${API_ENDPOINTS.alpha}/${encodeURIComponent(code)}`, {
+        full: true,
+      });
+      return data ? formatCountry(data) : null;
+    }),
+  );
+
+  const filteredCountries = countries.filter(Boolean);
+  state.cache.status = filteredCountries.length > 0 ? 200 : 404;
+  return filteredCountries.length > 0 ? filteredCountries : null;
+};
+
+const findCountriesByLanguage = async function (query) {
+  await getAllCountries();
+  if (!state.cache.countries) return null;
+  const normalizedQuery = decodeURI(query).toLowerCase();
+  const countries = state.cache.countries.filter(country =>
+    Object.entries(country.languages).some(
+      ([code, name]) =>
+        code.toLowerCase() === normalizedQuery ||
+        name.toLowerCase() === normalizedQuery,
+    ),
+  );
+
+  state.cache.status = countries.length > 0 ? 200 : 404;
+  return countries.length > 0 ? countries : null;
+};
+
+const findCountriesByCurrency = async function (query) {
+  await getAllCountries();
+  if (!state.cache.countries) return null;
+  const normalizedQuery = decodeURI(query).toLowerCase();
+  const countries = state.cache.countries.filter(country =>
+    Object.values(country.currencies).some(
+      cur =>
+        cur.code?.toLowerCase() === normalizedQuery ||
+        cur.name?.toLowerCase() === normalizedQuery,
+    ),
+  );
+
+  state.cache.status = countries.length > 0 ? 200 : 404;
+  return countries.length > 0 ? countries : null;
+};
+
+const findCountriesByTranslation = async function (query) {
+  await getAllCountries();
+  if (!state.cache.countries) return null;
+  const normalizedQuery = decodeURI(query).toLowerCase();
+  const countries = state.cache.countries.filter(country =>
+    Object.values(country.translations).some(translation =>
+      translation.toLowerCase().includes(normalizedQuery),
+    ),
+  );
+
+  state.cache.status = countries.length > 0 ? 200 : 404;
+  return countries.length > 0 ? countries : null;
 };
 
 const initData = function () {
@@ -72,16 +237,12 @@ export const getLocalData = function () {
 
 export const getAllCountriesOverview = async function () {
   try {
-    const res = await fetch(API_ROUTE_ALL + '?fields=name,cca3,flags');
-    state.cache.status = res.status;
-    if (!res.ok) return;
-    state.cache.countries = await res.json();
-    state.cache.countriesAlphabetical = [...state.cache.countries];
-    state.cache.countriesAlphabetical.sort((a, b) => {
-      if (a.name.common < b.name.common) return -1;
-      if (a.name.common > b.name.common) return 1;
-      return 0;
+    const countries = await fetchCountries(API_ENDPOINTS.all, {
+      fields: API_OVERVIEW_FIELDS,
     });
+
+    if (!countries) return;
+    cacheCountries(countries, 'countries', 'countriesAlphabetical');
   } catch (err) {
     console.error(err);
   }
@@ -89,16 +250,12 @@ export const getAllCountriesOverview = async function () {
 
 export const getAllCountries = async function () {
   try {
-    const res = await fetch(API_ROUTE_ALL);
-    state.cache.status = res.status;
-    if (!res.ok) return;
-    state.cache.countries = await res.json();
-    state.cache.countriesAlphabetical = [...state.cache.countries];
-    state.cache.countriesAlphabetical.sort((a, b) => {
-      if (a.name.common < b.name.common) return -1;
-      if (a.name.common > b.name.common) return 1;
-      return 0;
+    const countries = await fetchCountries(API_ENDPOINTS.all, {
+      full: true,
     });
+
+    if (!countries) return;
+    cacheCountries(countries, 'countries', 'countriesAlphabetical');
   } catch (err) {
     console.error(err);
   }
@@ -107,20 +264,19 @@ export const getAllCountries = async function () {
 export const getCountry = async function (cca3) {
   try {
     state.cache.currentCountry = null;
-    const res = await fetch(API_ROUTE_CODE + cca3);
-    state.cache.status = res.status;
-    if (!res.ok) return;
-    state.cache.currentCountry = await res.json();
+    state.cache.currentCountry = await fetchCountries(
+      `${API_ENDPOINTS.alpha}/${encodeURIComponent(cca3)}`,
+      { full: true },
+    );
 
-    if (state.cache.currentCountry[0].borders?.length > 0) {
-      const res2 = await fetch(
-        API_ROUTE_CODELIST + state.cache.currentCountry[0].borders.join(','),
+    if (state.cache.currentCountry?.[0].borders?.length > 0) {
+      const borderCountries = await getCountriesByCodes(
+        state.cache.currentCountry[0].borders.join(','),
       );
-      if (!res2.ok) return;
-      const arrayTemp = await res2.json();
-      const arrayTemp2 = arrayTemp.map(item => item.name.common);
-      arrayTemp2.sort();
-      state.cache.currentCountry[0].borders = arrayTemp2;
+      if (!borderCountries) return;
+      const borderNames = borderCountries.map(item => item.name.common);
+      borderNames.sort();
+      state.cache.currentCountry[0].borders = borderNames;
     }
   } catch (err) {
     console.error(err);
@@ -129,57 +285,70 @@ export const getCountry = async function (cca3) {
 
 export const getSearchResults = async function (query, selectedIndex) {
   try {
-    let res;
+    let countries;
     switch (selectedIndex) {
       case 1:
-        res = await fetch(API_ROUTE_NAME + query);
+        countries = await fetchCountries(
+          `${API_ENDPOINTS.name}/${encodeURIComponent(decodeURI(query))}`,
+        );
         break;
       case 2:
-        res = await fetch(API_ROUTE_CODE + query);
+        countries = await fetchCountries(
+          `${API_ENDPOINTS.alpha}/${encodeURIComponent(decodeURI(query))}`,
+          { full: true },
+        );
         break;
       case 3:
-        res = await fetch(API_ROUTE_CODELIST + query);
+        countries = await getCountriesByCodes(query);
         break;
       case 4:
-        res = await fetch(API_ROUTE_CAPITAL + query);
+        countries = await fetchCountries(
+          `${API_ENDPOINTS.capital}/${encodeURIComponent(decodeURI(query))}`,
+        );
         break;
       case 5:
-        res = await fetch(API_ROUTE_CURRENCY + query);
+        countries = await fetchCountries(
+          `${API_ENDPOINTS.currency}/${encodeURIComponent(decodeURI(query))}`,
+        );
+        if (!countries) countries = await findCountriesByCurrency(query);
         break;
       case 6:
-        res = await fetch(API_ROUTE_DEMONYM + query);
+        countries = await fetchCountries(
+          `${API_ENDPOINTS.demonym}/${encodeURIComponent(decodeURI(query))}`,
+        );
         break;
       case 7:
-        res = await fetch(API_ROUTE_LANG + query);
+        countries = await fetchCountries(
+          `${API_ENDPOINTS.language}/${encodeURIComponent(decodeURI(query))}`,
+        );
+        if (!countries) countries = await findCountriesByLanguage(query);
         break;
       case 8:
-        res = await fetch(API_ROUTE_REGION + query);
+        countries = await fetchCountries(
+          `${API_ENDPOINTS.region}/${encodeURIComponent(decodeURI(query))}`,
+        );
         break;
       case 9:
-        res = await fetch(API_ROUTE_SUBREGION + query);
+        countries = await fetchCountries(
+          `${API_ENDPOINTS.subregion}/${encodeURIComponent(decodeURI(query))}`,
+        );
         break;
       case 10:
-        res = await fetch(API_ROUTE_TRANSLATION + query);
+        countries = await findCountriesByTranslation(query);
         break;
       default:
-        res = await fetch(API_ROUTE_NAME + query);
+        countries = await fetchCountries(
+          `${API_ENDPOINTS.name}/${encodeURIComponent(decodeURI(query))}`,
+        );
         break;
     }
 
-    state.cache.status = res.status;
-    if (!res.ok) return;
-    state.cache.filteredCountries = await res.json();
-    state.cache.filteredCountriesAlphabetical = [...state.cache.filteredCountries];
-    state.cache.filteredCountriesAlphabetical.sort((a, b) => {
-      if (a.name.common < b.name.common) return -1;
-      if (a.name.common > b.name.common) return 1;
-      return 0;
-    });
-
-    // const res = await fetch(API_ROUTE_NAME + query);
-    // state.cache.status = res.status;
-    // if (!res.ok) return;
-    // state.cache.filteredCountries = await res.json();
+    if (!countries) return;
+    cacheCountries(
+      countries,
+      'filteredCountries',
+      'filteredCountriesAlphabetical',
+    );
   } catch (err) {
     console.error(err);
   }
